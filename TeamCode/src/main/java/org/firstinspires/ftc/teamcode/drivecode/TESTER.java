@@ -31,7 +31,7 @@ import com.qualcomm.robotcore.hardware.PwmControl;
 import com.qualcomm.robotcore.util.ElapsedTime.Resolution;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 
-@TeleOp(name="TESTER", group="Linear Opmode")
+@TeleOp(name="value testing", group="Linear Opmode")
 
 public class TESTER extends LinearOpMode{
     private DcMotor.ZeroPowerBehavior brake = DcMotor.ZeroPowerBehavior.BRAKE;
