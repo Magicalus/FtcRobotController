@@ -11,9 +11,9 @@ import org.opencv.imgproc.Imgproc;
 import org.opencv.core.Rect;
 import android.graphics.Canvas;
 
-import com.acmerobotics.dashboard.config.Config;
+//import com.acmerobotics.dashboard.config.Config;
 
-@Config
+//@Config
 public class BluePropThreshold implements VisionProcessor {
     Mat testMat = new Mat();
     Mat highMat = new Mat();

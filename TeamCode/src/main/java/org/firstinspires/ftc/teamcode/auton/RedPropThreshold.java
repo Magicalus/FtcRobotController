@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.auton;
 
 import org.firstinspires.ftc.robotcore.internal.camera.calibration.CameraCalibration;
 import org.firstinspires.ftc.vision.VisionProcessor;
@@ -11,9 +11,9 @@ import org.opencv.imgproc.Imgproc;
 import org.opencv.core.Rect;
 import android.graphics.Canvas;
 
-import com.acmerobotics.dashboard.config.Config;
+//import com.acmerobotics.dashboard.config.Config;
 
-@Config
+//@Config
 public class RedPropThreshold implements VisionProcessor {
     Mat testMat = new Mat();
     Mat highMat = new Mat();
