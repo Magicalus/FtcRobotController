@@ -53,11 +53,6 @@ public class DriverMode extends LinearOpMode {
     private Servo rightClawRotator;
     private DcMotor hookLifter;
     private DcMotor robotLifter;
-    private float leftStickX;
-    private float leftStickY;
-    private float rightStickX;
-    private float rightStickY;
-    private float liftAmount;
     
     
     public enum State{
@@ -235,8 +230,8 @@ public class DriverMode extends LinearOpMode {
     }
     public void pickupPixel(){
         craneArm.setTargetPosition(0);
-        rightClawRotator.setPosition(0.38);
         leftClawRotator.setPosition(0.62);
+        rightClawRotator.setPosition(0.38);
     }
     public void openClaw(){
         leftClawServo.setPosition(1);

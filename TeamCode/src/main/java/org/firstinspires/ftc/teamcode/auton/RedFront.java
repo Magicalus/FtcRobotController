@@ -276,8 +276,8 @@ public class RedFront extends LinearOpMode {
     }
     public void pickupPixel(){
         craneArm.setTargetPosition(0);
-        leftClawRotator.setPosition(0.38);
-        rightClawRotator.setPosition(0.62);
+        leftClawRotator.setPosition(0.62);
+        rightClawRotator.setPosition(0.38);
     }
     public void openClaw(){
         leftClawServo.setPosition(1);
