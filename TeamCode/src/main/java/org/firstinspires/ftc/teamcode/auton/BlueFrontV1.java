@@ -155,6 +155,7 @@ public class BlueFrontV1 extends LinearOpMode {
         // craneArm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         
         //closeClaw();-1
+        rotate(1800);
         
         foward(-1300);
         sleep(2000);
