@@ -1,38 +1,9 @@
 package org.firstinspires.ftc.teamcode.drivecode;
-
-import com.qualcomm.robotcore.hardware.DcMotor.ZeroPowerBehavior;
-import org.firstinspires.ftc.robotcore.external.State;
-import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
-import com.qualcomm.robotcore.hardware.Blinker;
-import com.qualcomm.robotcore.hardware.ColorSensor;
-import com.qualcomm.robotcore.util.ElapsedTime;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.Gamepad.*;
-
-import com.qualcomm.robotcore.hardware.ServoImpl;
-import com.qualcomm.robotcore.hardware.CRServoImplEx;
-import com.qualcomm.robotcore.hardware.CRServo;
-import com.qualcomm.robotcore.hardware.DistanceSensor;
-import com.qualcomm.robotcore.hardware.DcMotorEx;
-
-import java.util.Map;
-import java.lang.Math;
-
-import org.firstinspires.ftc.robotcore.external.navigation.Position;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.AnalogInput;
-import com.qualcomm.robotcore.hardware.DigitalChannel;
-
-import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
-import com.qualcomm.robotcore.hardware.CRServoImpl;
-import com.qualcomm.robotcore.hardware.ServoController;
-import com.qualcomm.robotcore.hardware.PwmControl;
-import com.qualcomm.robotcore.util.ElapsedTime.Resolution;
-import com.qualcomm.robotcore.hardware.TouchSensor;
 
 
 
@@ -40,21 +11,18 @@ import com.qualcomm.robotcore.hardware.TouchSensor;
 //@Disabled
 public class DriverMode extends LinearOpMode {
 
-    // Declare OpMode members.
-    private DcMotor.ZeroPowerBehavior brake = DcMotor.ZeroPowerBehavior.BRAKE;
-    private DcMotor.ZeroPowerBehavior floatt =DcMotor.ZeroPowerBehavior.FLOAT;
+    // Declare OpMode members
     private DcMotor fruntLeft, fruntRight, backLeft, jarmy;
     private DcMotor craneArm;
     private Servo airplaneLauncher;
     private Servo leftClawServo;
     private Servo rightClawServo;
-
     private Servo leftClawRotator;
     private Servo rightClawRotator;
     private DcMotor hookLifter;
     private DcMotor robotLifter;
-    
-    
+
+
     public enum State{
         LIFT,
         DOWN
@@ -69,18 +37,18 @@ public class DriverMode extends LinearOpMode {
         // to 'get' must correspond to the names assigned during the robot configuration
         // step (using the FTC Robot Controller app on the phone).
         fruntRight = hardwareMap.get(DcMotor.class, "fruntRight");
-        fruntRight.setDirection(DcMotorSimple.Direction.FORWARD);
+        //fruntRight.setDirection(DcMotorSimple.Direction.REVERSE);
         
         fruntLeft = hardwareMap.get(DcMotor.class, "fruntLeft");
         fruntLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         
         jarmy = hardwareMap.get(DcMotor.class, "jarmy");
-        jarmy.setDirection(DcMotorSimple.Direction.FORWARD);
+        //jarmy.setDirection(DcMotorSimple.Direction.REVERSE);
         
         backLeft = hardwareMap.get(DcMotor.class, "backLeft");
         backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         
-        //reset the zero position of the arm, and set it to not use power when not recieving power.
+        //reset the zero position of the arm, and set it to not use power when not receiving power.
         craneArm = hardwareMap.get(DcMotor.class, "craneArm");
         craneArm.setDirection(DcMotor.Direction.REVERSE);
         craneArm.setTargetPosition(0);
@@ -130,16 +98,13 @@ public class DriverMode extends LinearOpMode {
         // Wait for the game to start (driver presses PLAY)
         telemetry.update();
         waitForStart();
-        
-        if(opModeIsActive()){
-            // run until the end of the match (driver presses STOP)
-            while (opModeIsActive()) {
+            while (opModeIsActive()){
                telemetry.addData("Status", "Running");
 
-                fruntRight.setPower(((-gamepad1.left_stick_y + -gamepad1.left_stick_x) + -gamepad1.right_stick_x) *0.8);
+                fruntRight.setPower(((-gamepad1.left_stick_y - gamepad1.left_stick_x) - gamepad1.right_stick_x) *0.8);
                 fruntLeft.setPower(((-gamepad1.left_stick_y + gamepad1.left_stick_x) + gamepad1.right_stick_x) * 0.8);
-                jarmy.setPower(((-gamepad1.left_stick_y + gamepad1.left_stick_x) + -gamepad1.right_stick_x) *0.8);
-                backLeft.setPower(((-gamepad1.left_stick_y + -gamepad1.left_stick_x) + gamepad1.right_stick_x) *0.8);
+                jarmy.setPower(((-gamepad1.left_stick_y + gamepad1.left_stick_x) - gamepad1.right_stick_x) *0.8);
+                backLeft.setPower(((-gamepad1.left_stick_y - gamepad1.left_stick_x) + gamepad1.right_stick_x) *0.8);
             
                 telemetry.addData("hookLifter position:", hookLifter.getCurrentPosition());
             
@@ -194,18 +159,14 @@ public class DriverMode extends LinearOpMode {
                     airplaneLauncher.setPosition(1);
                 }else if(gamepad2.dpad_up){
                     craneCounterWeight();
-                }else if(gamepad2.dpad_left == true){
+                }else if(gamepad2.dpad_left){
                     craneArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
                     sleep(1000);
                     craneArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
                     craneArm.setTargetPosition(0);
                     craneArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 }
-    
-                
                 telemetry.update();
-            
-            }
         }
     }
     public void craneCounterWeight(){
