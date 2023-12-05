@@ -42,7 +42,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
 
-@Autonomous(name = "blueFrong", group = "Robot")
+@Autonomous(name = "WETESTIF BUILGINDWORKS :DDDDDDD BLUE BTW", group = "Robot")
 public class BlueFrontV1 extends LinearOpMode {
 
 
