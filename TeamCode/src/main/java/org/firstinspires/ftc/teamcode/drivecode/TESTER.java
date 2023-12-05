@@ -83,19 +83,19 @@ public class TESTER extends LinearOpMode{
         // craneArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         // craneArm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         
-        telemetry.addData("right position:", rightClawRotator.getPosition());
-        telemetry.addData("left position:", leftClawRotator.getPosition());
-        // telemetry.addData("frontLeft position:", frontLeft.getCurrentPosition());
-        // telemetry.addData("backRight position:", backRight.getCurrentPosition());
-        // telemetry.addData("backLeft position:", backLeft.getCurrentPosition());
+//        telemetry.addData("right position:", rightClawRotator.getPosition());
+//        telemetry.addData("left position:", leftClawRotator.getPosition());
+         telemetry.addData("frontLeft position:", frontLeft.getCurrentPosition());
+         telemetry.addData("backRight position:", backRight.getCurrentPosition());
+         telemetry.addData("backLeft position:", backLeft.getCurrentPosition());
         telemetry.update();
         
         waitForStart();
         
-        // telemetry.addData("frontRight position:", frontRight.getCurrentPosition());
-        // telemetry.addData("frontLeft position:", frontLeft.getCurrentPosition());
-        // telemetry.addData("backRight position:", backRight.getCurrentPosition());
-        // telemetry.addData("backLeft position:", backLeft.getCurrentPosition
+         telemetry.addData("frontRight position:", frontRight.getCurrentPosition());
+         telemetry.addData("frontLeft position:", frontLeft.getCurrentPosition());
+         telemetry.addData("backRight position:", backRight.getCurrentPosition());
+         telemetry.addData("backLeft position:", backLeft.getCurrentPosition());
         
         waitForStart();
         
