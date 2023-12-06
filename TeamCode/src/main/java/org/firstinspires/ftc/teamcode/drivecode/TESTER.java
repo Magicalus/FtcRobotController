@@ -96,16 +96,9 @@ public class TESTER extends LinearOpMode{
          telemetry.addData("frontLeft position:", frontLeft.getCurrentPosition());
          telemetry.addData("backRight position:", backRight.getCurrentPosition());
          telemetry.addData("backLeft position:", backLeft.getCurrentPosition());
+        sleep(10000);
         
-        waitForStart();
-        
-        while(opModeIsActive()){
-            telemetry.addData("leftx", gamepad1.left_stick_x);
-            telemetry.addData("lefty", gamepad1.left_stick_y);
-            telemetry.addData("leftx2", gamepad2.left_stick_x);
-            telemetry.addData("lefty2", gamepad2.left_stick_y);
-            telemetry.update();
-        }
+
                 
         
 

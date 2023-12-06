@@ -126,38 +126,6 @@ public class BlueFront extends LinearOpMode {
             if(blue.getPropPosition()=="center"){
                 telemetry.addData("Center","center");
                 telemetry.update();
-                foward(-1300);
-        sleep(2000);
-        resetEncoders();
-
-        foward(200);
-        sleep(1000);
-        resetEncoders();
-
-        rotate(-1100);
-        sleep(2000);
-        resetEncoders();
-
-        foward(-1250);
-        sleep(2000);
-        resetEncoders();
-
-        neutral();
-        sleep(1000);
-
-        placePixelLow();
-        sleep(2000);
-        foward(-300);
-        sleep(2000);
-        resetEncoders();
-
-        openClaw();
-
-        sleep(1000);
-
-        pickupPixel();
-
-        sleep(2000);
             }
             if(blue.getPropPosition()=="left"){
                 telemetry.addData("left","left");

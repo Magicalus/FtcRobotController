@@ -143,53 +143,9 @@ public class BlueFrontV1 extends LinearOpMode {
         // closeClaw();
         waitForStart();
         if(opModeIsActive()){
-        
-        
-        //         craneArm.setPower(0.1);
-        
-        
-        
-        
-        // craneArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        // craneArm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        
-        //closeClaw();-1
-        rotate(1800);
-        
-        foward(-1300);
-        sleep(2000);
-        resetEncoders();
-        
-        foward(200);
-        sleep(1000);
-        resetEncoders();
 
-        rotate(-1100);
-        sleep(2000);
-        resetEncoders();
         
-        foward(-1250);
-        sleep(2000);
-        resetEncoders();
-        
-        neutral();
-        sleep(1000);
-        
-        placePixelLow();
-        sleep(2000);
-        foward(-300);
-        sleep(2000);
-        resetEncoders();
-        
-        openClaw();
-        
-        sleep(1000);
-        
-        pickupPixel();
-        
-        sleep(2000);
-        // middlePush();
-        // sleep(100);
+
 
         
     }
