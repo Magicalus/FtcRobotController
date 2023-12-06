@@ -5,8 +5,6 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-
-
 @TeleOp(name="Driver Mode", group="Linear Opmode")
 //@Disabled
 public class DriverMode extends LinearOpMode {
@@ -82,12 +80,6 @@ public class DriverMode extends LinearOpMode {
         robotLifter.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         
         telemetry.update();
-
-        //Sets all motors to starting position
-        //airplaneLauncher.setPosition(0);
-        //craneArm.setTargetPosition(100);
-        sleep(1000);
-        // leftClawRotator.setPosition(0.0);
         
         // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
         // Pushing the left stick forward MUST make robot go forward. So adjust these two lines based on your first test drive.
@@ -101,10 +93,10 @@ public class DriverMode extends LinearOpMode {
             while (opModeIsActive()){
                telemetry.addData("Status", "Running");
 
-                fruntRight.setPower(((-gamepad1.left_stick_y - gamepad1.left_stick_x) - gamepad1.right_stick_x) *0.8);
-                fruntLeft.setPower(((-gamepad1.left_stick_y + gamepad1.left_stick_x) + gamepad1.right_stick_x) * 0.8);
-                jarmy.setPower(((-gamepad1.left_stick_y + gamepad1.left_stick_x) - gamepad1.right_stick_x) *0.8);
-                backLeft.setPower(((-gamepad1.left_stick_y - gamepad1.left_stick_x) + gamepad1.right_stick_x) *0.8);
+                fruntRight.setPower(((-gamepad1.left_stick_y - gamepad1.left_stick_x) - gamepad1.right_stick_x) *0.7);
+                fruntLeft.setPower(((-gamepad1.left_stick_y + gamepad1.left_stick_x) + gamepad1.right_stick_x) * 0.7);
+                jarmy.setPower(((-gamepad1.left_stick_y + gamepad1.left_stick_x) - gamepad1.right_stick_x) *0.7);
+                backLeft.setPower(((-gamepad1.left_stick_y - gamepad1.left_stick_x) + gamepad1.right_stick_x) *0.7);
             
                 telemetry.addData("hookLifter position:", hookLifter.getCurrentPosition());
             
