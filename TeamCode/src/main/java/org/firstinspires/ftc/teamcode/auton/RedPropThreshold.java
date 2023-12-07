@@ -19,7 +19,7 @@ public class RedPropThreshold implements VisionProcessor {
     Mat highMat = new Mat();
     Mat lowMat = new Mat();
     Mat finalMat = new Mat();
-    double redThreshold = 0.01; //0.01
+    double redThreshold = 0.04; //0.01
 
     String outStr = "center"; //Set a default value in case vision does not work
 //old
@@ -42,11 +42,11 @@ public class RedPropThreshold implements VisionProcessor {
         Imgproc.cvtColor(frame, testMat, Imgproc.COLOR_RGB2HSV);
 
 
-        Scalar lowHSVRedLower = new Scalar(0, 100, 20);  //Beginning of Color Wheel
-        Scalar lowHSVRedUpper = new Scalar(10, 255, 255);
+        Scalar lowHSVRedLower = new Scalar(20, 95, 100);  //Beginning of Color Wheel
+        Scalar lowHSVRedUpper = new Scalar(255, 235, 255);
 
-        Scalar highHSVRedLower = new Scalar(160, 100, 20); //Wraps around Color Wheel
-        Scalar highHSVRedUpper = new Scalar(180, 255, 255);
+        Scalar highHSVRedLower = new Scalar(20, 95, 100); //Wraps around Color Wheel
+        Scalar highHSVRedUpper = new Scalar(255, 235, 255);
 
         Core.inRange(testMat, lowHSVRedLower, lowHSVRedUpper, lowMat);
         Core.inRange(testMat, highHSVRedLower, highHSVRedUpper, highMat);
