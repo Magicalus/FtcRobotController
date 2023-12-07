@@ -174,6 +174,21 @@ public class BlueFront extends LinearOpMode {
             if(blue.getPropPosition()=="left"){
                 telemetry.addData("left","left");
                 telemetry.update();
+
+                foward(-1300);
+                sleep(2200);
+                resetEncoders();
+
+                rotate(1150);
+                pickupPixel();
+                sleep(2000);
+                resetEncoders();
+
+                foward(50);
+                rightClawServo.setPosition(0.5);
+                sleep(500);
+                resetEncoders();
+
             }
             if(blue.getPropPosition()=="right"){
                 telemetry.addData("right","right");
