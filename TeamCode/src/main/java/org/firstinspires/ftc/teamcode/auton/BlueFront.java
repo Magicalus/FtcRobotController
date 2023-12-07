@@ -188,7 +188,7 @@ public class BlueFront extends LinearOpMode {
                 sleep(2000);
                 resetEncoders();
 
-                foward(100);
+                foward(50);
                 rightClawServo.setPosition(0.5);
                 sleep(500);
                 resetEncoders();
@@ -198,6 +198,23 @@ public class BlueFront extends LinearOpMode {
                 //foward();
                 sleep(500);
                 resetEncoders();
+
+                foward(-1643);
+                sleep(2000);
+                resetEncoders();
+
+                side(-460);
+                sleep(1000);
+                resetEncoders();
+
+                placePixelLow();
+                sleep(5000);
+
+                openClaw();
+                sleep(2000);
+                resetEncoders();
+
+                sleep(1000000);
             }
             telemetry.update();
 
