@@ -78,7 +78,7 @@ public class BlueFront extends LinearOpMode {
         craneArm = hardwareMap.get(DcMotor.class, "craneArm");
         craneArm.setDirection(DcMotor.Direction.REVERSE);
         craneArm.setTargetPosition(0);
-        craneArm.setPower(0.2);
+        craneArm.setPower(0);
         craneArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         craneArm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
 
@@ -117,13 +117,61 @@ public class BlueFront extends LinearOpMode {
 
 
         waitForStart();
-
+        craneArm.setPower(0.2);
         while(opModeIsActive() && !isStopRequested()){
-            sleep(10000);
+            sleep(5000);
 
             if(blue.getPropPosition()=="center"){
                 telemetry.addData("Center","center");
                 telemetry.update();
+                foward(-900);
+                sleep(2200);
+                resetEncoders();
+
+                rotate(-2200);
+                pickupPixel();
+                sleep(2000);
+                resetEncoders();
+
+                foward(350);
+                rightClawServo.setPosition(0.5);
+                sleep(2200);
+                resetEncoders();
+
+                neutral();
+                foward(-100);
+                sleep(500);
+                resetEncoders();
+
+
+                rotate(1200);
+                sleep(1000);
+                resetEncoders();
+
+                foward(-1350);
+                sleep(2000);
+                resetEncoders();
+
+                placePixelLow();
+                sleep(5000);
+
+                foward(-200);
+                sleep(1000);
+                resetEncoders();
+
+                side(-200);
+                sleep(1000);
+                resetEncoders();
+
+                leftClawServo.setPosition(1);
+                sleep(300);
+
+                craneArm.setTargetPosition(0);
+                neutral();
+                sleep(1000);
+
+
+
             }
             if(blue.getPropPosition()=="left"){
                 telemetry.addData("left","left");
@@ -132,6 +180,26 @@ public class BlueFront extends LinearOpMode {
             if(blue.getPropPosition()=="right"){
                 telemetry.addData("right","right");
                 telemetry.update();
+
+                foward(-1300);
+                sleep(2200);
+                resetEncoders();
+
+                rotate(-1150);
+                pickupPixel();
+                sleep(2000);
+                resetEncoders();
+
+                foward(100);
+                rightClawServo.setPosition(0.5);
+                sleep(500);
+                resetEncoders();
+
+
+                neutral();
+                //foward();
+                sleep(500);
+                resetEncoders();
             }
             telemetry.update();
 
@@ -217,9 +285,9 @@ public class BlueFront extends LinearOpMode {
         rightClawRotator.setPosition(0);
     }
     public void neutral(){
-        craneArm.setTargetPosition(200);
-        leftClawRotator.setPosition(0.3);
-        rightClawRotator.setPosition(0.7);
+        craneArm.setTargetPosition(000);
+        leftClawRotator.setPosition(1);
+        rightClawRotator.setPosition(0);
     }
     public void pickupPixel(){
         craneArm.setTargetPosition(0);

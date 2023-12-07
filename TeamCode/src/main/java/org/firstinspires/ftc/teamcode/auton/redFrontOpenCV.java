@@ -100,26 +100,72 @@ public class redFrontOpenCV extends LinearOpMode {
         rightClawRotator.setPosition(0);
         airplaneLauncher.setPosition(0);
 
+        craneArm.setPower(0);
 
         waitForStart();
-
+        craneArm.setPower(0.2);
         while(opModeIsActive() && !isStopRequested()){
+
+
+            sleep(5000);
             telemetry.addData("Prop Position", red.getPropPosition());
             telemetry.update();
-
-            sleep(50);
-
-            if(red.getPropPosition() == "Left") {
+            if(red.getPropPosition() == "left") {
                 //go to the middle
                 //rotate 90 degrees with claw facing the spike mark
                 //foward until the spike mark
                 //open yellow purple claw
                 placePixelLow();
+                //go to the backboard, idk figure something out
+                //open purple claw
                 sleep(50);
 
-            }else if(red.getPropPosition() == "Center") {
-                // add something ig
-                sleep(50);
+            }else if(red.getPropPosition() == "center") {
+                foward(-900);
+                sleep(2200);
+                resetEncoders();
+
+                rotate(-2200);
+                pickupPixel();
+                sleep(2000);
+                resetEncoders();
+
+                foward(350);
+                rightClawServo.setPosition(0.5);
+                sleep(2200);
+                resetEncoders();
+
+                neutral();
+                foward(-100);
+                sleep(500);
+                resetEncoders();
+
+
+                rotate(-1200);
+                sleep(1000);
+                resetEncoders();
+
+                foward(-1350);
+                sleep(2000);
+                resetEncoders();
+
+                placePixelLow();
+                sleep(5000);
+
+                foward(-200);
+                sleep(1000);
+                resetEncoders();
+
+                side(200);
+                sleep(1000);
+                resetEncoders();
+
+                leftClawServo.setPosition(1);
+                sleep(300);
+
+                craneArm.setTargetPosition(0);
+                neutral();
+                sleep(1000);
 
             }else {
                 //add something ig
@@ -162,30 +208,7 @@ public class redFrontOpenCV extends LinearOpMode {
 
 
     }
-    /*
 
-    public void placePixelLow(){
-        craneArm.setTargetPosition(720);
-        clawRotator.setPosition(0);
-    }
-    public void neutral(){
-        craneArm.setTargetPosition(100);
-        clawRotator.setPosition(0.15);
-    }
-    public void pickupPixel(){
-        craneArm.setTargetPosition(5);
-        clawRotator.setPosition(0.75);
-    }
-    public void openClaw(){
-        goodServo.setPosition(0.35);
-        badServo.setPosition(0.6);
-    }
-
-    public void closeClaw() {
-        goodServo.setPosition(0.6);
-        badServo.setPosition(0.3);
-    }
-    */
 
     public void moveVertically(DcMotor mot, int position, double power){
         mot.setPower(0);
@@ -204,9 +227,9 @@ public class redFrontOpenCV extends LinearOpMode {
         rightClawRotator.setPosition(0);
     }
     public void neutral(){
-        craneArm.setTargetPosition(200);
-        leftClawRotator.setPosition(0.3);
-        rightClawRotator.setPosition(0.7);
+        craneArm.setTargetPosition(000);
+        leftClawRotator.setPosition(1);
+        rightClawRotator.setPosition(0);
     }
     public void pickupPixel(){
         craneArm.setTargetPosition(0);

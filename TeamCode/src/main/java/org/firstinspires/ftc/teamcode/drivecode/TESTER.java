@@ -96,6 +96,7 @@ public class TESTER extends LinearOpMode{
          telemetry.addData("frontLeft position:", frontLeft.getCurrentPosition());
          telemetry.addData("backRight position:", backRight.getCurrentPosition());
          telemetry.addData("backLeft position:", backLeft.getCurrentPosition());
+         telemetry.update();
         sleep(10000);
         
 

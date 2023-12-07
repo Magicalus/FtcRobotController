@@ -21,7 +21,7 @@ public class BluePropThreshold implements VisionProcessor {
     Mat finalMat = new Mat();
     double BlueThreshold = 0.04;
 
-    String outStr = "nothing"; //Set a default value in case vision does not work
+    String outStr = "right"; //Set a default value in case vision does not work
 
     static final Rect LEFT_RECTANGLE = new Rect(
             new Point( 0, 100),
@@ -29,7 +29,7 @@ public class BluePropThreshold implements VisionProcessor {
     );
     static final Rect RIGHT_RECTANGLE = new Rect(
             new Point( 1220, 100),
-            new Point( 1920, 1080)
+            new Point( 1920, 880)
     );
 
     @Override
