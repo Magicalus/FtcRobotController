@@ -111,8 +111,6 @@ public class BlueFront extends LinearOpMode {
         backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
 
         closeClaw();
-        leftClawRotator.setPosition(1);
-        rightClawRotator.setPosition(0);
         airplaneLauncher.setPosition(0);
 
 
