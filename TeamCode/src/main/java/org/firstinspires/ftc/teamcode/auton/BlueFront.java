@@ -153,7 +153,7 @@ public class BlueFront extends LinearOpMode {
                 placePixelLow();
                 sleep(5000);
 
-                foward(-200);
+                foward(-400);
                 sleep(1000);
                 resetEncoders();
 
