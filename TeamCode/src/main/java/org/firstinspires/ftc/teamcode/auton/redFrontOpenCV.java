@@ -115,7 +115,7 @@ public class redFrontOpenCV extends LinearOpMode {
                 //rotate 90 degrees with claw facing the spike mark
                 //foward until the spike mark
                 //open yellow purple claw
-                placePixelLow();
+                //placePixelLow();
                 //go to the backboard, idk figure something out
                 //open purple claw
                 sleep(50);
