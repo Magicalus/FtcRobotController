@@ -277,11 +277,11 @@ public class redFrontOpenCV extends LinearOpMode {
                 neutral();
                 sleep(3000);
 
-                side(-1500);
+                side(-4500);
                 sleep(1000);
                 resetEncoders();
 
-                foward(-400);
+                foward(-1000);
                 sleep(2000);
                 resetEncoders();
 
