@@ -153,11 +153,11 @@ public class BlueFront extends LinearOpMode {
                 placePixelLow();
                 sleep(5000);
 
-                foward(-400);
+                foward(-300);
                 sleep(1000);
                 resetEncoders();
 
-                side(-200);
+                side(200);
                 sleep(1000);
                 resetEncoders();
 
@@ -166,8 +166,8 @@ public class BlueFront extends LinearOpMode {
 
                 craneArm.setTargetPosition(0);
                 neutral();
-                sleep(1000);
-
+                sleep(2000);
+                break;
 
 
             }
@@ -179,15 +179,60 @@ public class BlueFront extends LinearOpMode {
                 sleep(2200);
                 resetEncoders();
 
-                rotate(1150);
+                rotate(1100);
                 pickupPixel();
                 sleep(2000);
                 resetEncoders();
 
-                foward(50);
+                rotate(1100);
+                pickupPixel();
+                sleep(2000);
+                resetEncoders();
+
+                rotate(1100);
+                sleep(2000);
+                resetEncoders();
+
+                foward(-1000);
+                sleep(2200);
+                resetEncoders();
+
                 rightClawServo.setPosition(0.5);
                 sleep(500);
                 resetEncoders();
+
+                neutral();
+                sleep(500);
+                resetEncoders();
+
+                foward(-800);
+                sleep(2200);
+                resetEncoders();
+
+                //add thingy that moves from pixel placement to board
+
+                side(550);
+                sleep(1000);
+                resetEncoders();
+
+                placePixelLow();
+                sleep(5000);
+
+
+
+                openClaw();
+                sleep(2000);
+                resetEncoders();
+
+                leftClawServo.setPosition(1);
+                sleep(300);
+
+                craneArm.setTargetPosition(0);
+                neutral();
+                sleep(2000);
+                break;
+
+
 
             }
             if(blue.getPropPosition()=="right"){
@@ -218,7 +263,7 @@ public class BlueFront extends LinearOpMode {
                 sleep(2000);
                 resetEncoders();
 
-                side(-460);
+                side(-470);
                 sleep(1000);
                 resetEncoders();
 
@@ -229,7 +274,15 @@ public class BlueFront extends LinearOpMode {
                 sleep(2000);
                 resetEncoders();
 
-                sleep(1000000);
+                leftClawServo.setPosition(1);
+                sleep(300);
+
+                craneArm.setTargetPosition(0);
+                neutral();
+                sleep(2000);
+
+
+                break;
             }
             telemetry.update();
 
@@ -310,7 +363,7 @@ public class BlueFront extends LinearOpMode {
     }
 
     public void placePixelLow(){
-        craneArm.setTargetPosition(1440);
+        craneArm.setTargetPosition(1500);
         leftClawRotator.setPosition(1);
         rightClawRotator.setPosition(0);
     }

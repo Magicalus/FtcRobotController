@@ -103,14 +103,14 @@ public class DriverMode extends LinearOpMode {
                 switch(curState){
                     case LIFT:
                         if(gamepad1.dpad_up){
-                        moveVertically(hookLifter, 1300, 0.3);
+                        moveVertically(hookLifter, 1400, 0.3);
                         robotLifter.setTargetPosition(6000);
                         curState = State.DOWN;
                     }
                     break;
                     case DOWN:
                         if(gamepad1.dpad_left){
-                            robotLifter.setTargetPosition(-7000);
+                            robotLifter.setTargetPosition(0);
                             curState = State.LIFT;
                         }
                         else if(gamepad1.dpad_down){

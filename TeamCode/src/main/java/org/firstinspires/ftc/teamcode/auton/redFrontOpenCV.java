@@ -106,33 +106,92 @@ public class redFrontOpenCV extends LinearOpMode {
         craneArm.setPower(0.2);
         while(opModeIsActive() && !isStopRequested()){
 
-
+            resetEncoders();
+            closeClaw();
             sleep(5000);
             telemetry.addData("Prop Position", red.getPropPosition());
             telemetry.update();
-            if(red.getPropPosition() == "left") {
-                //go to the middle
-                //rotate 90 degrees with claw facing the spike mark
-                //foward until the spike mark
-                //open yellow purple claw
-                //placePixelLow();
-                //go to the backboard, idk figure something out
-                //open purple claw
-                sleep(50);
+            if(red.getPropPosition() == "right") {
+                telemetry.addData("right","right");
+                telemetry.update();
+
+                foward(-1300);
+                sleep(2200);
+                resetEncoders();
+
+                rotate(-1100);
+                pickupPixel();
+                sleep(2000);
+                resetEncoders();
+
+                rotate(-1100);
+                pickupPixel();
+                sleep(2000);
+                resetEncoders();
+
+                rotate(-1100);
+                sleep(2000);
+                resetEncoders();
+
+                foward(-1000);
+                sleep(2200);
+                resetEncoders();
+
+                rightClawServo.setPosition(0.5);
+                sleep(500);
+                resetEncoders();
+
+                neutral();
+                sleep(500);
+                resetEncoders();
+
+                foward(-800);
+                sleep(2200);
+                resetEncoders();
+
+                //add thingy that moves from pixel placement to board
+
+                side(-600);
+                sleep(1000);
+                resetEncoders();
+
+                placePixelLow();
+                sleep(5000);
+
+                openClaw();
+                sleep(2000);
+                resetEncoders();
+
+                leftClawServo.setPosition(1);
+                sleep(300);
+
+                craneArm.setTargetPosition(0);
+                closeClaw();
+                neutral();
+                sleep(2000);
+                break;
 
             }else if(red.getPropPosition() == "center") {
+                telemetry.addData("Center","center");
+                closeClaw();
+                telemetry.update();
+                resetEncoders();
                 foward(-900);
                 sleep(2200);
                 resetEncoders();
 
-                rotate(-2200);
+                rotate(-1100);
+                sleep(2000);
+                resetEncoders();
+
+                rotate(-1100);
                 pickupPixel();
                 sleep(2000);
                 resetEncoders();
 
                 foward(350);
                 rightClawServo.setPosition(0.5);
-                sleep(2200);
+                sleep(2350);
                 resetEncoders();
 
                 neutral();
@@ -141,7 +200,7 @@ public class redFrontOpenCV extends LinearOpMode {
                 resetEncoders();
 
 
-                rotate(-1200);
+                rotate(-1500);
                 sleep(1000);
                 resetEncoders();
 
@@ -152,7 +211,7 @@ public class redFrontOpenCV extends LinearOpMode {
                 placePixelLow();
                 sleep(5000);
 
-                foward(-200);
+                foward(-300);
                 sleep(1000);
                 resetEncoders();
 
@@ -164,12 +223,60 @@ public class redFrontOpenCV extends LinearOpMode {
                 sleep(300);
 
                 craneArm.setTargetPosition(0);
+                closeClaw();
                 neutral();
                 sleep(1000);
+                break;
 
             }else {
-                //add something ig
-                sleep(50);
+                telemetry.addData("left","left");
+                telemetry.update();
+
+                foward(-1300);
+                sleep(2200);
+                resetEncoders();
+
+                rotate(1150);
+                pickupPixel();
+                sleep(2000);
+                resetEncoders();
+
+                foward(50);
+                rightClawServo.setPosition(0.5);
+                sleep(500);
+                resetEncoders();
+
+
+                neutral();
+                //foward();
+                sleep(500);
+                resetEncoders();
+
+                foward(-1600);
+                sleep(2000);
+                resetEncoders();
+
+                side(460);
+                sleep(1000);
+                resetEncoders();
+
+                placePixelLow();
+                sleep(5000);
+
+                openClaw();
+                sleep(2000);
+                resetEncoders();
+
+                leftClawServo.setPosition(1);
+                sleep(300);
+
+                craneArm.setTargetPosition(0);
+                closeClaw();
+                neutral();
+                sleep(3000);
+
+
+                break;
 
             }
         }

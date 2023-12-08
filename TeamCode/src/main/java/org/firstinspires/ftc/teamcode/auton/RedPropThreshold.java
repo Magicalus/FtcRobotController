@@ -28,8 +28,8 @@ public class RedPropThreshold implements VisionProcessor {
             new Point( 700, 1000)
     );
     static final Rect RIGHT_RECTANGLE = new Rect(
-            new Point( 1220, 100),
-            new Point( 1920, 1000)
+            new Point( 1220, 200),
+            new Point( 1920, 800)
     );
 
     @Override
@@ -42,11 +42,11 @@ public class RedPropThreshold implements VisionProcessor {
         Imgproc.cvtColor(frame, testMat, Imgproc.COLOR_RGB2HSV);
 
 
-        Scalar lowHSVRedLower = new Scalar(20, 95, 100);  //Beginning of Color Wheel
-        Scalar lowHSVRedUpper = new Scalar(255, 235, 255);
+        Scalar lowHSVRedLower = new Scalar(0, 100, 20);  //Beginning of Color Wheel
+        Scalar lowHSVRedUpper = new Scalar(5, 255, 255);
 
-        Scalar highHSVRedLower = new Scalar(20, 95, 100); //Wraps around Color Wheel
-        Scalar highHSVRedUpper = new Scalar(255, 235, 255);
+        Scalar highHSVRedLower = new Scalar(170, 95, 100); //Wraps around Color Wheel
+        Scalar highHSVRedUpper = new Scalar(180, 255, 255);
 
         Core.inRange(testMat, lowHSVRedLower, lowHSVRedUpper, lowMat);
         Core.inRange(testMat, highHSVRedLower, highHSVRedUpper, highMat);
