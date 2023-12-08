@@ -90,6 +90,7 @@ public class DriverMode extends LinearOpMode {
         // Wait for the game to start (driver presses PLAY)
         telemetry.update();
         waitForStart();
+        airplaneLauncher.setPosition(0);
             while (opModeIsActive()){
                telemetry.addData("Status", "Running");
 
@@ -103,7 +104,7 @@ public class DriverMode extends LinearOpMode {
                 switch(curState){
                     case LIFT:
                         if(gamepad1.dpad_up){
-                        moveVertically(hookLifter, 1400, 0.3);
+                        moveVertically(hookLifter, 1500, 0.3);
                         robotLifter.setTargetPosition(7000);
                         curState = State.DOWN;
                     }
@@ -157,6 +158,8 @@ public class DriverMode extends LinearOpMode {
                     craneArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
                     craneArm.setTargetPosition(0);
                     craneArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                }else if(gamepad2.dpad_down){
+                    craneArm.setTargetPosition(-3000);
                 }
                 telemetry.update();
         }
