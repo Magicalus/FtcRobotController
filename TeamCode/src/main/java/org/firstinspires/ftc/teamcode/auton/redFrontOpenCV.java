@@ -145,7 +145,7 @@ public class redFrontOpenCV extends LinearOpMode {
                 sleep(500);
                 resetEncoders();
 
-                foward(-800);
+                foward(-830);
                 sleep(2200);
                 resetEncoders();
 
@@ -169,6 +169,8 @@ public class redFrontOpenCV extends LinearOpMode {
                 closeClaw();
                 neutral();
                 sleep(2000);
+
+
                 break;
 
             }else if(red.getPropPosition() == "center") {
@@ -275,6 +277,13 @@ public class redFrontOpenCV extends LinearOpMode {
                 neutral();
                 sleep(3000);
 
+                side(-1500);
+                sleep(1000);
+                resetEncoders();
+
+                foward(-400);
+                sleep(2000);
+                resetEncoders();
 
                 break;
 
