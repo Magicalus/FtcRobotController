@@ -145,12 +145,12 @@ public class DriverMode extends LinearOpMode {
                 if(gamepad2.left_bumper){
                     leftClawServo.setPosition(0);
                 }else if(gamepad2.left_trigger>0.4){
-                    leftClawServo.setPosition(1);
+                    leftClawServo.setPosition(0.5);
                 }
                 if(gamepad2.right_bumper){
                     rightClawServo.setPosition(1);
                 }else if(gamepad2.right_trigger>0.4){
-                    rightClawServo.setPosition(0);
+                    rightClawServo.setPosition(0.5);
                 }
                 
                 if(gamepad2.dpad_right){
@@ -193,15 +193,6 @@ public class DriverMode extends LinearOpMode {
         craneArm.setTargetPosition(0);
         leftClawRotator.setPosition(0.58);
         rightClawRotator.setPosition(0.38);
-    }
-    public void openClaw(){
-        leftClawServo.setPosition(1);
-        rightClawServo.setPosition(0);
-    }
-    
-    public void closeClaw() {
-        leftClawServo.setPosition(0);
-        rightClawServo.setPosition(1);
     }
     
     public void moveVertically(DcMotor mot, int position, double power){
