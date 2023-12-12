@@ -104,7 +104,7 @@ public class DriverMode extends LinearOpMode {
                 switch(curState){
                     case LIFT:
                         if(gamepad1.dpad_up){
-                        moveVertically(hookLifter, 1500, 0.3);
+                        moveVertically(hookLifter, 1700, 0.3);
                         robotLifter.setTargetPosition(7000);
                         curState = State.DOWN;
                     }
@@ -142,10 +142,15 @@ public class DriverMode extends LinearOpMode {
                 }
                 
                 
+                if(gamepad2.left_bumper){
+                    leftClawServo.setPosition(0);
+                }else if(gamepad2.left_trigger>0.4){
+                    leftClawServo.setPosition(1);
+                }
                 if(gamepad2.right_bumper){
-                    openClaw();
-                }else if(gamepad2.left_bumper){
-                    closeClaw();
+                    rightClawServo.setPosition(1);
+                }else if(gamepad2.right_trigger>0.4){
+                    rightClawServo.setPosition(0);
                 }
                 
                 if(gamepad2.dpad_right){
@@ -186,7 +191,7 @@ public class DriverMode extends LinearOpMode {
     }
     public void pickupPixel(){
         craneArm.setTargetPosition(0);
-        leftClawRotator.setPosition(0.62);
+        leftClawRotator.setPosition(0.58);
         rightClawRotator.setPosition(0.38);
     }
     public void openClaw(){
