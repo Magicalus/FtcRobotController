@@ -171,28 +171,28 @@ public class DriverMode extends LinearOpMode {
     }
     public void craneCounterWeight(){
         craneArm.setTargetPosition(1000);
-        leftClawRotator.setPosition(1);
-        rightClawRotator.setPosition(0);
+        leftClawRotator.setPosition(0.1);
+        rightClawRotator.setPosition(0.85);
     }
     public void placePixelLow(){
         craneArm.setTargetPosition(1440);
-        leftClawRotator.setPosition(1);
-        rightClawRotator.setPosition(0);
+        leftClawRotator.setPosition(0.1);
+        rightClawRotator.setPosition(0.85);
     }
     public void placePixelHigh(){
         craneArm.setTargetPosition(1200);
-        leftClawRotator.setPosition(1);
-        rightClawRotator.setPosition(0);
+        leftClawRotator.setPosition(0.1);
+        rightClawRotator.setPosition(0.85);
     }
     public void neutral(){
         craneArm.setTargetPosition(200);
-        leftClawRotator.setPosition(1);
-        rightClawRotator.setPosition(0);
+        leftClawRotator.setPosition(0.1);
+        rightClawRotator.setPosition(0.85);
     }
     public void pickupPixel(){
         craneArm.setTargetPosition(0);
-        leftClawRotator.setPosition(0.58);
-        rightClawRotator.setPosition(0.38);
+        leftClawRotator.setPosition(0.53);
+        rightClawRotator.setPosition(0.42);
     }
     
     public void moveVertically(DcMotor mot, int position, double power){

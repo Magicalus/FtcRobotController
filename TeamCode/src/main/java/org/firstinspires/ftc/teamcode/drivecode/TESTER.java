@@ -85,20 +85,17 @@ public class TESTER extends LinearOpMode{
         
 //        telemetry.addData("right position:", rightClawRotator.getPosition());
 //        telemetry.addData("left position:", leftClawRotator.getPosition());
-         telemetry.addData("frontLeft position:", frontLeft.getCurrentPosition());
-         telemetry.addData("backRight position:", backRight.getCurrentPosition());
-         telemetry.addData("backLeft position:", backLeft.getCurrentPosition());
-        telemetry.update();
+
         
         waitForStart();
-        
-         telemetry.addData("frontRight position:", frontRight.getCurrentPosition());
-         telemetry.addData("frontLeft position:", frontLeft.getCurrentPosition());
-         telemetry.addData("backRight position:", backRight.getCurrentPosition());
-         telemetry.addData("backLeft position:", backLeft.getCurrentPosition());
-         telemetry.update();
-        sleep(10000);
-        
+        //neutral and place
+        leftClawRotator.setPosition(0.1);
+        rightClawRotator.setPosition(0.85);
+        sleep(5000);
+        //pickup
+        leftClawRotator.setPosition(0.53);
+        rightClawRotator.setPosition(0.42);
+        sleep(1000);
 
                 
         
