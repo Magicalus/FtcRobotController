@@ -136,6 +136,13 @@ public class blueFrontBackiftheymove extends LinearOpMode {
                 sleep(2000);
 
                 rotate(1100);
+                sleep(2000);
+                resetEncoders();
+
+                foward(-3980);
+                sleep(2000);
+                resetEncoders();
+
 
                 break;
 
