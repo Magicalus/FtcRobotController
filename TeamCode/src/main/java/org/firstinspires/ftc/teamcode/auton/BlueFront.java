@@ -131,7 +131,7 @@ public class BlueFront extends LinearOpMode {
                 sleep(2000);
                 resetEncoders();
 
-                foward(350);
+                foward(390);
                 rightClawServo.setPosition(0.5);
                 sleep(2200);
                 resetEncoders();
