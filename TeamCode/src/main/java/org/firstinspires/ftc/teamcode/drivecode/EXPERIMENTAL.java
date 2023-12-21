@@ -159,11 +159,11 @@ public class EXPERIMENTAL extends LinearOpMode {
                     startTime = System.nanoTime();
                 }
 
-                //Gets the time in nano seconds and caps it to 1 second, which is then adjusted to the speed
-                timeElapsed = Math.min(1000000000 * speed, System.nanoTime() - startTime) / (1000000000 * speed);
+                //Gets the time in milliseconds and caps it to 1 second, which is then adjusted to the speed
+                timeElapsed = Math.min(1000 * speed, System.currentTimeMillis() - startTime) / (1000 * speed);
 
-                leftClawRotator.setPosition(leftClawRotatorOldPosition + (leftClawRotatorOldPosition - leftClawRotatorTargetPosition) * timeElapsed);
-                rightClawRotator.setPosition(rightClawRotatorOldPosition + (rightClawRotatorOldPosition - rightClawRotatorTargetPosition) * timeElapsed);
+                leftClawRotator.setPosition(leftClawRotatorOldPosition + (leftClawRotatorOldPosition - (leftClawRotatorTargetPosition * timeElapsed)));
+                rightClawRotator.setPosition(rightClawRotatorOldPosition + (rightClawRotatorOldPosition - (rightClawRotatorTargetPosition * timeElapsed)));
 
 
 
