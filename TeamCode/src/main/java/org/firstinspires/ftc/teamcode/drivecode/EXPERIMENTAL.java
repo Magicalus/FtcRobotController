@@ -22,11 +22,11 @@ public class EXPERIMENTAL extends LinearOpMode {
     private DcMotor robotLifter;
 
     //These variables make the Servo slowdown work
-    private double leftClawRotatorTargetPosition;
-    private double leftClawRotatorOldPosition;
-    private double rightClawRotatorTargetPosition;
-    private double rightClawRotatorOldPosition;
-    private double startTime = System.nanoTime();
+    private double leftRotatorNewPos;
+    private double leftRotatorOldPos;
+    private double rightRotatorNewPos;
+    private double rightRotatorOldPos;
+    private double startTime;
     //How long (in seconds) you want the servo to take to move
     private double speed = 3.0;
     double timeElapsed;
@@ -144,27 +144,31 @@ public class EXPERIMENTAL extends LinearOpMode {
                 */
                 if(gamepad2.a){
                     neutral();
-                    startTime = System.nanoTime();
+                    startTime = System.currentTimeMillis();
                 }else if(gamepad2.x){
                     placePixelHigh();
-                    startTime = System.nanoTime();
+                    startTime = System.currentTimeMillis();
                 }else if(gamepad2.b){
                     pickupPixel();
-                    startTime = System.nanoTime();
+                    startTime = System.currentTimeMillis();
                 }else if(gamepad2.y){
                     placePixelLow();
-                    startTime = System.nanoTime();
+                    startTime = System.currentTimeMillis();
                 }else if(gamepad2.dpad_up){
                     craneCounterWeight();
-                    startTime = System.nanoTime();
+                    startTime = System.currentTimeMillis();
                 }
 
+
                 //Gets the time in milliseconds and caps it to 1 second, which is then adjusted to the speed
-                timeElapsed = Math.min(1000 * speed, System.currentTimeMillis() - startTime) / (1000 * speed);
+                timeElapsed = Math.min(System.currentTimeMillis() - startTime, speed * 1000) / speed * 1000;
+                telemetry.addData("timeElapsed", timeElapsed);
 
-                leftClawRotator.setPosition(leftClawRotatorOldPosition  - (leftClawRotatorTargetPosition * timeElapsed));
-                rightClawRotator.setPosition(rightClawRotatorOldPosition - (rightClawRotatorTargetPosition * timeElapsed));
+                leftClawRotator.setPosition(leftRotatorOldPos + ((leftRotatorOldPos - leftRotatorNewPos) * timeElapsed));
+                rightClawRotator.setPosition(rightRotatorOldPos + ((rightRotatorOldPos - rightRotatorNewPos) * timeElapsed));
 
+                telemetry.addData("leftClawRotator Position", leftClawRotator.getPosition());
+                telemetry.addData("rightClawRotator Position", leftClawRotator.getPosition());
 
 
 
@@ -198,38 +202,38 @@ public class EXPERIMENTAL extends LinearOpMode {
 
     public void craneCounterWeight(){
         craneArm.setTargetPosition(1000);
-        leftClawRotatorOldPosition = leftClawRotator.getPosition();
-        rightClawRotatorOldPosition = rightClawRotator.getPosition();
-        leftClawRotatorTargetPosition = 0.1;
-        rightClawRotatorTargetPosition = 0.85;
+        leftRotatorOldPos = leftClawRotator.getPosition();
+        rightRotatorOldPos = rightClawRotator.getPosition();
+        leftRotatorNewPos = 0.1;
+        rightRotatorNewPos = 0.85;
     }
     public void placePixelLow(){
         craneArm.setTargetPosition(1440);
-        leftClawRotatorOldPosition = leftClawRotator.getPosition();
-        rightClawRotatorOldPosition = rightClawRotator.getPosition();
-        leftClawRotatorTargetPosition = 0.1;
-        rightClawRotatorTargetPosition = 0.85;
+        leftRotatorOldPos = leftClawRotator.getPosition();
+        rightRotatorOldPos = rightClawRotator.getPosition();
+        leftRotatorNewPos = 0.1;
+        rightRotatorNewPos = 0.85;
     }
     public void placePixelHigh(){
         craneArm.setTargetPosition(1200);
-        leftClawRotatorOldPosition = leftClawRotator.getPosition();
-        rightClawRotatorOldPosition = rightClawRotator.getPosition();
-        leftClawRotatorTargetPosition = 0.1;
-        rightClawRotatorTargetPosition = 0.85;
+        leftRotatorOldPos = leftClawRotator.getPosition();
+        rightRotatorOldPos = rightClawRotator.getPosition();
+        leftRotatorNewPos = 0.1;
+        rightRotatorNewPos = 0.85;
     }
     public void neutral(){
         craneArm.setTargetPosition(0);
-        leftClawRotatorOldPosition = leftClawRotator.getPosition();
-        rightClawRotatorOldPosition = rightClawRotator.getPosition();
-        leftClawRotatorTargetPosition = 0.1;
-        rightClawRotatorTargetPosition = 0.85;
+        leftRotatorOldPos = leftClawRotator.getPosition();
+        rightRotatorOldPos = rightClawRotator.getPosition();
+        leftRotatorNewPos = 0.1;
+        rightRotatorNewPos = 0.85;
     }
     public void pickupPixel(){
         craneArm.setTargetPosition(0);
-        leftClawRotatorOldPosition = leftClawRotator.getPosition();
-        rightClawRotatorOldPosition = rightClawRotator.getPosition();
-        leftClawRotatorTargetPosition = 0.53;
-        rightClawRotatorTargetPosition = 0.42;
+        leftRotatorOldPos = leftClawRotator.getPosition();
+        rightRotatorOldPos = rightClawRotator.getPosition();
+        leftRotatorNewPos = 0.53;
+        rightRotatorNewPos = 0.42;
     }
     
     public void moveVertically(DcMotor mot, int position, double power){
