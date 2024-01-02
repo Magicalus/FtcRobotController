@@ -29,7 +29,7 @@ public class EXPERIMENTAL extends LinearOpMode {
     private double startTime;
     //How long (in seconds) you want the servo to take to move
     private double speed = 3.0;
-    double timeElapsed;
+    private double timeElapsed;
 
     public enum State{
         LIFT,
@@ -161,8 +161,9 @@ public class EXPERIMENTAL extends LinearOpMode {
 
 
                 //Gets the time in milliseconds and caps it to 1 second, which is then adjusted to the speed
-                timeElapsed = Math.min(System.currentTimeMillis() - startTime, speed * 1000) / speed * 1000;
+                timeElapsed = Math.min(System.currentTimeMillis() - startTime, speed * 1000) / (speed * 1000000);
                 telemetry.addData("timeElapsed", timeElapsed);
+                telemetry.addData("????", speed * 1000);
 
                 leftClawRotator.setPosition(leftRotatorOldPos + ((leftRotatorOldPos - leftRotatorNewPos) * timeElapsed));
                 rightClawRotator.setPosition(rightRotatorOldPos + ((rightRotatorOldPos - rightRotatorNewPos) * timeElapsed));
