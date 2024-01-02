@@ -220,7 +220,7 @@ public class BlueFront extends LinearOpMode {
 
                 //add thingy that moves from pixel placement to board
 
-                side(750);
+                side(620);
                 sleep(1000);
                 resetEncoders();
 
