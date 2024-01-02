@@ -1,13 +1,14 @@
 package org.firstinspires.ftc.teamcode.drivecode;
+
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
 
-@TeleOp(name="Driver Mode", group="Linear Opmode")
+@TeleOp(name="EXPERIMENTAL", group="Linear Opmode")
 //@Disabled
-public class DriverMode extends LinearOpMode {
+public class EXPERIMENTAL extends LinearOpMode {
 
     // Declare OpMode members
     private DcMotor fruntLeft, fruntRight, backLeft, jarmy;
@@ -20,6 +21,15 @@ public class DriverMode extends LinearOpMode {
     private DcMotor hookLifter;
     private DcMotor robotLifter;
 
+    //These variables make the Servo slowdown work
+    private double leftClawRotatorTargetPosition;
+    private double leftClawRotatorOldPosition;
+    private double rightClawRotatorTargetPosition;
+    private double rightClawRotatorOldPosition;
+    private double startTime = System.nanoTime();
+    //How long (in seconds) you want the servo to take to move
+    private double speed = 3.0;
+    double timeElapsed;
 
     public enum State{
         LIFT,
@@ -91,6 +101,7 @@ public class DriverMode extends LinearOpMode {
         telemetry.update();
         waitForStart();
         airplaneLauncher.setPosition(0);
+        neutral();
             while (opModeIsActive()){
                 telemetry.addData("Status", "Running");
 
@@ -98,21 +109,21 @@ public class DriverMode extends LinearOpMode {
                 fruntLeft.setPower(((-gamepad1.left_stick_y + gamepad1.left_stick_x) + gamepad1.right_stick_x) * 0.7);
                 jarmy.setPower(((-gamepad1.left_stick_y + gamepad1.left_stick_x) - gamepad1.right_stick_x) *0.7);
                 backLeft.setPower(((-gamepad1.left_stick_y - gamepad1.left_stick_x) + gamepad1.right_stick_x) *0.7);
-            
+
                 telemetry.addData("hookLifter position:", hookLifter.getCurrentPosition());
-            
+
                 switch(curState){
                     case LIFT:
                         if(gamepad1.dpad_up){
-                        moveVertically(hookLifter, 1700, 0.3);
-                        robotLifter.setTargetPosition(7000);
-                        curState = State.DOWN;
-                    }
-                    break;
+                            moveVertically(hookLifter, 1700, 0.3);
+                            robotLifter.setTargetPosition(7000);
+                            curState = EXPERIMENTAL.State.DOWN;
+                        }
+                        break;
                     case DOWN:
                         if(gamepad1.dpad_left){
                             robotLifter.setTargetPosition(-7000);
-                            curState = State.LIFT;
+                            curState = EXPERIMENTAL.State.LIFT;
                         }
                         else if(gamepad1.dpad_down){
                             moveVertically(hookLifter, 0, 0.3);
@@ -120,10 +131,10 @@ public class DriverMode extends LinearOpMode {
                         }
                         break;
                     default:
-                        curState = State.LIFT;
+                        curState = EXPERIMENTAL.State.LIFT;
                 }
-                
-                
+
+
                 /*
                 Controller buttons use different labels, so
                 A is the Blue Cross
@@ -133,15 +144,32 @@ public class DriverMode extends LinearOpMode {
                 */
                 if(gamepad2.a){
                     neutral();
+                    startTime = System.nanoTime();
                 }else if(gamepad2.x){
                     placePixelHigh();
+                    startTime = System.nanoTime();
                 }else if(gamepad2.b){
                     pickupPixel();
+                    startTime = System.nanoTime();
                 }else if(gamepad2.y){
                     placePixelLow();
+                    startTime = System.nanoTime();
+                }else if(gamepad2.dpad_up){
+                    craneCounterWeight();
+                    startTime = System.nanoTime();
                 }
-                
-                
+
+                //Gets the time in milliseconds and caps it to 1 second, which is then adjusted to the speed
+                timeElapsed = Math.min(1000 * speed, System.currentTimeMillis() - startTime) / (1000 * speed);
+
+                leftClawRotator.setPosition(leftClawRotatorOldPosition  - (leftClawRotatorTargetPosition * timeElapsed));
+                rightClawRotator.setPosition(rightClawRotatorOldPosition - (rightClawRotatorTargetPosition * timeElapsed));
+
+
+
+
+
+
                 if(gamepad2.left_bumper){
                     leftClawServo.setPosition(0);
                 }else if(gamepad2.left_trigger>0.4){
@@ -152,11 +180,9 @@ public class DriverMode extends LinearOpMode {
                 }else if(gamepad2.right_trigger>0.4){
                     rightClawServo.setPosition(0.3);
                 }
-                
+
                 if(gamepad2.dpad_right){
                     airplaneLauncher.setPosition(1);
-                }else if(gamepad2.dpad_up){
-                    craneCounterWeight();
                 }else if(gamepad2.dpad_left){
                     craneArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
                     sleep(1000);
@@ -167,32 +193,43 @@ public class DriverMode extends LinearOpMode {
                     craneArm.setTargetPosition(-3000);
                 }
                 telemetry.update();
+            }
         }
-    }
+
     public void craneCounterWeight(){
         craneArm.setTargetPosition(1000);
-        leftClawRotator.setPosition(0.1);
-        rightClawRotator.setPosition(0.85);
+        leftClawRotatorOldPosition = leftClawRotator.getPosition();
+        rightClawRotatorOldPosition = rightClawRotator.getPosition();
+        leftClawRotatorTargetPosition = 0.1;
+        rightClawRotatorTargetPosition = 0.85;
     }
     public void placePixelLow(){
         craneArm.setTargetPosition(1440);
-        leftClawRotator.setPosition(0.1);
-        rightClawRotator.setPosition(0.85);
+        leftClawRotatorOldPosition = leftClawRotator.getPosition();
+        rightClawRotatorOldPosition = rightClawRotator.getPosition();
+        leftClawRotatorTargetPosition = 0.1;
+        rightClawRotatorTargetPosition = 0.85;
     }
     public void placePixelHigh(){
         craneArm.setTargetPosition(1200);
-        leftClawRotator.setPosition(0.1);
-        rightClawRotator.setPosition(0.85);
+        leftClawRotatorOldPosition = leftClawRotator.getPosition();
+        rightClawRotatorOldPosition = rightClawRotator.getPosition();
+        leftClawRotatorTargetPosition = 0.1;
+        rightClawRotatorTargetPosition = 0.85;
     }
     public void neutral(){
         craneArm.setTargetPosition(0);
-        leftClawRotator.setPosition(0.1);
-        rightClawRotator.setPosition(0.85);
+        leftClawRotatorOldPosition = leftClawRotator.getPosition();
+        rightClawRotatorOldPosition = rightClawRotator.getPosition();
+        leftClawRotatorTargetPosition = 0.1;
+        rightClawRotatorTargetPosition = 0.85;
     }
     public void pickupPixel(){
         craneArm.setTargetPosition(0);
-        leftClawRotator.setPosition(0.53);
-        rightClawRotator.setPosition(0.42);
+        leftClawRotatorOldPosition = leftClawRotator.getPosition();
+        rightClawRotatorOldPosition = rightClawRotator.getPosition();
+        leftClawRotatorTargetPosition = 0.53;
+        rightClawRotatorTargetPosition = 0.42;
     }
     
     public void moveVertically(DcMotor mot, int position, double power){
