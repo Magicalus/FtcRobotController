@@ -125,7 +125,7 @@ public class blueFrontBackiftheymove extends LinearOpMode {
 
                 rotate(-2200);
                 pickupPixel();
-                sleep(2000);
+                sleep(2200);
                 resetEncoders();
 
                 foward(390);
@@ -140,13 +140,17 @@ public class blueFrontBackiftheymove extends LinearOpMode {
                 resetEncoders();
 
 
-                rotate(1200);
-                sleep(1000);
-                resetEncoders();
+                //rotate(1200);
+                //sleep(1000);
+                //resetEncoders();
 
-                foward(-3880);
-                sleep(2000);
-                resetEncoders();
+                //side(100);
+                //sleep(100);
+                //resetEncoders();
+
+                //foward(-3880);
+//                sleep(2000);
+//                resetEncoders();
 
                 placePixelLow();
                 sleep(5000);

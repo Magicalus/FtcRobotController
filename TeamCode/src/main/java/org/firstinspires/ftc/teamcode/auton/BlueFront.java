@@ -142,7 +142,7 @@ public class BlueFront extends LinearOpMode {
                 resetEncoders();
 
 
-                rotate(1200);
+                rotate(1100);
                 sleep(1000);
                 resetEncoders();
 
@@ -168,7 +168,7 @@ public class BlueFront extends LinearOpMode {
                 neutral();
                 sleep(2000);
 
-                side(1500);
+                side(1130);
                 sleep(2200);
                 resetEncoders();
 
@@ -220,14 +220,20 @@ public class BlueFront extends LinearOpMode {
 
                 //add thingy that moves from pixel placement to board
 
-                side(620);
-                sleep(1000);
-                resetEncoders();
+                //side(150);
+                //sleep(1000);
+                //resetEncoders();
 
-                placePixelLow();
+                craneArm.setTargetPosition(1500);
+            leftClawRotator.setPosition(0.1);
+            rightClawRotator.setPosition(0.85);
                 sleep(5000);
 
-                foward(100);
+                //foward(-100);
+                //sleep(1000);
+                //resetEncoders();
+
+                side(350);
                 sleep(1000);
                 resetEncoders();
 
@@ -242,11 +248,11 @@ public class BlueFront extends LinearOpMode {
                 neutral();
                 sleep(2000);
 
-                side(1500);
+                side(900);
                 sleep(2200);
                 resetEncoders();
 
-                foward(-1000);
+                foward(-350);
                 sleep(2000);
                 resetEncoders();
                 break;
@@ -300,7 +306,11 @@ public class BlueFront extends LinearOpMode {
                 neutral();
                 sleep(2000);
 
-                side(1500);
+                foward(200);
+                sleep(1000);
+                resetEncoders();
+
+                side(1550);
                 sleep(2200);
                 resetEncoders();
 

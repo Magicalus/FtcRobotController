@@ -161,12 +161,12 @@ public class EXPERIMENTAL extends LinearOpMode {
 
 
                 //Gets the time in milliseconds and caps it to 1 second, which is then adjusted to the speed
-                timeElapsed = Math.min(System.currentTimeMillis() - startTime, speed * 1000) / (speed * 1000000);
+                timeElapsed = Math.min(System.currentTimeMillis() - startTime, speed * 1000) / (speed * 1000);
                 telemetry.addData("timeElapsed", timeElapsed);
                 telemetry.addData("????", speed * 1000);
 
-                leftClawRotator.setPosition(leftRotatorOldPos + ((leftRotatorOldPos - leftRotatorNewPos) * timeElapsed));
-                rightClawRotator.setPosition(rightRotatorOldPos + ((rightRotatorOldPos - rightRotatorNewPos) * timeElapsed));
+                leftClawRotator.setPosition(leftRotatorOldPos + ((leftRotatorOldPos - leftRotatorNewPos) * timeElapsed * 10));
+                rightClawRotator.setPosition(rightRotatorOldPos + ((rightRotatorOldPos - rightRotatorNewPos) * timeElapsed * 10));
 
                 telemetry.addData("leftClawRotator Position", leftClawRotator.getPosition());
                 telemetry.addData("rightClawRotator Position", leftClawRotator.getPosition());
