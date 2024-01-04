@@ -119,47 +119,50 @@ public class blueFrontBackiftheymove extends LinearOpMode {
             if(blue.getPropPosition()=="center"){
                 telemetry.addData("Center","center");
                 telemetry.update();
-                foward(-860);
+                foward(-2160);
                 sleep(2200);
                 resetEncoders();
 
-                rotate(-2200);
                 pickupPixel();
-                sleep(2200);
-                resetEncoders();
+                sleep(1000);
 
-                foward(390);
                 rightClawServo.setPosition(0.5);
-                sleep(2200);
-                resetEncoders();
-
-                neutral();
-                sleep(50);
-                foward(-130);
-                sleep(500);
-                resetEncoders();
-
-
-                //rotate(1200);
-                //sleep(1000);
-                //resetEncoders();
-
-                //side(100);
-                //sleep(100);
-                //resetEncoders();
-
-                //foward(-3880);
-//                sleep(2000);
-//                resetEncoders();
-
-                placePixelLow();
-                sleep(5000);
-
-                foward(-300);
                 sleep(1000);
                 resetEncoders();
 
-                side(-200);
+                neutral();
+                foward(-150);
+                sleep(1000);
+                resetEncoders();
+
+
+                rotate(-1070);
+                sleep(2300);
+                resetEncoders();
+
+
+//                side(-2700);
+//                sleep(1300);
+//                resetEncoders();
+
+                foward(-3670);
+                sleep(6000);
+                resetEncoders();
+
+                side(1200);
+                sleep(3000);
+                resetEncoders();
+
+
+                placePixelLow();
+                sleep(5000);
+                resetEncoders();
+
+                foward(-200);
+                sleep(3000);
+                resetEncoders();
+
+                side(-100);
                 sleep(1000);
                 resetEncoders();
 
@@ -170,11 +173,11 @@ public class blueFrontBackiftheymove extends LinearOpMode {
                 neutral();
                 sleep(2000);
 
-                side(-1200);
+                side(-1050);
                 sleep(2200);
                 resetEncoders();
 
-                foward(-1000);
+                foward(-350);
                 sleep(2000);
                 resetEncoders();
                 break;
@@ -237,7 +240,6 @@ public class blueFrontBackiftheymove extends LinearOpMode {
                 leftClawServo.setPosition(1);
                 sleep(300);
 
-                craneArm.setTargetPosition(0);
                 neutral();
                 sleep(2000);
 
@@ -245,7 +247,7 @@ public class blueFrontBackiftheymove extends LinearOpMode {
                 sleep(2200);
                 resetEncoders();
 
-                foward(-1000);
+                foward(-350);
                 sleep(2000);
                 resetEncoders();
                 break;
@@ -267,6 +269,7 @@ public class blueFrontBackiftheymove extends LinearOpMode {
                 resetEncoders();
 
                 foward(50);
+                sleep(1000);
                 rightClawServo.setPosition(0.5);
                 sleep(500);
                 resetEncoders();
@@ -285,7 +288,9 @@ public class blueFrontBackiftheymove extends LinearOpMode {
                 sleep(1000);
                 resetEncoders();
 
-                placePixelLow();
+                craneArm.setTargetPosition(1500);
+                leftClawRotator.setPosition(0.1);
+                rightClawRotator.setPosition(0.85);
                 sleep(5000);
 
                 openClaw();
@@ -303,7 +308,7 @@ public class blueFrontBackiftheymove extends LinearOpMode {
                 sleep(2200);
                 resetEncoders();
 
-                foward(-1000);
+                foward(-350);
                 sleep(2000);
                 resetEncoders();
 
@@ -329,10 +334,10 @@ public class blueFrontBackiftheymove extends LinearOpMode {
     }
 
     public void foward(int distance){
-        moveVertically(frontLeft, distance, 0.5);
-        moveVertically(frontRight, distance, 0.5);
-        moveVertically(backRight, distance, 0.5);
-        moveVertically(backLeft, distance, 0.5);
+        moveVertically(frontLeft, distance, 1);
+        moveVertically(frontRight, distance, 1);
+        moveVertically(backRight, distance, 1);
+        moveVertically(backLeft, distance, 1);
     }
 
     public void side(int distance){
@@ -390,7 +395,7 @@ public class blueFrontBackiftheymove extends LinearOpMode {
     }
 
     public void placePixelLow(){
-        craneArm.setTargetPosition(1500);
+        craneArm.setTargetPosition(1700);
         leftClawRotator.setPosition(0.1);
         rightClawRotator.setPosition(0.85);
     }
