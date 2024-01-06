@@ -307,7 +307,7 @@ public class RedFrontT extends LinearOpMode {
                 resetEncoders();
 
                 side(-1550);
-                sleep(2200);
+                sleep(3000);
                 resetEncoders();
 
                 foward(-350);
