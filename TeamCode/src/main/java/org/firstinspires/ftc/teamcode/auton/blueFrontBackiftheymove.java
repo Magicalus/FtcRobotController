@@ -149,22 +149,22 @@ public class blueFrontBackiftheymove extends LinearOpMode {
                 sleep(6000);
                 resetEncoders();
 
-                side(1200);
+                side(1980);
                 sleep(3000);
                 resetEncoders();
 
 
                 placePixelLow();
-                sleep(5000);
-                resetEncoders();
-
-                foward(-200);
                 sleep(3000);
                 resetEncoders();
 
-                side(-100);
-                sleep(1000);
+                foward(-100);
+                sleep(1200);
                 resetEncoders();
+
+//                side(250);
+//                sleep(1000);
+//                resetEncoders();
 
                 leftClawServo.setPosition(1);
                 sleep(300);
@@ -173,13 +173,6 @@ public class blueFrontBackiftheymove extends LinearOpMode {
                 neutral();
                 sleep(2000);
 
-                side(-1050);
-                sleep(2200);
-                resetEncoders();
-
-                foward(-350);
-                sleep(2000);
-                resetEncoders();
                 break;
 
 
@@ -197,59 +190,14 @@ public class blueFrontBackiftheymove extends LinearOpMode {
                 sleep(2000);
                 resetEncoders();
 
-                rotate(1100);
-                pickupPixel();
-                sleep(2000);
-                resetEncoders();
-
-                rotate(1100);
-                sleep(2000);
-                resetEncoders();
-
-                foward(-1000);
-                sleep(2200);
-                resetEncoders();
-
+                foward(100);
+                sleep(500);
                 rightClawServo.setPosition(0.5);
                 sleep(500);
                 resetEncoders();
 
                 neutral();
-                sleep(500);
-                resetEncoders();
-
-                foward(-800);
-                sleep(2200);
-                resetEncoders();
-
-                //add thingy that moves from pixel placement to board
-
-                side(550);
-                sleep(1000);
-                resetEncoders();
-
-                placePixelLow();
-                sleep(5000);
-
-
-
-                openClaw();
-                sleep(2000);
-                resetEncoders();
-
-                leftClawServo.setPosition(1);
-                sleep(300);
-
-                neutral();
-                sleep(2000);
-
-                side(-1300);
-                sleep(2200);
-                resetEncoders();
-
-                foward(-350);
-                sleep(2000);
-                resetEncoders();
+                sleep(2500);
                 break;
 
 
@@ -279,39 +227,6 @@ public class blueFrontBackiftheymove extends LinearOpMode {
                 //foward();
                 sleep(500);
                 resetEncoders();
-
-                foward(-1643);
-                sleep(2000);
-                resetEncoders();
-
-                side(-470);
-                sleep(1000);
-                resetEncoders();
-
-                craneArm.setTargetPosition(1500);
-                leftClawRotator.setPosition(0.1);
-                rightClawRotator.setPosition(0.85);
-                sleep(5000);
-
-                openClaw();
-                sleep(2000);
-                resetEncoders();
-
-                leftClawServo.setPosition(1);
-                sleep(300);
-
-                craneArm.setTargetPosition(0);
-                neutral();
-                sleep(2000);
-
-                side(-1200);
-                sleep(2200);
-                resetEncoders();
-
-                foward(-350);
-                sleep(2000);
-                resetEncoders();
-
 
                 break;
             }
@@ -395,7 +310,7 @@ public class blueFrontBackiftheymove extends LinearOpMode {
     }
 
     public void placePixelLow(){
-        craneArm.setTargetPosition(1700);
+        craneArm.setTargetPosition(1550);
         leftClawRotator.setPosition(0.1);
         rightClawRotator.setPosition(0.85);
     }

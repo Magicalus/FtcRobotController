@@ -119,21 +119,35 @@ public class blueFrontBack extends LinearOpMode {
             if(blue.getPropPosition()=="center"){
                 telemetry.addData("Center","center");
                 telemetry.update();
-                foward(-900);
+                foward(-2160);
                 sleep(2200);
                 resetEncoders();
 
-                rotate(-2200);
                 pickupPixel();
-                sleep(2000);
-                resetEncoders();
+                sleep(1000);
 
-                foward(350);
                 rightClawServo.setPosition(0.5);
-                sleep(2200);
+                sleep(1000);
                 resetEncoders();
 
-                sleep(2000);
+                neutral();
+                foward(-150);
+                sleep(1000);
+                resetEncoders();
+
+
+                rotate(-1070);
+                sleep(2300);
+                resetEncoders();
+
+
+//                side(-2700);
+//                sleep(1300);
+//                resetEncoders();
+
+                foward(-3670);
+                sleep(6000);
+                resetEncoders();
                 break;
 
 
