@@ -20,11 +20,6 @@ public class DriverMode extends LinearOpMode {
     private DcMotor hookLifter;
     private DcMotor robotLifter;
 
-
-    public enum State{
-        LIFT,
-        DOWN
-    }
     
     @Override
     public void runOpMode() {
@@ -69,7 +64,7 @@ public class DriverMode extends LinearOpMode {
         hookLifter.setDirection(DcMotor.Direction.REVERSE);
         hookLifter.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         hookLifter.setTargetPosition(0);
-        hookLifter.setPower(0.5);
+        hookLifter.setPower(0.3);
         hookLifter.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         
         //resets the zero position of the drawer slide motor
@@ -83,9 +78,7 @@ public class DriverMode extends LinearOpMode {
         
         // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
         // Pushing the left stick forward MUST make robot go forward. So adjust these two lines based on your first test drive.
-        // Note: The settings here assume direct drive on left and right wheels.  Gear Reduction or 90 Deg drives may require direction flips
-        
-        State curState = State.LIFT;
+        // Note: The settings here assume direct drive on left and right wheels.  Gear Reduction or 90 Deg drives may require direction flip
         
         // Wait for the game to start (driver presses PLAY)
         telemetry.update();
@@ -101,27 +94,16 @@ public class DriverMode extends LinearOpMode {
             
                 telemetry.addData("hookLifter position:", hookLifter.getCurrentPosition());
             
-                switch(curState){
-                    case LIFT:
-                        if(gamepad1.dpad_up){
-                        moveVertically(hookLifter, 1700, 0.3);
-                        robotLifter.setTargetPosition(7000);
-                        curState = State.DOWN;
-                    }
-                    break;
-                    case DOWN:
-                        if(gamepad1.dpad_left){
+
+                        if(gamepad1.dpad_up) {
+                            robotLifter.setTargetPosition(7000);
+                        }else if(gamepad1.dpad_down){
                             robotLifter.setTargetPosition(-7000);
-                            curState = State.LIFT;
+                        }else if(gamepad1.right_bumper){
+                            hookLifter.setTargetPosition(0);
+                        }else if(gamepad1.left_bumper){
+                            hookLifter.setTargetPosition(1700);
                         }
-                        else if(gamepad1.dpad_down){
-                            moveVertically(hookLifter, 0, 0.3);
-                            //curState = State.LIFT;
-                        }
-                        break;
-                    default:
-                        curState = State.LIFT;
-                }
                 
                 
                 /*

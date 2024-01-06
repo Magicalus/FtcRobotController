@@ -94,14 +94,13 @@ public class redBack extends LinearOpMode {
         backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
 
         closeClaw();
-        leftClawRotator.setPosition(1);
-        rightClawRotator.setPosition(0);
-        airplaneLauncher.setPosition(0);
+//        leftClawRotator.setPosition(1);
+//        rightClawRotator.setPosition(0);
+//        airplaneLauncher.setPosition(0);
 
         craneArm.setPower(0);
 
         waitForStart();
-        craneArm.setPower(0.2);
         while(opModeIsActive() && !isStopRequested()){
 
             resetEncoders();
@@ -150,24 +149,77 @@ public class redBack extends LinearOpMode {
                 closeClaw();
                 telemetry.update();
                 resetEncoders();
-                foward(-860);
+//                foward(-860);
+////                sleep(2200);
+////                resetEncoders();
+////
+////                rotate(2200);
+////                pickupPixel();
+////                sleep(2000);
+////                resetEncoders();
+////
+////                foward(390);
+////                rightClawServo.setPosition(0.5);
+////                sleep(2200);
+////                resetEncoders();
+////
+////                neutral();
+////                foward(-100);
+////                sleep(500);
+////                resetEncoders();
+
+                foward(-2160);
                 sleep(2200);
                 resetEncoders();
 
-                rotate(2200);
                 pickupPixel();
-                sleep(2000);
-                resetEncoders();
+                sleep(1000);
 
-                foward(390);
                 rightClawServo.setPosition(0.5);
-                sleep(2200);
+                sleep(1000);
                 resetEncoders();
 
                 neutral();
-                foward(-100);
-                sleep(500);
+                foward(-150);
+                sleep(1000);
                 resetEncoders();
+
+
+                rotate(1070);
+                sleep(2300);
+                resetEncoders();
+
+
+//                side(-2700);
+//                sleep(1300);
+//                resetEncoders();
+
+                foward(-3670);
+                sleep(6000);
+                resetEncoders();
+
+                side(-1980);
+                sleep(3000);
+                resetEncoders();
+
+
+                placePixelLow();
+                sleep(3000);
+
+                foward(-100);
+                sleep(1200);
+                resetEncoders();
+
+//                side(250);
+//                sleep(1000);
+//                resetEncoders();
+
+                leftClawServo.setPosition(1);
+                sleep(300);
+
+                craneArm.setTargetPosition(0);
+                neutral();
+                sleep(2000);
                 break;
 
             }else {
@@ -209,10 +261,10 @@ public class redBack extends LinearOpMode {
     }
 
     public void foward(int distance){
-        moveVertically(frontLeft, distance, 0.5);
-        moveVertically(frontRight, distance, 0.5);
-        moveVertically(backRight, distance, 0.5);
-        moveVertically(backLeft, distance, 0.5);
+        moveVertically(frontLeft, distance, 1);
+        moveVertically(frontRight, distance, 1);
+        moveVertically(backRight, distance, 1);
+        moveVertically(backLeft, distance, 1);
     }
 
     public void side(int distance){
@@ -247,7 +299,7 @@ public class redBack extends LinearOpMode {
     }
 
     public void placePixelLow(){
-        craneArm.setTargetPosition(1440);
+        craneArm.setTargetPosition(1550);
         leftClawRotator.setPosition(0.1);
         rightClawRotator.setPosition(0.85);
     }
