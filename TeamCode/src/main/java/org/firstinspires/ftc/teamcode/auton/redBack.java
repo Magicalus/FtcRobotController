@@ -235,7 +235,6 @@ public class redBack extends LinearOpMode {
                 sleep(2000);
                 resetEncoders();
 
-                foward(100);
                 rightClawServo.setPosition(0.5);
                 sleep(500);
                 resetEncoders();
