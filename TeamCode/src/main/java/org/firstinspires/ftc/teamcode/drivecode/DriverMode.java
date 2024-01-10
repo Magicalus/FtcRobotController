@@ -95,14 +95,13 @@ public class DriverMode extends LinearOpMode {
                 telemetry.addData("hookLifter position:", hookLifter.getCurrentPosition());
             
 
-                        if(gamepad1.dpad_up) {
-                            robotLifter.setTargetPosition(7000);
-                        }else if(gamepad1.dpad_down){
-                            robotLifter.setTargetPosition(-7000);
+                        if(gamepad1.dpad_down){
+                            robotLifter.setTargetPosition(-8000);
                         }else if(gamepad1.right_bumper){
-                            hookLifter.setTargetPosition(0);
-                        }else if(gamepad1.left_bumper){
                             hookLifter.setTargetPosition(1700);
+                            robotLifter.setTargetPosition(72500);
+                        }else if(gamepad1.left_bumper){
+                            hookLifter.setTargetPosition(0);
                         }
                 
                 
