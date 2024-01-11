@@ -30,11 +30,6 @@ public class EXPERIMENTAL extends LinearOpMode {
     //How long (in seconds) you want the servo to take to move
     private double speed = 3.0;
     private double timeElapsed;
-
-    public enum State{
-        LIFT,
-        DOWN
-    }
     
     @Override
     public void runOpMode() {
@@ -95,8 +90,6 @@ public class EXPERIMENTAL extends LinearOpMode {
         // Pushing the left stick forward MUST make robot go forward. So adjust these two lines based on your first test drive.
         // Note: The settings here assume direct drive on left and right wheels.  Gear Reduction or 90 Deg drives may require direction flips
         
-        State curState = State.LIFT;
-        
         // Wait for the game to start (driver presses PLAY)
         telemetry.update();
         waitForStart();
@@ -112,26 +105,16 @@ public class EXPERIMENTAL extends LinearOpMode {
 
                 telemetry.addData("hookLifter position:", hookLifter.getCurrentPosition());
 
-                switch(curState){
-                    case LIFT:
-                        if(gamepad1.dpad_up){
-                            moveVertically(hookLifter, 1700, 0.3);
-                            robotLifter.setTargetPosition(7000);
-                            curState = EXPERIMENTAL.State.DOWN;
-                        }
-                        break;
-                    case DOWN:
-                        if(gamepad1.dpad_left){
-                            robotLifter.setTargetPosition(-7000);
-                            curState = EXPERIMENTAL.State.LIFT;
-                        }
-                        else if(gamepad1.dpad_down){
-                            moveVertically(hookLifter, 0, 0.3);
-                            //curState = State.LIFT;
-                        }
-                        break;
-                    default:
-                        curState = EXPERIMENTAL.State.LIFT;
+                if(gamepad1.left_trigger > 0.3){
+                    moveVertically(hookLifter, 1700, 0.3);
+                    robotLifter.setTargetPosition(7000);
+                }else if(gamepad1.right_trigger > 0.3){
+                    moveVertically(hookLifter, -1700, 0.3);
+                }else if(gamepad1.dpad_left){
+                    robotLifter.setTargetPosition(-7000);
+                }else if(gamepad1.dpad_right){
+                    robotLifter.setTargetPosition(0);
+                    hookLifter.setTargetPosition(0);
                 }
 
 
