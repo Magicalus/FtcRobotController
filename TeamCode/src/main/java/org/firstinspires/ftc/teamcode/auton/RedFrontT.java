@@ -154,7 +154,7 @@ public class RedFrontT extends LinearOpMode {
                 sleep(1000);
                 resetEncoders();
 
-                side(300);
+                side(200);
                 sleep(1000);
                 resetEncoders();
 
@@ -165,7 +165,7 @@ public class RedFrontT extends LinearOpMode {
                 neutral();
                 sleep(2000);
 
-                side(-1130);
+                side(-1350);
                 sleep(2200);
                 resetEncoders();
 
@@ -246,7 +246,7 @@ public class RedFrontT extends LinearOpMode {
                 neutral();
                 sleep(2000);
 
-                side(-970);
+                side(-1050);
                 sleep(2200);
                 resetEncoders();
 
@@ -306,7 +306,7 @@ public class RedFrontT extends LinearOpMode {
                 sleep(1000);
                 resetEncoders();
 
-                side(-1550);
+                side(-1600);
                 sleep(3000);
                 resetEncoders();
 

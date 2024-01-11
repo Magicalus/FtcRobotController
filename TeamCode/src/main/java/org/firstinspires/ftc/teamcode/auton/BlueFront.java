@@ -160,7 +160,7 @@ public class BlueFront extends LinearOpMode {
                 sleep(1000);
                 resetEncoders();
 
-                side(-250);
+                side(-300);
                 sleep(1000);
                 resetEncoders();
 
@@ -171,7 +171,7 @@ public class BlueFront extends LinearOpMode {
                 neutral();
                 sleep(2000);
 
-                side(1300);
+                side(1350);
                 sleep(2200);
                 resetEncoders();
 
@@ -287,7 +287,7 @@ public class BlueFront extends LinearOpMode {
 
                 //side(-470);
                 placePixelLow();
-                sleep(3000);
+                sleep(5000);
                 resetEncoders();
 
                 leftClawServo.setPosition(1);
