@@ -120,43 +120,35 @@ public class RedFrontT extends LinearOpMode {
                 telemetry.addData("Center","center");
                 telemetry.update();
                 foward(-860);
-                sleep(2200);
-                resetEncoders();
+                waitforwheels();
+
 
                 rotate(2200);
                 pickupPixel();
                 sleep(2000);
-                resetEncoders();
 
                 foward(390);
                 rightClawServo.setPosition(0.5);
-                sleep(2200);
-                resetEncoders();
+                sleep(500);
 
                 neutral();
                 foward(-100);
-                sleep(500);
-                resetEncoders();
-
+                waitforwheels();
 
                 rotate(-1100);
-                sleep(1000);
-                resetEncoders();
+                waitforwheels();
 
                 foward(-1350);
-                sleep(2000);
-                resetEncoders();
+                waitforwheels();
 
                 placePixelLow();
                 sleep(5000);
 
                 foward(-300);
-                sleep(1000);
-                resetEncoders();
+                waitforwheels();
 
                 side(200);
-                sleep(1000);
-                resetEncoders();
+                waitforwheels();
 
                 leftClawServo.setPosition(1);
                 sleep(300);
@@ -166,12 +158,11 @@ public class RedFrontT extends LinearOpMode {
                 sleep(2000);
 
                 side(-1350);
-                sleep(2200);
-                resetEncoders();
+                waitforwheels();
 
                 foward(-350);
-                sleep(2000);
-                resetEncoders();
+                waitforwheels();
+
                 //why joe I love you <3 THIS WAS MIGUEL I PROMISE
                 break;
 
@@ -182,13 +173,11 @@ public class RedFrontT extends LinearOpMode {
                 telemetry.update();
 
                 foward(-1300);
-                sleep(2200);
-                resetEncoders();
+                waitforwheels();
 
                 rotate(1100);
                 pickupPixel();
                 sleep(2000);
-                resetEncoders();
 
 //                rotate(1100);
 //                pickupPixel();
@@ -200,21 +189,16 @@ public class RedFrontT extends LinearOpMode {
 //                resetEncoders();
 
                 foward(-850);
-                sleep(2200);
-                resetEncoders();
+                waitforwheels();
 
                 rightClawServo.setPosition(0.5);
                 sleep(500);
-                resetEncoders();
-
 
                 neutral();
                 sleep(500);
-                resetEncoders();
 
                 foward(-800);
-                sleep(2200);
-                resetEncoders();
+                waitforwheels();
 
                 //add thingy that moves from pixel placement to board
 
@@ -232,8 +216,7 @@ public class RedFrontT extends LinearOpMode {
                 //resetEncoders();
 
                 side(-400);
-                sleep(1000);
-                resetEncoders();
+                waitforwheels();
 
 //                openClaw();
 //                sleep(2000);
@@ -247,12 +230,11 @@ public class RedFrontT extends LinearOpMode {
                 sleep(2000);
 
                 side(-1050);
-                sleep(2200);
-                resetEncoders();
+                waitforwheels();
 
                 foward(-350);
-                sleep(2000);
-                resetEncoders();
+                waitforwheels();
+
                 break;
 
 
@@ -263,32 +245,25 @@ public class RedFrontT extends LinearOpMode {
                 telemetry.update();
 
                 foward(-1300);
-                sleep(2200);
-                resetEncoders();
+                waitforwheels();
 
                 rotate(1100);
                 pickupPixel();
                 sleep(2000);
-                resetEncoders();
 
                 foward(100);
                 rightClawServo.setPosition(0.5);
                 sleep(500);
-                resetEncoders();
-
 
                 neutral();
                 //foward();
                 sleep(500);
-                resetEncoders();
 
                 foward(-1600);
-                sleep(2000);
-                resetEncoders();
+                waitforwheels();
 
                 side(200);
-                sleep(1000);
-                resetEncoders();
+                waitforwheels();
 
                 placePixelLow();
                 sleep(5000);
@@ -303,17 +278,13 @@ public class RedFrontT extends LinearOpMode {
                 sleep(2000);
 
                 foward(200);
-                sleep(1000);
-                resetEncoders();
+                waitforwheels();
 
                 side(-1600);
-                sleep(3000);
-                resetEncoders();
+                waitforwheels();
 
                 foward(-350);
-                sleep(2000);
-                resetEncoders();
-
+                waitforwheels();
 
                 break;
             }
