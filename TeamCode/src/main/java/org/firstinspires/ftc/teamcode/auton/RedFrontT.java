@@ -13,7 +13,7 @@ import org.firstinspires.ftc.vision.VisionPortal;
 
 
 //@Disabled
-@Autonomous(name="Blue Front For Red")
+@Autonomous(name="Red Front")
 public class RedFrontT extends LinearOpMode {
     private VisionPortal portal;
     private RedPropThreshold red;
@@ -337,6 +337,7 @@ public class RedFrontT extends LinearOpMode {
         moveVertically(frontRight, distance, 0.5);
         moveVertically(backRight, distance, 0.5);
         moveVertically(backLeft, distance, 0.5);
+        
     }
 
     public void side(int distance){
@@ -416,5 +417,12 @@ public class RedFrontT extends LinearOpMode {
     public void closeClaw() {
         leftClawServo.setPosition(0);
         rightClawServo.setPosition(1);
+    }
+    public void waitforwheels() {
+        while (frontLeft.getCurrentPosition() != frontLeft.getTargetPosition() && frontRight.getCurrentPosition() != frontRight.getTargetPosition()
+                && backLeft.getCurrentPosition() != backLeft.getTargetPosition() && backRight.getCurrentPosition() != backRight.getTargetPosition())
+            ;
+        resetEncoders();
+
     }
 }

@@ -105,15 +105,12 @@ public class EXPERIMENTAL extends LinearOpMode {
 
                 telemetry.addData("hookLifter position:", hookLifter.getCurrentPosition());
 
-                if(gamepad1.left_trigger > 0.3){
-                    moveVertically(hookLifter, 1700, 0.3);
-                    robotLifter.setTargetPosition(7000);
-                }else if(gamepad1.right_trigger > 0.3){
-                    moveVertically(hookLifter, -1700, 0.3);
-                }else if(gamepad1.dpad_left){
-                    robotLifter.setTargetPosition(-7000);
-                }else if(gamepad1.dpad_right){
-                    robotLifter.setTargetPosition(0);
+                if(gamepad1.dpad_down){
+                    robotLifter.setTargetPosition(-8000);
+                }else if(gamepad1.right_bumper){
+                    hookLifter.setTargetPosition(1700);
+                    robotLifter.setTargetPosition(72500);
+                }else if(gamepad1.left_bumper){
                     hookLifter.setTargetPosition(0);
                 }
 
@@ -127,32 +124,34 @@ public class EXPERIMENTAL extends LinearOpMode {
                 */
                 if(gamepad2.a){
                     neutral();
-                    startTime = System.currentTimeMillis();
+                    startTime = System.currentTimeMillis() + 400;
                 }else if(gamepad2.x){
                     placePixelHigh();
-                    startTime = System.currentTimeMillis();
+                    startTime = System.currentTimeMillis() + 400;
                 }else if(gamepad2.b){
                     pickupPixel();
-                    startTime = System.currentTimeMillis();
+                    startTime = System.currentTimeMillis() + 400;
                 }else if(gamepad2.y){
                     placePixelLow();
-                    startTime = System.currentTimeMillis();
+                    startTime = System.currentTimeMillis() + 400;
                 }else if(gamepad2.dpad_up){
                     craneCounterWeight();
-                    startTime = System.currentTimeMillis();
+                    startTime = System.currentTimeMillis() + 400;
                 }
 
 
                 //Gets the time in milliseconds and caps it to 1 second, which is then adjusted to the speed
                 timeElapsed = Math.min(System.currentTimeMillis() - startTime, speed * 1000) / (speed * 1000);
                 telemetry.addData("timeElapsed", timeElapsed);
-                telemetry.addData("????", speed * 1000);
 
-                leftClawRotator.setPosition(leftRotatorOldPos + ((leftRotatorOldPos - leftRotatorNewPos) * timeElapsed * 10));
-                rightClawRotator.setPosition(rightRotatorOldPos + ((rightRotatorOldPos - rightRotatorNewPos) * timeElapsed * 10));
+                leftClawRotator.setPosition(-leftRotatorOldPos - ((leftRotatorOldPos - leftRotatorNewPos) * timeElapsed));
+                rightClawRotator.setPosition(-rightRotatorOldPos - ((rightRotatorOldPos - rightRotatorNewPos) * timeElapsed));
 
                 telemetry.addData("leftClawRotator Position", leftClawRotator.getPosition());
                 telemetry.addData("rightClawRotator Position", leftClawRotator.getPosition());
+
+                telemetry.addData("leftClawRotator Code Position", leftRotatorOldPos + ((leftRotatorOldPos - leftRotatorNewPos) * timeElapsed));
+                telemetry.addData("rightClawRotator Code Position", rightRotatorOldPos + ((rightRotatorOldPos - rightRotatorNewPos) * timeElapsed));
 
 
 
