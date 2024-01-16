@@ -13,8 +13,8 @@ import org.firstinspires.ftc.vision.VisionPortal;
 
 
 //@Disabled
-@Autonomous(name="blueBack With Open CV IF THEY MOVE")
-public class blueFrontBackiftheymove extends LinearOpMode {
+@Autonomous(name="Blue Back")
+public class blueBack extends LinearOpMode {
     private VisionPortal portal;
     private BluePropThreshold blue;
     private DcMotor.ZeroPowerBehavior brake = DcMotor.ZeroPowerBehavior.BRAKE;
@@ -71,7 +71,7 @@ public class blueFrontBackiftheymove extends LinearOpMode {
         //starting posistions
 
         // pickupPixel();
-        //
+        // sleep(1000);
         // openClaw();
 
         craneArm = hardwareMap.get(DcMotor.class, "craneArm");
@@ -122,8 +122,8 @@ public class blueFrontBackiftheymove extends LinearOpMode {
             if(blue.getPropPosition()=="center"){
                 telemetry.addData("Center","center");
                 telemetry.update();
+
                 foward(-2160);
-                waitforwheels();
 
                 pickupPixel();
                 sleep(500);
@@ -132,99 +132,53 @@ public class blueFrontBackiftheymove extends LinearOpMode {
                 sleep(1000);
 
                 neutral();
-                foward(-150);
-                waitforwheels();
-
 
                 rotate(-1070);
-                waitforwheels();
 
                 while(System.currentTimeMillis() - startTime < 18000.0);
 //                side(-2700);
 //                waitforwheels();
 
                 foward(-3670);
-                waitforwheels();
-
-                side(1350);
-                waitforwheels();
-
-
-                placePixelLow();
-                sleep(3000);
-
-                foward(-230);
-                waitforwheels();
-
-//                side(250);
-//                sleep(1000);
-//                resetEncoders();
-
-                leftClawServo.setPosition(1);
-                sleep(300);
-
-                craneArm.setTargetPosition(0);
-                neutral();
-                sleep(2000);
 
                 break;
-
-
             }
             if(blue.getPropPosition()=="left"){
                 telemetry.addData("left","left");
                 telemetry.update();
 
                 foward(-1300);
-                sleep(2200);
-                waitforwheels();
 
                 rotate(1100);
                 pickupPixel();
-                sleep(2000);
-                waitforwheels();
 
                 foward(100);
-                sleep(500);
                 rightClawServo.setPosition(0.5);
                 sleep(500);
-                waitforwheels();
 
                 neutral();
                 sleep(2500);
+
                 break;
-
-
-
             }
             if(blue.getPropPosition()=="right"){
                 telemetry.addData("right","right");
                 telemetry.update();
 
                 foward(-1300);
-                sleep(2200);
-                waitforwheels();
 
                 rotate(-1150);
                 pickupPixel();
-                sleep(2000);
-                waitforwheels();
 
                 foward(50);
-                sleep(1000);
                 rightClawServo.setPosition(0.5);
                 sleep(500);
-                waitforwheels();
-
 
                 neutral();
-                //foward();
-                sleep(500);
-                waitforwheels();
+                sleep(2500);
 
                 break;
             }
-
             telemetry.update();
 
             sleep(50);
@@ -243,24 +197,30 @@ public class blueFrontBackiftheymove extends LinearOpMode {
     }
 
     public void foward(int distance){
-        moveVertically(frontLeft, distance, 1);
-        moveVertically(frontRight, distance, 1);
-        moveVertically(backLeft, distance, 1);
-        moveVertically(backRight, distance, 1);
+        moveVertically(frontLeft, distance, 0.5);
+        moveVertically(frontRight, distance, 0.5);
+        moveVertically(backRight, distance, 0.5);
+        moveVertically(backLeft, distance, 0.5);
+
+        waitforwheels();
     }
 
     public void side(int distance){
         moveVertically(frontLeft, distance, 0.5);
         moveVertically(frontRight, -distance, 0.5);
-        moveVertically(backLeft, -distance, 0.5);
         moveVertically(backRight, distance, 0.5);
+        moveVertically(backLeft, -distance, 0.5);
+
+        waitforwheels();
     }
 
     public void rotate(int distance){
         moveVertically(frontLeft, distance, 0.5);
         moveVertically(frontRight, -distance, 0.5);
-        moveVertically(backLeft, distance, 0.5);
         moveVertically(backRight, -distance, 0.5);
+        moveVertically(backLeft, distance, 0.5);
+
+        waitforwheels();
     }
 
     public void middlePush(){
@@ -304,7 +264,7 @@ public class blueFrontBackiftheymove extends LinearOpMode {
     }
 
     public void placePixelLow(){
-        craneArm.setTargetPosition(1350);
+        craneArm.setTargetPosition(1500);
         leftClawRotator.setPosition(0.1);
         rightClawRotator.setPosition(0.85);
     }
@@ -327,8 +287,9 @@ public class blueFrontBackiftheymove extends LinearOpMode {
         leftClawServo.setPosition(0);
         rightClawServo.setPosition(1);
     }
+
     public void waitforwheels() {
-        while (frontLeft.getCurrentPosition() != frontLeft.getTargetPosition() && frontRight.getCurrentPosition() != frontRight.getTargetPosition() 
+        while (frontLeft.getCurrentPosition() != frontLeft.getTargetPosition() && frontRight.getCurrentPosition() != frontRight.getTargetPosition()
                 && backLeft.getCurrentPosition() != backLeft.getTargetPosition() && backRight.getCurrentPosition() != backRight.getTargetPosition())
             ;
         resetEncoders();

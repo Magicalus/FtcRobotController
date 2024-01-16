@@ -16,7 +16,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 
 //@Disabled
-@Autonomous(name="BlueFront With Open CV")
+@Autonomous(name="Blue Front")
 public class BlueFront extends LinearOpMode {
     private VisionPortal portal;
     private BluePropThreshold blue;
@@ -118,108 +118,72 @@ public class BlueFront extends LinearOpMode {
         craneArm.setPower(0.2);
         while(opModeIsActive() && !isStopRequested()){
             sleep(5000);
-
+            resetEncoders();
             if(blue.getPropPosition()=="center"){
                 telemetry.addData("Center","center");
                 telemetry.update();
+
                 foward(-860);
-                sleep(2200);
-                resetEncoders();
 
                 rotate(-2200);
-                sleep(2000);
-                resetEncoders();
 
                 foward(390);
-                sleep(2200);
+
                 pickupPixel();
                 sleep(500);
+
                 rightClawServo.setPosition(0.5);
                 sleep(500);
-                resetEncoders();
 
                 neutral();
-                sleep(100);
-                foward(-200);
                 sleep(500);
-                resetEncoders();
 
+                foward(-200);
 
                 rotate(1100);
-                sleep(1000);
-                resetEncoders();
 
                 foward(-1350);
-                sleep(2000);
-                resetEncoders();
 
                 placePixelLow();
                 sleep(5000);
 
                 foward(-300);
-                sleep(1000);
-                resetEncoders();
 
                 side(-300);
-                sleep(1000);
-                resetEncoders();
 
                 leftClawServo.setPosition(1);
                 sleep(300);
 
                 craneArm.setTargetPosition(0);
                 neutral();
-                sleep(2000);
+                sleep(2500);
 
                 side(1350);
-                sleep(2200);
-                resetEncoders();
 
                 foward(-350);
-                sleep(2000);
-                resetEncoders();
+
                 break;
-
-
             }
             if(blue.getPropPosition()=="left"){
                 telemetry.addData("left","left");
                 telemetry.update();
 
                 foward(-1300);
-                sleep(2200);
-                resetEncoders();
 
                 rotate(-1100);
-                pickupPixel();
-                sleep(2000);
-                resetEncoders();
 
-//                rotate(1100);
-//                pickupPixel();
-//                sleep(2000);
-//                resetEncoders();
-//
-//                rotate(1100);
-//                sleep(2000);
-//                resetEncoders();
+                pickupPixel();
+                sleep(500);
 
                 foward(-900);
-                sleep(2200);
-                resetEncoders();
 
                 rightClawServo.setPosition(0.5);
                 sleep(500);
-                resetEncoders();
-
 
                 neutral();
                 sleep(500);
-                resetEncoders();
 
                 foward(-800);
-                sleep(2200);
-                resetEncoders();
 
                 //add thingy that moves from pixel placement to board
 
@@ -235,83 +199,63 @@ public class BlueFront extends LinearOpMode {
                 //resetEncoders();
 
                 side(350);
-                sleep(1000);
-                resetEncoders();
 
                 leftClawServo.setPosition(1);
-                sleep(300);
+                sleep(500);
 
                 craneArm.setTargetPosition(0);
                 neutral();
-                sleep(2000);
+                sleep(2500);
 
                 side(1050);
-                sleep(2200);
-                resetEncoders();
 
                 foward(-350);
-                sleep(2000);
-                resetEncoders();
+
                 break;
-
-
-
             }
             if(blue.getPropPosition()=="right"){
                 telemetry.addData("right","right");
                 telemetry.update();
 
                 foward(-1300);
-                sleep(1300);
-                resetEncoders();
 
                 rotate(-1150);
+
                 pickupPixel();
-                sleep(1200);
-                resetEncoders();
+                sleep(500);
 
                 foward(150);
+
                 rightClawServo.setPosition(0.5);
                 sleep(500);
-                resetEncoders();
-
 
                 neutral();
-                //foward();
                 sleep(500);
-                resetEncoders();
 
                 foward(-1600);
-                sleep(3500);
-                resetEncoders();
 
                 //side(-470);
                 placePixelLow();
                 sleep(5000);
-                resetEncoders();
 
                 leftClawServo.setPosition(1);
-                sleep(300);
+                sleep(500);
 
                 craneArm.setTargetPosition(0);
                 neutral();
-                sleep(2000);
+                sleep(2500);
 
+                //Does this foward need to be here? It's not in the other directions
                 foward(200);
-                sleep(1000);
-                resetEncoders();
 
                 side(1600);
-                sleep(2200);
-                resetEncoders();
 
                 foward(-350);
-                sleep(2000);
-                resetEncoders();
-
 
                 break;
             }
+            //The line below can't be reached in the current state; the code always hits a break before hitting here
+            //Good place for error detection, actually
             telemetry.update();
         }
 
@@ -332,6 +276,8 @@ public class BlueFront extends LinearOpMode {
         moveVertically(frontRight, distance, 0.5);
         moveVertically(backRight, distance, 0.5);
         moveVertically(backLeft, distance, 0.5);
+
+        waitforwheels();
     }
 
     public void side(int distance){
@@ -339,6 +285,8 @@ public class BlueFront extends LinearOpMode {
         moveVertically(frontRight, -distance, 0.5);
         moveVertically(backRight, distance, 0.5);
         moveVertically(backLeft, -distance, 0.5);
+
+        waitforwheels();
     }
 
     public void rotate(int distance){
@@ -346,6 +294,8 @@ public class BlueFront extends LinearOpMode {
         moveVertically(frontRight, -distance, 0.5);
         moveVertically(backRight, -distance, 0.5);
         moveVertically(backLeft, distance, 0.5);
+
+        waitforwheels();
     }
 
     public void middlePush(){
@@ -411,5 +361,12 @@ public class BlueFront extends LinearOpMode {
     public void closeClaw() {
         leftClawServo.setPosition(0);
         rightClawServo.setPosition(1);
+    }
+
+    public void waitforwheels() {
+        while (frontLeft.getCurrentPosition() != frontLeft.getTargetPosition() && frontRight.getCurrentPosition() != frontRight.getTargetPosition()
+                && backLeft.getCurrentPosition() != backLeft.getTargetPosition() && backRight.getCurrentPosition() != backRight.getTargetPosition())
+            ;
+        resetEncoders();
     }
 }

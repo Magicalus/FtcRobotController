@@ -13,8 +13,8 @@ import org.firstinspires.ftc.vision.VisionPortal;
 
 
 //@Disabled
-@Autonomous(name="blueBack With Open CV")
-public class blueFrontBack extends LinearOpMode {
+@Autonomous(name="Blue Back IF THEY MOVE")
+public class blueBackIfTheyMove extends LinearOpMode {
     private VisionPortal portal;
     private BluePropThreshold blue;
     private DcMotor.ZeroPowerBehavior brake = DcMotor.ZeroPowerBehavior.BRAKE;
@@ -33,6 +33,8 @@ public class blueFrontBack extends LinearOpMode {
 
     private int mid = 80;
     private int turn = 65;
+
+    private long startTime;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -69,7 +71,7 @@ public class blueFrontBack extends LinearOpMode {
         //starting posistions
 
         // pickupPixel();
-        // sleep(1000);
+        //
         // openClaw();
 
         craneArm = hardwareMap.get(DcMotor.class, "craneArm");
@@ -114,107 +116,89 @@ public class blueFrontBack extends LinearOpMode {
         waitForStart();
         craneArm.setPower(0.2);
         while(opModeIsActive() && !isStopRequested()){
+            startTime = System.currentTimeMillis();
+            resetEncoders();
             sleep(5000);
-
             if(blue.getPropPosition()=="center"){
                 telemetry.addData("Center","center");
                 telemetry.update();
                 foward(-2160);
-                sleep(2200);
-                resetEncoders();
 
                 pickupPixel();
-                sleep(1000);
+                sleep(500);
 
                 rightClawServo.setPosition(0.5);
                 sleep(1000);
-                resetEncoders();
 
                 neutral();
                 foward(-150);
-                sleep(1000);
-                resetEncoders();
-
 
                 rotate(-1070);
-                sleep(2300);
-                resetEncoders();
 
-
+                while(System.currentTimeMillis() - startTime < 18000.0);
 //                side(-2700);
-//                sleep(1300);
-//                resetEncoders();
+//                waitforwheels();
 
                 foward(-3670);
-                sleep(6000);
-                resetEncoders();
+
+                side(1350);
+
+                placePixelLow();
+                sleep(3000);
+
+                foward(-230);
+
+//                side(250);
+//                sleep(1000);
+//                resetEncoders();
+
+                leftClawServo.setPosition(1);
+                sleep(300);
+
+                craneArm.setTargetPosition(0);
+                neutral();
+                sleep(2500);
+
                 break;
-
-
             }
             if(blue.getPropPosition()=="left"){
                 telemetry.addData("left","left");
                 telemetry.update();
 
                 foward(-1300);
-                sleep(2200);
-                resetEncoders();
 
                 rotate(1100);
                 pickupPixel();
-                sleep(2000);
-                resetEncoders();
 
-                rotate(1100);
-                pickupPixel();
-                sleep(2000);
-                resetEncoders();
-
-                rotate(1100);
-                sleep(2000);
-                resetEncoders();
-
-                foward(-1000);
-                sleep(2200);
-                resetEncoders();
-
+                foward(100);
                 rightClawServo.setPosition(0.5);
                 sleep(500);
-                resetEncoders();
-
 
                 neutral();
-                sleep(2000);
+                sleep(2500);
+
                 break;
-
-
-
             }
             if(blue.getPropPosition()=="right"){
                 telemetry.addData("right","right");
                 telemetry.update();
 
                 foward(-1300);
-                sleep(2200);
-                resetEncoders();
 
                 rotate(-1150);
                 pickupPixel();
-                sleep(2000);
-                resetEncoders();
 
                 foward(50);
                 rightClawServo.setPosition(0.5);
                 sleep(500);
-                resetEncoders();
 
 
-
-                sleep(2000);
-
+                neutral();
+                sleep(2500);
 
                 break;
             }
+
             telemetry.update();
 
             sleep(50);
@@ -233,24 +217,30 @@ public class blueFrontBack extends LinearOpMode {
     }
 
     public void foward(int distance){
-        moveVertically(frontLeft, distance, 0.5);
-        moveVertically(frontRight, distance, 0.5);
-        moveVertically(backRight, distance, 0.5);
-        moveVertically(backLeft, distance, 0.5);
+        moveVertically(frontLeft, distance, 1);
+        moveVertically(frontRight, distance, 1);
+        moveVertically(backLeft, distance, 1);
+        moveVertically(backRight, distance, 1);
+
+        waitforwheels();
     }
 
     public void side(int distance){
         moveVertically(frontLeft, distance, 0.5);
         moveVertically(frontRight, -distance, 0.5);
-        moveVertically(backRight, distance, 0.5);
         moveVertically(backLeft, -distance, 0.5);
+        moveVertically(backRight, distance, 0.5);
+
+        waitforwheels();
     }
 
     public void rotate(int distance){
         moveVertically(frontLeft, distance, 0.5);
         moveVertically(frontRight, -distance, 0.5);
-        moveVertically(backRight, -distance, 0.5);
         moveVertically(backLeft, distance, 0.5);
+        moveVertically(backRight, -distance, 0.5);
+
+        waitforwheels();
     }
 
     public void middlePush(){
@@ -294,12 +284,12 @@ public class blueFrontBack extends LinearOpMode {
     }
 
     public void placePixelLow(){
-        craneArm.setTargetPosition(1500);
+        craneArm.setTargetPosition(1350);
         leftClawRotator.setPosition(0.1);
         rightClawRotator.setPosition(0.85);
     }
     public void neutral(){
-        craneArm.setTargetPosition(000);
+        craneArm.setTargetPosition(0);
         leftClawRotator.setPosition(0.1);
         rightClawRotator.setPosition(0.85);
     }
@@ -316,5 +306,11 @@ public class blueFrontBack extends LinearOpMode {
     public void closeClaw() {
         leftClawServo.setPosition(0);
         rightClawServo.setPosition(1);
+    }
+    public void waitforwheels() {
+        while (frontLeft.getCurrentPosition() != frontLeft.getTargetPosition() && frontRight.getCurrentPosition() != frontRight.getTargetPosition() 
+                && backLeft.getCurrentPosition() != backLeft.getTargetPosition() && backRight.getCurrentPosition() != backRight.getTargetPosition())
+            ;
+        resetEncoders();
     }
 }
