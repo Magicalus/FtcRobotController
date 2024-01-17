@@ -115,40 +115,39 @@ public class RedFrontT extends LinearOpMode {
         craneArm.setPower(0.2);
         while(opModeIsActive() && !isStopRequested()){
             sleep(5000);
+            resetEncoders();
 
             if(red.getPropPosition()=="center"){
-                telemetry.addData("Center","center");
+                telemetry.addData("Prop","center");
                 telemetry.update();
-                foward(-860);
-                waitforwheels();
 
+                foward(-860);
 
                 rotate(2200);
-                pickupPixel();
-                sleep(2000);
 
                 foward(390);
+
+                pickupPixel();
+                sleep(500);
+
                 rightClawServo.setPosition(0.5);
                 sleep(500);
 
                 neutral();
+                sleep(500);
+
                 foward(-100);
-                waitforwheels();
 
                 rotate(-1100);
-                waitforwheels();
 
                 foward(-1350);
-                waitforwheels();
 
                 placePixelLow();
                 sleep(5000);
 
                 foward(-300);
-                waitforwheels();
 
                 side(200);
-                waitforwheels();
 
                 leftClawServo.setPosition(1);
                 sleep(300);
@@ -158,10 +157,8 @@ public class RedFrontT extends LinearOpMode {
                 sleep(2000);
 
                 side(-1350);
-                waitforwheels();
 
                 foward(-350);
-                waitforwheels();
 
                 //why joe I love you <3 THIS WAS MIGUEL I PROMISE
                 break;
@@ -169,15 +166,15 @@ public class RedFrontT extends LinearOpMode {
 
             }
             if(red.getPropPosition()=="right"){
-                telemetry.addData("right","right");
+                telemetry.addData("Prop","right");
                 telemetry.update();
 
                 foward(-1300);
-                waitforwheels();
 
                 rotate(1100);
+
                 pickupPixel();
-                sleep(2000);
+                sleep(500);
 
 //                rotate(1100);
 //                pickupPixel();
@@ -189,7 +186,6 @@ public class RedFrontT extends LinearOpMode {
 //                resetEncoders();
 
                 foward(-850);
-                waitforwheels();
 
                 rightClawServo.setPosition(0.5);
                 sleep(500);
@@ -198,7 +194,6 @@ public class RedFrontT extends LinearOpMode {
                 sleep(500);
 
                 foward(-800);
-                waitforwheels();
 
                 //add thingy that moves from pixel placement to board
 
@@ -209,6 +204,7 @@ public class RedFrontT extends LinearOpMode {
                 craneArm.setTargetPosition(1500);
             leftClawRotator.setPosition(0.1);
             rightClawRotator.setPosition(0.85);
+            //claw rotator positions are different?? should be 0.2 for left and 0.75 for right, dont know if this has an effect on the placement of the pixel though
                 sleep(5000);
 
                 //foward(-100);
@@ -216,7 +212,6 @@ public class RedFrontT extends LinearOpMode {
                 //resetEncoders();
 
                 side(-400);
-                waitforwheels();
 
 //                openClaw();
 //                sleep(2000);
@@ -230,10 +225,8 @@ public class RedFrontT extends LinearOpMode {
                 sleep(2000);
 
                 side(-1050);
-                waitforwheels();
 
                 foward(-350);
-                waitforwheels();
 
                 break;
 
@@ -241,17 +234,18 @@ public class RedFrontT extends LinearOpMode {
 
             }
             if(red.getPropPosition()=="left"){
-                telemetry.addData("left","left");
+                telemetry.addData("Prop","left");
                 telemetry.update();
 
                 foward(-1300);
-                waitforwheels();
 
                 rotate(1100);
+
                 pickupPixel();
-                sleep(2000);
+                sleep(500);
 
                 foward(100);
+
                 rightClawServo.setPosition(0.5);
                 sleep(500);
 
@@ -260,10 +254,8 @@ public class RedFrontT extends LinearOpMode {
                 sleep(500);
 
                 foward(-1600);
-                waitforwheels();
 
                 side(200);
-                waitforwheels();
 
                 placePixelLow();
                 sleep(5000);
@@ -278,13 +270,10 @@ public class RedFrontT extends LinearOpMode {
                 sleep(2000);
 
                 foward(200);
-                waitforwheels();
 
                 side(-1600);
-                waitforwheels();
 
                 foward(-350);
-                waitforwheels();
 
                 break;
             }
@@ -308,7 +297,8 @@ public class RedFrontT extends LinearOpMode {
         moveVertically(frontRight, distance, 0.5);
         moveVertically(backRight, distance, 0.5);
         moveVertically(backLeft, distance, 0.5);
-        
+
+        waitforwheels();
     }
 
     public void side(int distance){
@@ -316,6 +306,8 @@ public class RedFrontT extends LinearOpMode {
         moveVertically(frontRight, -distance, 0.5);
         moveVertically(backRight, distance, 0.5);
         moveVertically(backLeft, -distance, 0.5);
+
+        waitforwheels();
     }
 
     public void rotate(int distance){
@@ -323,6 +315,8 @@ public class RedFrontT extends LinearOpMode {
         moveVertically(frontRight, -distance, 0.5);
         moveVertically(backRight, -distance, 0.5);
         moveVertically(backLeft, distance, 0.5);
+
+        waitforwheels();
     }
 
     public void middlePush(){

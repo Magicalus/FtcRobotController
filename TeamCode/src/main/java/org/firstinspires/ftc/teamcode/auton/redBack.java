@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.vision.VisionPortal;
 
-@Autonomous(name="redbackOpenCV")
+@Autonomous(name="Red Back IF THEY MOVE")
 public class redBack extends LinearOpMode {
 
     private VisionPortal portal;
@@ -33,6 +33,8 @@ public class redBack extends LinearOpMode {
 
     private int mid = 80;
     private int turn = 65;
+
+    private long startTime;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -102,14 +104,12 @@ public class redBack extends LinearOpMode {
 
         waitForStart();
         while(opModeIsActive() && !isStopRequested()){
-
-            resetEncoders();
-            closeClaw();
+            startTime = System.currentTimeMillis();
             sleep(5000);
-            telemetry.addData("Prop Position", red.getPropPosition());
-            telemetry.update();
+            resetEncoders();
+
             if(red.getPropPosition() == "right") {
-                telemetry.addData("right","right");
+                telemetry.addData("Prop","right");
                 telemetry.update();
 
                 foward(-1300);
@@ -145,70 +145,35 @@ public class redBack extends LinearOpMode {
                 break;
 
             }else if(red.getPropPosition() == "center") {
-                telemetry.addData("Center","center");
-                closeClaw();
+                telemetry.addData("Prop","center");
                 telemetry.update();
                 resetEncoders();
-//                foward(-860);
-////                sleep(2200);
-////                resetEncoders();
-////
-////                rotate(2200);
-////                pickupPixel();
-////                sleep(2000);
-////                resetEncoders();
-////
-////                foward(390);
-////                rightClawServo.setPosition(0.5);
-////                sleep(2200);
-////                resetEncoders();
-////
-////                neutral();
-////                foward(-100);
-////                sleep(500);
-////                resetEncoders();
 
                 foward(-2160);
-                sleep(2200);
-                resetEncoders();
 
                 pickupPixel();
-                sleep(1000);
+                sleep(500);
 
                 rightClawServo.setPosition(0.5);
                 sleep(1000);
-                resetEncoders();
 
                 neutral();
                 foward(-150);
-                sleep(1000);
-                resetEncoders();
-
 
                 rotate(1070);
-                sleep(2300);
-                resetEncoders();
 
-
+                while(System.currentTimeMillis() - startTime < 18000.0);
 //                side(-2700);
-//                sleep(1300);
-//                resetEncoders();
+//                waitforwheels();
 
                 foward(-3670);
-                sleep(6000);
-                resetEncoders();
 
-                side(-1980);
-                sleep(3000);
-                resetEncoders();
-
+                side(-1350);
 
                 placePixelLow();
                 sleep(3000);
 
-                foward(-100);
-                sleep(1200);
-                resetEncoders();
+                foward(-230);
 
 //                side(250);
 //                sleep(1000);
@@ -219,11 +184,12 @@ public class redBack extends LinearOpMode {
 
                 craneArm.setTargetPosition(0);
                 neutral();
-                sleep(2000);
+                sleep(2500);
+
                 break;
 
             }else {
-                telemetry.addData("left","left");
+                telemetry.addData("Prop","left");
                 telemetry.update();
 
                 foward(-1300);
@@ -264,6 +230,8 @@ public class redBack extends LinearOpMode {
         moveVertically(frontRight, distance, 1);
         moveVertically(backRight, distance, 1);
         moveVertically(backLeft, distance, 1);
+
+        waitforwheels();
     }
 
     public void side(int distance){
@@ -271,6 +239,8 @@ public class redBack extends LinearOpMode {
         moveVertically(frontRight, -distance, 0.5);
         moveVertically(backRight, distance, 0.5);
         moveVertically(backLeft, -distance, 0.5);
+
+        waitforwheels();
     }
 
     public void rotate(int distance){
@@ -278,6 +248,8 @@ public class redBack extends LinearOpMode {
         moveVertically(frontRight, -distance, 0.5);
         moveVertically(backRight, -distance, 0.5);
         moveVertically(backLeft, distance, 0.5);
+
+        waitforwheels();
     }
 
     public void middlePush(){
@@ -320,6 +292,12 @@ public class redBack extends LinearOpMode {
     public void closeClaw() {
         leftClawServo.setPosition(0);
         rightClawServo.setPosition(1);
+    }
+    public void waitforwheels() {
+        while (frontLeft.getCurrentPosition() != frontLeft.getTargetPosition() && frontRight.getCurrentPosition() != frontRight.getTargetPosition()
+                && backLeft.getCurrentPosition() != backLeft.getTargetPosition() && backRight.getCurrentPosition() != backRight.getTargetPosition())
+            ;
+        resetEncoders();
     }
 }
 

@@ -120,7 +120,7 @@ public class BlueFront extends LinearOpMode {
             sleep(5000);
             resetEncoders();
             if(blue.getPropPosition()=="center"){
-                telemetry.addData("Center","center");
+                telemetry.addData("Prop","center");
                 telemetry.update();
 
                 foward(-860);
@@ -165,7 +165,7 @@ public class BlueFront extends LinearOpMode {
                 break;
             }
             if(blue.getPropPosition()=="left"){
-                telemetry.addData("left","left");
+                telemetry.addData("Prop","left");
                 telemetry.update();
 
                 foward(-1300);
@@ -184,8 +184,6 @@ public class BlueFront extends LinearOpMode {
                 sleep(500);
 
                 foward(-800);
-
-                //add thingy that moves from pixel placement to board
 
                 //side(150);
                 //sleep(1000);
@@ -214,7 +212,7 @@ public class BlueFront extends LinearOpMode {
                 break;
             }
             if(blue.getPropPosition()=="right"){
-                telemetry.addData("right","right");
+                telemetry.addData("Prop","right");
                 telemetry.update();
 
                 foward(-1300);
