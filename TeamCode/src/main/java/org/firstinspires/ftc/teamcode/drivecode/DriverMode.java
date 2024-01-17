@@ -17,8 +17,8 @@ public class DriverMode extends LinearOpMode {
     private Servo rightClawServo;
     private Servo leftClawRotator;
     private Servo rightClawRotator;
-    private DcMotor hookLifter;
-    private DcMotor robotLifter;
+    private DcMotor leftRobotLifter;
+    private DcMotor rightRobotLifter;
 
     
     @Override
@@ -60,19 +60,21 @@ public class DriverMode extends LinearOpMode {
         rightClawRotator = hardwareMap.get(Servo.class, "rightClawRotator");
         
         //resets the zero position of the drawer slide motor
-        hookLifter = hardwareMap.get(DcMotor.class, "hookLifter");
-        hookLifter.setDirection(DcMotor.Direction.REVERSE);
-        hookLifter.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        hookLifter.setTargetPosition(0);
-        hookLifter.setPower(0.3);
-        hookLifter.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        leftRobotLifter = hardwareMap.get(DcMotor.class, "leftRobotLifter");
+        leftRobotLifter.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        leftRobotLifter.setTargetPosition(0);
+        leftRobotLifter.setPower(1);
+        leftRobotLifter.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        // Baller bro that's absolutely crazy
+        // On god bro frfr
         
         //resets the zero position of the drawer slide motor
-        robotLifter = hardwareMap.get(DcMotor.class, "robotLifter");
-        robotLifter.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robotLifter.setTargetPosition(0);
-        robotLifter.setPower(1);
-        robotLifter.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rightRobotLifter = hardwareMap.get(DcMotor.class, "rightRobotLifter");
+        rightRobotLifter.setDirection(DcMotorSimple.Direction.REVERSE);
+        rightRobotLifter.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightRobotLifter.setTargetPosition(0);
+        rightRobotLifter.setPower(1);
+        rightRobotLifter.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         
         telemetry.update();
         
@@ -92,17 +94,14 @@ public class DriverMode extends LinearOpMode {
                 jarmy.setPower(((-gamepad1.left_stick_y + gamepad1.left_stick_x) - gamepad1.right_stick_x) *0.7);
                 backLeft.setPower(((-gamepad1.left_stick_y - gamepad1.left_stick_x) + gamepad1.right_stick_x) *0.7);
             
-                telemetry.addData("hookLifter position:", hookLifter.getCurrentPosition());
-            
 
-                        if(gamepad1.dpad_down){
-                            robotLifter.setTargetPosition(-8000);
-                        }else if(gamepad1.right_bumper){
-                            hookLifter.setTargetPosition(1700);
-                            robotLifter.setTargetPosition(72500);
-                        }else if(gamepad1.left_bumper){
-                            hookLifter.setTargetPosition(0);
-                        }
+                if(gamepad1.right_bumper){
+                    leftRobotLifter.setTargetPosition(2000);
+                    rightRobotLifter.setTargetPosition(2000);
+                }else if(gamepad1.left_bumper){
+                    leftRobotLifter.setTargetPosition(0);
+                    rightRobotLifter.setTargetPosition(0);
+                }
                 
                 
                 /*

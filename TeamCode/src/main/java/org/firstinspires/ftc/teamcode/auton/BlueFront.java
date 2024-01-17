@@ -158,6 +158,8 @@ public class BlueFront extends LinearOpMode {
                 neutral();
                 sleep(2500);
 
+                foward(200);
+
                 side(1350);
 
                 foward(-350);
@@ -205,6 +207,8 @@ public class BlueFront extends LinearOpMode {
                 neutral();
                 sleep(2500);
 
+                foward(200);
+
                 side(1050);
 
                 foward(-350);
@@ -243,7 +247,6 @@ public class BlueFront extends LinearOpMode {
                 neutral();
                 sleep(2500);
 
-                //Does this foward need to be here? It's not in the other directions
                 foward(200);
 
                 side(1600);

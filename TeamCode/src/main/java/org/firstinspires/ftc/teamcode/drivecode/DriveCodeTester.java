@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotor.ZeroPowerBehavior;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
 @TeleOp(name="Drive Code Testing", group="Linear Opmode")
@@ -13,6 +14,9 @@ public class DriveCodeTester extends LinearOpMode{
     private ZeroPowerBehavior floatt = ZeroPowerBehavior.FLOAT;
     private DcMotor frontLeft, frontRight, backLeft, backRight, craneArm;
     private Servo rightClawRotator, leftClawRotator, rightClawServo, leftClawServo;
+
+    private DcMotor leftRobotLifter;
+    private DcMotor rightRobotLifter;
     
     @Override
     public void runOpMode() {
@@ -65,6 +69,22 @@ public class DriveCodeTester extends LinearOpMode{
 
         leftClawRotator = hardwareMap.get(Servo.class, "leftClawRotator");
         rightClawRotator = hardwareMap.get(Servo.class, "rightClawRotator");
+
+        leftRobotLifter = hardwareMap.get(DcMotor.class, "leftRobotLifter");
+        leftRobotLifter.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        leftRobotLifter.setTargetPosition(0);
+        leftRobotLifter.setPower(1);
+        leftRobotLifter.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        // Baller bro that's absolutely crazy
+        // On god bro frfr
+
+        //resets the zero position of the drawer slide motor
+        rightRobotLifter = hardwareMap.get(DcMotor.class, "robotLifter");
+        rightRobotLifter.setDirection(DcMotorSimple.Direction.REVERSE);
+        rightRobotLifter.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightRobotLifter.setTargetPosition(0);
+        rightRobotLifter.setPower(1);
+        rightRobotLifter.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         waitForStart();
         craneArm.setTargetPosition(200);

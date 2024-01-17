@@ -38,6 +38,8 @@ public class TESTER extends LinearOpMode{
     private DcMotor.ZeroPowerBehavior floatt =DcMotor.ZeroPowerBehavior.FLOAT;
     private DcMotor frontLeft, frontRight, backLeft, backRight;
     private Servo rightClawRotator, leftClawRotator, rightClawServo, leftClawServo;
+
+    private DcMotor leftRobotLifter, rightRobotLifter;
     
     @Override
     public void runOpMode() {
@@ -48,9 +50,12 @@ public class TESTER extends LinearOpMode{
         frontRight = hardwareMap.get(DcMotor.class, "fruntRight");
         backLeft = hardwareMap.get(DcMotor.class, "backLeft");
         backRight = hardwareMap.get(DcMotor.class, "jarmy");
-        backRight = hardwareMap.get(DcMotor.class, "jarmy");
 
-        
+        leftRobotLifter = hardwareMap.get(DcMotor.class, "leftRobotLifter");
+        rightRobotLifter = hardwareMap.get(DcMotor.class, "rightRobotLifter");
+
+
+
         rightClawRotator = hardwareMap.get(Servo.class, "rightClawRotator");
         leftClawRotator = hardwareMap.get(Servo.class, "leftClawRotator");
         
@@ -77,6 +82,17 @@ public class TESTER extends LinearOpMode{
         backLeft.setTargetPosition(0);
         backLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+
+
+        leftRobotLifter.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        leftRobotLifter.setTargetPosition(0);
+        leftRobotLifter.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        leftRobotLifter.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+
+        rightRobotLifter.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightRobotLifter.setTargetPosition(0);
+        rightRobotLifter.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rightRobotLifter.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         
         // craneArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         // craneArm.setTargetPosition(0);
@@ -85,18 +101,18 @@ public class TESTER extends LinearOpMode{
         
 //        telemetry.addData("right position:", rightClawRotator.getPosition());
 //        telemetry.addData("left position:", leftClawRotator.getPosition());
-         telemetry.addData("frontLeft position:", frontLeft.getCurrentPosition());
-        telemetry.addData("frontRight position:", frontRight.getCurrentPosition());
-        telemetry.addData("backLeft position:", frontLeft.getCurrentPosition());
-
-        telemetry.addData("backRight position:", frontRight.getCurrentPosition());
+         telemetry.addData("right position:", rightRobotLifter.getCurrentPosition());
+        telemetry.addData("left position:", leftRobotLifter.getCurrentPosition());
+//        telemetry.addData("backLeft position:", frontLeft.getCurrentPosition());
+//
+//        telemetry.addData("backRight position:", frontRight.getCurrentPosition());
         telemetry.update();
         waitForStart();
-        telemetry.addData("frontLeft position:", frontLeft.getCurrentPosition());
-        telemetry.addData("frontRight position:", frontRight.getCurrentPosition());
-        telemetry.addData("backLeft position:", frontLeft.getCurrentPosition());
-
-        telemetry.addData("backRight position:", frontRight.getCurrentPosition());
+        telemetry.addData("right position:", rightRobotLifter.getCurrentPosition());
+        telemetry.addData("left position:", leftRobotLifter.getCurrentPosition());
+//        telemetry.addData("backLeft position:", frontLeft.getCurrentPosition());
+//
+//        telemetry.addData("backRight position:", frontRight.getCurrentPosition());
         telemetry.update();
         sleep(100000);
 
