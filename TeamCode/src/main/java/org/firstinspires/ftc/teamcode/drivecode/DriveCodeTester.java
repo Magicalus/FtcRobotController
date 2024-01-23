@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotor.ZeroPowerBehavior;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
+import org.firstinspires.ftc.teamcode.universalCode.*;
 
 @TeleOp(name="Drive Code Testing", group="Linear Opmode")
 
@@ -23,8 +24,8 @@ public class DriveCodeTester extends LinearOpMode{
         telemetry.addData("Status", "Initialized");
         telemetry.update();
         
-        frontLeft = hardwareMap.get(DcMotor.class, "fruntLeft");
-        frontRight = hardwareMap.get(DcMotor.class, "fruntRight");
+        frontLeft = hardwareMap.get(DcMotor.class, "frontLeft");
+        frontRight = hardwareMap.get(DcMotor.class, "frontRight");
         backLeft = hardwareMap.get(DcMotor.class, "backLeft");
         backRight = hardwareMap.get(DcMotor.class, "jarmy");
         backRight = hardwareMap.get(DcMotor.class, "jarmy");

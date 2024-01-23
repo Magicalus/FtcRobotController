@@ -13,6 +13,9 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
+import org.firstinspires.ftc.teamcode.universalCode.craneMotors;
+import org.firstinspires.ftc.teamcode.universalCode.values;
+
 
 
 //@Disabled
@@ -20,19 +23,15 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 public class BlueFront extends LinearOpMode {
     private VisionPortal portal;
     private BluePropThreshold blue;
-    private DcMotor.ZeroPowerBehavior brake = DcMotor.ZeroPowerBehavior.BRAKE;
-    private DcMotor.ZeroPowerBehavior floatt =DcMotor.ZeroPowerBehavior.FLOAT;
     private DcMotor frontLeft, frontRight, backLeft, backRight;
+
+    private craneMotors crane = new craneMotors(hardwareMap);
     private Servo leftClawRotator;
     private Servo rightClawRotator;
     private Servo airplaneLauncher;
 
     private Servo leftClawServo;
     private Servo rightClawServo;
-
-    private DcMotor craneArm;
-    // private Servo goodServo;
-    //private Servo badServo;
 
     private int mid = 80;
     private int turn = 65;
@@ -48,11 +47,10 @@ public class BlueFront extends LinearOpMode {
                 .addProcessor(blue)
                 .build();
 
-        frontLeft = hardwareMap.get(DcMotor.class, "fruntLeft");
-        frontRight = hardwareMap.get(DcMotor.class, "fruntRight");
+        frontLeft = hardwareMap.get(DcMotor.class, "frontLeft");
+        frontRight = hardwareMap.get(DcMotor.class, "frontRight");
         backLeft = hardwareMap.get(DcMotor.class, "backLeft");
         backRight = hardwareMap.get(DcMotor.class, "jarmy");
-        craneArm = hardwareMap.get(DcMotor.class, "craneArm");
 
         rightClawRotator = hardwareMap.get(Servo.class, "rightClawRotator");
         leftClawRotator = hardwareMap.get(Servo.class, "leftClawRotator");
@@ -74,13 +72,6 @@ public class BlueFront extends LinearOpMode {
         // pickupPixel();
         // sleep(1000);
         // openClaw();
-
-        craneArm = hardwareMap.get(DcMotor.class, "craneArm");
-        craneArm.setDirection(DcMotor.Direction.REVERSE);
-        craneArm.setTargetPosition(0);
-        craneArm.setPower(0);
-        craneArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        craneArm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
 
         frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         frontRight.setTargetPosition(0);
@@ -115,7 +106,6 @@ public class BlueFront extends LinearOpMode {
 
 
         waitForStart();
-        craneArm.setPower(0.2);
         while(opModeIsActive() && !isStopRequested()){
             sleep(5000);
             resetEncoders();
@@ -154,7 +144,6 @@ public class BlueFront extends LinearOpMode {
                 leftClawServo.setPosition(1);
                 sleep(300);
 
-                craneArm.setTargetPosition(0);
                 neutral();
                 sleep(2500);
 
@@ -203,7 +192,6 @@ public class BlueFront extends LinearOpMode {
                 leftClawServo.setPosition(1);
                 sleep(500);
 
-                craneArm.setTargetPosition(0);
                 neutral();
                 sleep(2500);
 
@@ -243,7 +231,6 @@ public class BlueFront extends LinearOpMode {
                 leftClawServo.setPosition(1);
                 sleep(500);
 
-                craneArm.setTargetPosition(0);
                 neutral();
                 sleep(2500);
 
@@ -303,30 +290,6 @@ public class BlueFront extends LinearOpMode {
 
 
     }
-    /*
-
-    public void placePixelLow(){
-        craneArm.setTargetPosition(720);
-        clawRotator.setPosition(0);
-    }
-    public void neutral(){
-        craneArm.setTargetPosition(100);
-        clawRotator.setPosition(0.15);
-    }
-    public void pickupPixel(){
-        craneArm.setTargetPosition(5);
-        clawRotator.setPosition(0.75);
-    }
-    public void openClaw(){
-        goodServo.setPosition(0.35);
-        badServo.setPosition(0.6);
-    }
-
-    public void closeClaw() {
-        goodServo.setPosition(0.6);
-        badServo.setPosition(0.3);
-    }
-    */
 
     public void moveVertically(DcMotor mot, int position, double power){
         mot.setPower(0);
@@ -340,25 +303,20 @@ public class BlueFront extends LinearOpMode {
     }
 
     public void placePixelLow(){
-        craneArm.setTargetPosition(1550);
+        crane.setTargetPosition(values.cranePlaceLowAuton);
         leftClawRotator.setPosition(0.1);
         rightClawRotator.setPosition(0.85);
     }
     public void neutral(){
-        craneArm.setTargetPosition(000);
+        crane.setTargetPosition(values.craneResting);
         leftClawRotator.setPosition(0.1);
         rightClawRotator.setPosition(0.85);
     }
     public void pickupPixel(){
-        craneArm.setTargetPosition(0);
+        crane.setTargetPosition(values.craneResting);
         leftClawRotator.setPosition(0.53);
         rightClawRotator.setPosition(0.42);
     }
-    public void openClaw(){
-        leftClawServo.setPosition(1);
-        rightClawServo.setPosition(0);
-    }
-
     public void closeClaw() {
         leftClawServo.setPosition(0);
         rightClawServo.setPosition(1);

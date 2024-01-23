@@ -9,6 +9,8 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.firstinspires.ftc.teamcode.universalCode.craneMotors;
+import org.firstinspires.ftc.teamcode.universalCode.values;
 import org.firstinspires.ftc.vision.VisionPortal;
 
 
@@ -27,7 +29,7 @@ public class RedFrontT extends LinearOpMode {
     private Servo leftClawServo;
     private Servo rightClawServo;
 
-    private DcMotor craneArm;
+    private craneMotors crane = new craneMotors(hardwareMap);
     // private Servo goodServo;
     //private Servo badServo;
 
@@ -45,11 +47,10 @@ public class RedFrontT extends LinearOpMode {
                 .addProcessor(red)
                 .build();
 
-        frontLeft = hardwareMap.get(DcMotor.class, "fruntLeft");
-        frontRight = hardwareMap.get(DcMotor.class, "fruntRight");
+        frontLeft = hardwareMap.get(DcMotor.class, "frontLeft");
+        frontRight = hardwareMap.get(DcMotor.class, "frontRight");
         backLeft = hardwareMap.get(DcMotor.class, "backLeft");
         backRight = hardwareMap.get(DcMotor.class, "jarmy");
-        craneArm = hardwareMap.get(DcMotor.class, "craneArm");
 
         rightClawRotator = hardwareMap.get(Servo.class, "rightClawRotator");
         leftClawRotator = hardwareMap.get(Servo.class, "leftClawRotator");
@@ -71,13 +72,6 @@ public class RedFrontT extends LinearOpMode {
         // pickupPixel();
         // sleep(1000);
         // openClaw();
-
-        craneArm = hardwareMap.get(DcMotor.class, "craneArm");
-        craneArm.setDirection(DcMotor.Direction.REVERSE);
-        craneArm.setTargetPosition(0);
-        craneArm.setPower(0);
-        craneArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        craneArm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
 
         frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         frontRight.setTargetPosition(0);
@@ -112,7 +106,7 @@ public class RedFrontT extends LinearOpMode {
 
 
         waitForStart();
-        craneArm.setPower(0.2);
+        crane.setPower(0.2);
         while(opModeIsActive() && !isStopRequested()){
             sleep(5000);
             resetEncoders();
@@ -152,7 +146,6 @@ public class RedFrontT extends LinearOpMode {
                 leftClawServo.setPosition(1);
                 sleep(300);
 
-                craneArm.setTargetPosition(0);
                 neutral();
                 sleep(2000);
 
@@ -201,10 +194,7 @@ public class RedFrontT extends LinearOpMode {
                 //sleep(1000);
                 //resetEncoders();
 
-                craneArm.setTargetPosition(1500);
-            leftClawRotator.setPosition(0.1);
-            rightClawRotator.setPosition(0.85);
-            //claw rotator positions are different?? should be 0.2 for left and 0.75 for right, dont know if this has an effect on the placement of the pixel though
+                placePixelLow();
                 sleep(5000);
 
                 //foward(-100);
@@ -220,7 +210,6 @@ public class RedFrontT extends LinearOpMode {
                 leftClawServo.setPosition(1);
                 sleep(300);
 
-                craneArm.setTargetPosition(0);
                 neutral();
                 sleep(2000);
 
@@ -265,7 +254,6 @@ public class RedFrontT extends LinearOpMode {
                 leftClawServo.setPosition(1);
                 sleep(300);
 
-                craneArm.setTargetPosition(0);
                 neutral();
                 sleep(2000);
 
@@ -360,34 +348,29 @@ public class RedFrontT extends LinearOpMode {
     }
 
     public void placePixelLow(){
-        craneArm.setTargetPosition(1500);
-        leftClawRotator.setPosition(0.2);
-        rightClawRotator.setPosition(0.75);
+        crane.setTargetPosition(values.cranePlaceLowAuton);
+        leftClawRotator.setPosition(0.1);
+        rightClawRotator.setPosition(0.85);
     }
     public void neutral(){
-        craneArm.setTargetPosition(000);
+        crane.setTargetPosition(values.craneResting);
         leftClawRotator.setPosition(0.1);
         rightClawRotator.setPosition(0.85);
     }
     public void pickupPixel(){
-        craneArm.setTargetPosition(0);
+        crane.setTargetPosition(values.craneResting);
         leftClawRotator.setPosition(0.53);
         rightClawRotator.setPosition(0.42);
     }
-    public void openClaw(){
-        leftClawServo.setPosition(1);
-        rightClawServo.setPosition(0);
-    }
-
     public void closeClaw() {
         leftClawServo.setPosition(0);
         rightClawServo.setPosition(1);
     }
+
     public void waitforwheels() {
         while (frontLeft.getCurrentPosition() != frontLeft.getTargetPosition() && frontRight.getCurrentPosition() != frontRight.getTargetPosition()
                 && backLeft.getCurrentPosition() != backLeft.getTargetPosition() && backRight.getCurrentPosition() != backRight.getTargetPosition())
             ;
         resetEncoders();
-
     }
 }

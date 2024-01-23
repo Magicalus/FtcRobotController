@@ -1,35 +1,10 @@
 package org.firstinspires.ftc.teamcode.auton;
 
-import com.qualcomm.robotcore.hardware.DcMotor.ZeroPowerBehavior;
-import com.qualcomm.robotcore.hardware.Blinker;
-import com.qualcomm.robotcore.hardware.ColorSensor;
-import com.qualcomm.robotcore.util.ElapsedTime;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.Gamepad.*;
-
-import com.qualcomm.robotcore.hardware.ServoImpl;
-import com.qualcomm.robotcore.hardware.CRServoImplEx;
-import com.qualcomm.robotcore.hardware.CRServo;
-import com.qualcomm.robotcore.hardware.DistanceSensor;
-
-import java.util.Map;
-import java.lang.Math;
-
-import org.firstinspires.ftc.robotcore.external.navigation.Position;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.AnalogInput;
-import com.qualcomm.robotcore.hardware.DigitalChannel;
-
-import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
-import com.qualcomm.robotcore.hardware.CRServoImpl;
-import com.qualcomm.robotcore.hardware.ServoController;
-import com.qualcomm.robotcore.hardware.PwmControl;
-import com.qualcomm.robotcore.util.ElapsedTime.Resolution;
-import com.qualcomm.robotcore.hardware.TouchSensor;
+import org.firstinspires.ftc.teamcode.universalCode.*;
 
 @TeleOp(name="value testing", group="Linear Opmode")
 
@@ -39,20 +14,20 @@ public class TESTER extends LinearOpMode{
     private DcMotor frontLeft, frontRight, backLeft, backRight;
     private Servo rightClawRotator, leftClawRotator, rightClawServo, leftClawServo;
 
-    private DcMotor leftRobotLifter, rightRobotLifter;
+    private DcMotor leftHanger, rightHanger, leftCraneArm, rightCraneArm;
     
     @Override
     public void runOpMode() {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
         
-        frontLeft = hardwareMap.get(DcMotor.class, "fruntLeft");
-        frontRight = hardwareMap.get(DcMotor.class, "fruntRight");
+        frontLeft = hardwareMap.get(DcMotor.class, "frontLeft");
+        frontRight = hardwareMap.get(DcMotor.class, "frontRight");
         backLeft = hardwareMap.get(DcMotor.class, "backLeft");
         backRight = hardwareMap.get(DcMotor.class, "jarmy");
 
-        leftRobotLifter = hardwareMap.get(DcMotor.class, "leftRobotLifter");
-        rightRobotLifter = hardwareMap.get(DcMotor.class, "rightRobotLifter");
+        leftHanger = hardwareMap.get(DcMotor.class, "leftHanger");
+        rightHanger = hardwareMap.get(DcMotor.class, "rightHanger");
 
 
 
@@ -84,15 +59,17 @@ public class TESTER extends LinearOpMode{
         backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
 
 
-        leftRobotLifter.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        leftRobotLifter.setTargetPosition(0);
-        leftRobotLifter.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        leftRobotLifter.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        leftHanger.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        leftHanger.setTargetPosition(0);
+        leftHanger.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        leftHanger.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
 
-        rightRobotLifter.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rightRobotLifter.setTargetPosition(0);
-        rightRobotLifter.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rightRobotLifter.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        rightHanger.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightHanger.setTargetPosition(0);
+        rightHanger.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rightHanger.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+
+        craneMotors crane = new craneMotors(hardwareMap, 0);
         
         // craneArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         // craneArm.setTargetPosition(0);
@@ -101,18 +78,22 @@ public class TESTER extends LinearOpMode{
         
 //        telemetry.addData("right position:", rightClawRotator.getPosition());
 //        telemetry.addData("left position:", leftClawRotator.getPosition());
-         telemetry.addData("right position:", rightRobotLifter.getCurrentPosition());
-        telemetry.addData("left position:", leftRobotLifter.getCurrentPosition());
+//        telemetry.addData("right position:", rightHanger.getCurrentPosition());
+//        telemetry.addData("left position:", leftHanger.getCurrentPosition());
 //        telemetry.addData("backLeft position:", frontLeft.getCurrentPosition());
-//
+
 //        telemetry.addData("backRight position:", frontRight.getCurrentPosition());
+        telemetry.addData("Left Crane Motor Position", crane.getCurrentLeftPosition());
+        telemetry.addData("Right Crane Motor Position", crane.getCurrentRightPosition());
         telemetry.update();
         waitForStart();
-        telemetry.addData("right position:", rightRobotLifter.getCurrentPosition());
-        telemetry.addData("left position:", leftRobotLifter.getCurrentPosition());
+//        telemetry.addData("right position:", rightHanger.getCurrentPosition());
+//        telemetry.addData("left position:", leftHanger.getCurrentPosition());
 //        telemetry.addData("backLeft position:", frontLeft.getCurrentPosition());
 //
 //        telemetry.addData("backRight position:", frontRight.getCurrentPosition());
+        telemetry.addData("Left Crane Motor Position", crane.getCurrentLeftPosition());
+        telemetry.addData("Right Crane Motor Position", crane.getCurrentRightPosition());
         telemetry.update();
         sleep(100000);
 

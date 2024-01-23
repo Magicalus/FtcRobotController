@@ -47,8 +47,8 @@ public class blueBack extends LinearOpMode {
                 .addProcessor(blue)
                 .build();
 
-        frontLeft = hardwareMap.get(DcMotor.class, "fruntLeft");
-        frontRight = hardwareMap.get(DcMotor.class, "fruntRight");
+        frontLeft = hardwareMap.get(DcMotor.class, "frontLeft");
+        frontRight = hardwareMap.get(DcMotor.class, "frontRight");
         backLeft = hardwareMap.get(DcMotor.class, "backLeft");
         backRight = hardwareMap.get(DcMotor.class, "jarmy");
         craneArm = hardwareMap.get(DcMotor.class, "craneArm");

@@ -9,6 +9,8 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.firstinspires.ftc.teamcode.universalCode.craneMotors;
+import org.firstinspires.ftc.teamcode.universalCode.values;
 import org.firstinspires.ftc.vision.VisionPortal;
 
 @Autonomous(name="Red Back IF THEY MOVE")
@@ -27,7 +29,7 @@ public class redBack extends LinearOpMode {
     private Servo leftClawServo;
     private Servo rightClawServo;
 
-    private DcMotor craneArm;
+    private craneMotors crane = new craneMotors(hardwareMap);
     // private Servo goodServo;
     //private Servo badServo;
 
@@ -47,11 +49,10 @@ public class redBack extends LinearOpMode {
                 .addProcessor(red)
                 .build();
 
-        frontLeft = hardwareMap.get(DcMotor.class, "fruntLeft");
-        frontRight = hardwareMap.get(DcMotor.class, "fruntRight");
+        frontLeft = hardwareMap.get(DcMotor.class, "frontLeft");
+        frontRight = hardwareMap.get(DcMotor.class, "frontRight");
         backLeft = hardwareMap.get(DcMotor.class, "backLeft");
         backRight = hardwareMap.get(DcMotor.class, "jarmy");
-        craneArm = hardwareMap.get(DcMotor.class, "craneArm");
 
         rightClawRotator = hardwareMap.get(Servo.class, "rightClawRotator");
         leftClawRotator = hardwareMap.get(Servo.class, "leftClawRotator");
@@ -60,12 +61,7 @@ public class redBack extends LinearOpMode {
         leftClawServo = hardwareMap.get(Servo.class, "leftClawServo");
 
 
-        craneArm = hardwareMap.get(DcMotor.class, "craneArm");
-        craneArm.setDirection(DcMotor.Direction.REVERSE);
-        craneArm.setTargetPosition(0);
-        craneArm.setPower(0.2);
-        craneArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        craneArm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+
 
         frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         frontRight.setTargetPosition(0);
@@ -99,8 +95,6 @@ public class redBack extends LinearOpMode {
 //        leftClawRotator.setPosition(1);
 //        rightClawRotator.setPosition(0);
 //        airplaneLauncher.setPosition(0);
-
-        craneArm.setPower(0);
 
         waitForStart();
         while(opModeIsActive() && !isStopRequested()){
@@ -182,7 +176,6 @@ public class redBack extends LinearOpMode {
                 leftClawServo.setPosition(1);
                 sleep(300);
 
-                craneArm.setTargetPosition(0);
                 neutral();
                 sleep(2500);
 
@@ -270,29 +263,25 @@ public class redBack extends LinearOpMode {
     }
 
     public void placePixelLow(){
-        craneArm.setTargetPosition(1550);
+        crane.setTargetPosition(values.cranePlaceHighAuton);
         leftClawRotator.setPosition(0.1);
         rightClawRotator.setPosition(0.85);
     }
     public void neutral(){
-        craneArm.setTargetPosition(000);
+        crane.setTargetPosition(values.craneResting);
         leftClawRotator.setPosition(0.1);
         rightClawRotator.setPosition(0.85);
     }
     public void pickupPixel(){
-        craneArm.setTargetPosition(0);
+        crane.setTargetPosition(values.craneResting);
         leftClawRotator.setPosition(0.53);
         rightClawRotator.setPosition(0.42);
     }
-    public void openClaw(){
-        leftClawServo.setPosition(1);
-        rightClawServo.setPosition(0);
-    }
-
     public void closeClaw() {
         leftClawServo.setPosition(0);
         rightClawServo.setPosition(1);
     }
+
     public void waitforwheels() {
         while (frontLeft.getCurrentPosition() != frontLeft.getTargetPosition() && frontRight.getCurrentPosition() != frontRight.getTargetPosition()
                 && backLeft.getCurrentPosition() != backLeft.getTargetPosition() && backRight.getCurrentPosition() != backRight.getTargetPosition())
