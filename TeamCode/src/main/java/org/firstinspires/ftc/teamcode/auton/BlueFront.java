@@ -115,7 +115,7 @@ public class BlueFront extends LinearOpMode {
 
                 foward(-860);
 
-                rotate(-2200);
+                rotate(values.turn90DegreesClockwise * 2);
 
                 foward(390);
 
@@ -130,7 +130,7 @@ public class BlueFront extends LinearOpMode {
 
                 foward(-200);
 
-                rotate(1100);
+                rotate(values.turn90DegreesClockwise);
 
                 foward(-1350);
 
@@ -161,7 +161,7 @@ public class BlueFront extends LinearOpMode {
 
                 foward(-1300);
 
-                rotate(-1100);
+                rotate(values.turn90DegreesCounterClockwise);
 
                 pickupPixel();
                 sleep(500);
@@ -209,7 +209,7 @@ public class BlueFront extends LinearOpMode {
 
                 foward(-1300);
 
-                rotate(-1150);
+                rotate(values.turn90DegreesCounterClockwise);
 
                 pickupPixel();
                 sleep(500);

@@ -110,7 +110,7 @@ public class redBack extends LinearOpMode {
                 sleep(2200);
                 resetEncoders();
 
-                rotate(1100);
+                rotate(values.turn90DegreesClockwise);
                 pickupPixel();
                 sleep(2000);
                 resetEncoders();
@@ -154,7 +154,7 @@ public class redBack extends LinearOpMode {
                 neutral();
                 foward(-150);
 
-                rotate(1070);
+                rotate(values.turn90DegreesClockwise);
 
                 while(System.currentTimeMillis() - startTime < 18000.0);
 //                side(-2700);
@@ -186,23 +186,17 @@ public class redBack extends LinearOpMode {
                 telemetry.update();
 
                 foward(-1300);
-                sleep(2200);
-                resetEncoders();
 
-                rotate(1100);
+                rotate(values.turn90DegreesClockwise);
                 pickupPixel();
-                sleep(2000);
-                resetEncoders();
+                sleep(500);
 
                 rightClawServo.setPosition(0.5);
                 sleep(500);
-                resetEncoders();
 
 
                 neutral();
-                //foward();
                 sleep(500);
-                resetEncoders();
 
                 break;
 

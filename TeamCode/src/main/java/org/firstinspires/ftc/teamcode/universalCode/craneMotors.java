@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.universalCode;
 
+import static android.os.SystemClock.sleep;
+
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -8,9 +10,12 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.teamcode.universalCode.craneMotors;
 import org.firstinspires.ftc.teamcode.universalCode.values;
+import com.qualcomm.robotcore.hardware.TouchSensor;
 
 public class craneMotors {
     private DcMotor leftCraneArm, rightCraneArm;
+
+    private TouchSensor craneZero;
 
     public craneMotors(HardwareMap hardwareMap){
         leftCraneArm = hardwareMap.get(DcMotor.class, "leftCraneArm");
@@ -24,6 +29,8 @@ public class craneMotors {
         rightCraneArm.setPower(0.5);
         rightCraneArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         rightCraneArm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+
+        //craneZero = hardwareMap.get(TouchSensor.class,"craneZero");
     }
 
     public craneMotors(HardwareMap hardwareMap, double power){
@@ -64,4 +71,6 @@ public class craneMotors {
     public int getCurrentLeftPosition() { return leftCraneArm.getCurrentPosition(); }
 
     public int getCurrentRightPosition() { return rightCraneArm.getCurrentPosition(); }
+
+    public void zeroCheck(){}
 }

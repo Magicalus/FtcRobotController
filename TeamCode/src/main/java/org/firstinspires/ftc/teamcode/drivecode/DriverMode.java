@@ -92,8 +92,8 @@ public class DriverMode extends LinearOpMode {
                     leftHanger.setTargetPosition(values.hangerRaised);
                     rightHanger.setTargetPosition(values.hangerRaised);
                 }else if(gamepad1.left_bumper){
-                    leftHanger.setTargetPosition(values.hangerResting);
-                    rightHanger.setTargetPosition(values.hangerResting);
+                    leftHanger.setTargetPosition(values.hangerHanging);
+                    rightHanger.setTargetPosition(values.hangerHanging);
                 }
                 
                 
@@ -134,9 +134,9 @@ public class DriverMode extends LinearOpMode {
                 }
 
                 //new cranes have INSANE value drift, this is here so they don't rip the belts apart
-//                if(crane.getCurrentRightPosition() < -10){
-//                    crane.resetEncoders();
-//                }
+                if(crane.getCurrentRightPosition() < -10 || (crane.getCurrentLeftPosition() > 15 && crane.getCurrentRightPosition() < 5)){
+                    crane.resetEncoders();
+                }
 
                 telemetry.addData("Left Crane Motor Position", crane.getCurrentLeftPosition());
                 telemetry.addData("Right Crane Motor Position", crane.getCurrentRightPosition());

@@ -132,7 +132,7 @@ public class RedFrontT extends LinearOpMode {
 
                 foward(-100);
 
-                rotate(-1100);
+                rotate(values.turn90DegreesCounterClockwise);
 
                 foward(-1350);
 
@@ -164,7 +164,7 @@ public class RedFrontT extends LinearOpMode {
 
                 foward(-1300);
 
-                rotate(1100);
+                rotate(values.turn90DegreesClockwise);
 
                 pickupPixel();
                 sleep(500);
@@ -228,7 +228,7 @@ public class RedFrontT extends LinearOpMode {
 
                 foward(-1300);
 
-                rotate(1100);
+                rotate(values.turn90DegreesClockwise);
 
                 pickupPixel();
                 sleep(500);

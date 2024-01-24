@@ -9,6 +9,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.firstinspires.ftc.teamcode.universalCode.values;
 import org.firstinspires.ftc.vision.VisionPortal;
 
 
@@ -135,7 +136,7 @@ public class blueBack extends LinearOpMode {
 
                 rotate(-1070);
 
-                while(System.currentTimeMillis() - startTime < 18000.0);
+                while(System.currentTimeMillis() - startTime < 25000.0);
 //                side(-2700);
 //                waitforwheels();
 
@@ -149,7 +150,7 @@ public class blueBack extends LinearOpMode {
 
                 foward(-1300);
 
-                rotate(1100);
+                rotate(values.turn90DegreesClockwise);
                 pickupPixel();
 
                 foward(100);
@@ -167,7 +168,7 @@ public class blueBack extends LinearOpMode {
 
                 foward(-1300);
 
-                rotate(-1150);
+                rotate(values.turn90DegreesCounterClockwise);
                 pickupPixel();
 
                 foward(50);

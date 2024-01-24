@@ -23,12 +23,19 @@ public class values {
 
     //Crane Arm Positions (REDO)
     public static int craneResting = 0;
-    public static int cranePlaceTeleop = 1440;
-    public static int cranePlaceHighAuton = 1350;
-    public static int cranePlaceLowAuton = 1550;
+    public static int cranePlaceTeleop = 1800;
+    public static int cranePlaceHighAuton = 1688;
+    public static int cranePlaceLowAuton = 1938;
 
 
     //Hanging Positions
     public static int hangerResting = 0;
+    public static int hangerHanging = 1000;
     public static int hangerRaised = 2000;
+
+
+    //Auton movement values
+    public static int turn90DegreesClockwise = 1100;
+
+    public static int turn90DegreesCounterClockwise = - turn90DegreesClockwise;
 }

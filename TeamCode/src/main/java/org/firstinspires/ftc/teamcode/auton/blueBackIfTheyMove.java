@@ -120,7 +120,7 @@ public class blueBackIfTheyMove extends LinearOpMode {
                 neutral();
                 foward(-150);
 
-                rotate(-1070);
+                rotate(values.turn90DegreesCounterClockwise);
 
                 while(System.currentTimeMillis() - startTime < 18000.0);
 //                side(-2700);
@@ -153,7 +153,7 @@ public class blueBackIfTheyMove extends LinearOpMode {
 
                 foward(-1300);
 
-                rotate(1100);
+                rotate(values.turn90DegreesClockwise);
                 pickupPixel();
 
                 foward(100);
@@ -171,7 +171,7 @@ public class blueBackIfTheyMove extends LinearOpMode {
 
                 foward(-1300);
 
-                rotate(-1150);
+                rotate(values.turn90DegreesCounterClockwise);
                 pickupPixel();
 
                 foward(50);
