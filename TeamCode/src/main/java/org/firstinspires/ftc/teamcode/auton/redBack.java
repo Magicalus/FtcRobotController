@@ -85,7 +85,9 @@ public class redBack extends LinearOpMode {
 
         // clawRotator.setPosition(0.0);
 
-        airplaneLauncher = hardwareMap.get(Servo.class, "airplaneLauncher");
+        //airplaneLauncher = hardwareMap.get(Servo.class, "airplaneLauncher");
+
+        crane = new craneMotors(hardwareMap);
 
 
         frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);

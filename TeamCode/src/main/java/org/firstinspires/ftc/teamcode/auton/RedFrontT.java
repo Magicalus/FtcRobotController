@@ -29,7 +29,7 @@ public class RedFrontT extends LinearOpMode {
     private Servo leftClawServo;
     private Servo rightClawServo;
 
-    private craneMotors crane = new craneMotors(hardwareMap);
+    private craneMotors crane;
     // private Servo goodServo;
     //private Servo badServo;
 
@@ -95,14 +95,16 @@ public class RedFrontT extends LinearOpMode {
 
         // clawRotator.setPosition(0.0);
 
-        airplaneLauncher = hardwareMap.get(Servo.class, "airplaneLauncher");
+        //airplaneLauncher = hardwareMap.get(Servo.class, "airplaneLauncher");
+
+        crane = new craneMotors(hardwareMap);
 
 
         frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
 
         closeClaw();
-        airplaneLauncher.setPosition(0);
+        //airplaneLauncher.setPosition(0);
 
 
         waitForStart();
@@ -117,15 +119,15 @@ public class RedFrontT extends LinearOpMode {
 
                 foward(-860);
 
+                pickupPixel();
+                sleep(700);
+
                 rotate(2200);
 
-                foward(390);
-
-                pickupPixel();
-                sleep(500);
+                foward(280);
 
                 rightClawServo.setPosition(0.5);
-                sleep(500);
+                sleep(300);
 
                 neutral();
                 sleep(500);
@@ -141,7 +143,7 @@ public class RedFrontT extends LinearOpMode {
 
                 foward(-300);
 
-                side(200);
+               //side(-);
 
                 leftClawServo.setPosition(1);
                 sleep(300);
@@ -202,6 +204,7 @@ public class RedFrontT extends LinearOpMode {
                 //resetEncoders();
 
                 side(-400);
+                foward(-100);
 
 //                openClaw();
 //                sleep(2000);
@@ -244,11 +247,12 @@ public class RedFrontT extends LinearOpMode {
 
                 foward(-1600);
 
-                side(200);
+                side(330);
 
                 placePixelLow();
                 sleep(5000);
 
+                foward(-70);
 
 
                 leftClawServo.setPosition(1);
@@ -281,28 +285,28 @@ public class RedFrontT extends LinearOpMode {
     }
 
     public void foward(int distance){
-        moveVertically(frontLeft, distance, 0.5);
-        moveVertically(frontRight, distance, 0.5);
-        moveVertically(backRight, distance, 0.5);
-        moveVertically(backLeft, distance, 0.5);
+        moveVertically(frontLeft, distance, 0.75);
+        moveVertically(frontRight, distance, 0.75);
+        moveVertically(backRight, distance, 0.75);
+        moveVertically(backLeft, distance, 0.75);
 
         waitforwheels();
     }
 
     public void side(int distance){
-        moveVertically(frontLeft, distance, 0.5);
-        moveVertically(frontRight, -distance, 0.5);
-        moveVertically(backRight, distance, 0.5);
-        moveVertically(backLeft, -distance, 0.5);
+        moveVertically(frontLeft, distance, 0.75);
+        moveVertically(frontRight, -distance, 0.75);
+        moveVertically(backRight, distance, 0.75);
+        moveVertically(backLeft, -distance, 0.75);
 
         waitforwheels();
     }
 
     public void rotate(int distance){
-        moveVertically(frontLeft, distance, 0.5);
-        moveVertically(frontRight, -distance, 0.5);
-        moveVertically(backRight, -distance, 0.5);
-        moveVertically(backLeft, distance, 0.5);
+        moveVertically(frontLeft, distance, 0.75);
+        moveVertically(frontRight, -distance, 0.75);
+        moveVertically(backRight, -distance, 0.75);
+        moveVertically(backLeft, distance, 0.75);
 
         waitforwheels();
     }

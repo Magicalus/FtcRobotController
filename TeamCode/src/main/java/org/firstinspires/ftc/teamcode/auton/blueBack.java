@@ -9,6 +9,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.firstinspires.ftc.teamcode.universalCode.craneMotors;
 import org.firstinspires.ftc.teamcode.universalCode.values;
 import org.firstinspires.ftc.vision.VisionPortal;
 
@@ -28,7 +29,7 @@ public class blueBack extends LinearOpMode {
     private Servo leftClawServo;
     private Servo rightClawServo;
 
-    private DcMotor craneArm;
+    private craneMotors crane;
     // private Servo goodServo;
     //private Servo badServo;
 
@@ -52,7 +53,6 @@ public class blueBack extends LinearOpMode {
         frontRight = hardwareMap.get(DcMotor.class, "frontRight");
         backLeft = hardwareMap.get(DcMotor.class, "backLeft");
         backRight = hardwareMap.get(DcMotor.class, "jarmy");
-        craneArm = hardwareMap.get(DcMotor.class, "craneArm");
 
         rightClawRotator = hardwareMap.get(Servo.class, "rightClawRotator");
         leftClawRotator = hardwareMap.get(Servo.class, "leftClawRotator");
@@ -74,13 +74,6 @@ public class blueBack extends LinearOpMode {
         // pickupPixel();
         // sleep(1000);
         // openClaw();
-
-        craneArm = hardwareMap.get(DcMotor.class, "craneArm");
-        craneArm.setDirection(DcMotor.Direction.REVERSE);
-        craneArm.setTargetPosition(0);
-        craneArm.setPower(0);
-        craneArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        craneArm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
 
         frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         frontRight.setTargetPosition(0);
@@ -104,18 +97,19 @@ public class blueBack extends LinearOpMode {
 
         // clawRotator.setPosition(0.0);
 
-        airplaneLauncher = hardwareMap.get(Servo.class, "airplaneLauncher");
+        //airplaneLauncher = hardwareMap.get(Servo.class, "airplaneLauncher");
+
+        crane = new craneMotors(hardwareMap);
 
 
         frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
 
         closeClaw();
-        airplaneLauncher.setPosition(0);
+        //airplaneLauncher.setPosition(0);
 
 
         waitForStart();
-        craneArm.setPower(0.2);
         while(opModeIsActive() && !isStopRequested()){
             startTime = System.currentTimeMillis();
             resetEncoders();
@@ -265,17 +259,17 @@ public class blueBack extends LinearOpMode {
     }
 
     public void placePixelLow(){
-        craneArm.setTargetPosition(1500);
+        crane.setTargetPosition(values.cranePlaceHighAuton);
         leftClawRotator.setPosition(0.1);
         rightClawRotator.setPosition(0.85);
     }
     public void neutral(){
-        craneArm.setTargetPosition(000);
+        crane.setTargetPosition(values.craneResting);
         leftClawRotator.setPosition(0.1);
         rightClawRotator.setPosition(0.85);
     }
     public void pickupPixel(){
-        craneArm.setTargetPosition(0);
+        crane.setTargetPosition(values.craneResting);
         leftClawRotator.setPosition(0.53);
         rightClawRotator.setPosition(0.42);
     }

@@ -42,7 +42,7 @@ public class DriverMode extends LinearOpMode {
 
         crane = new craneMotors(hardwareMap);
 
-        Servo airplaneLauncher = hardwareMap.get(Servo.class, "airplaneLauncher");
+        //Servo airplaneLauncher = hardwareMap.get(Servo.class, "airplaneLauncher");
 
 
         Servo leftClawServo = hardwareMap.get(Servo.class, "leftClawServo");
@@ -77,7 +77,7 @@ public class DriverMode extends LinearOpMode {
         // Wait for the game to start (driver presses PLAY)
         telemetry.update();
         waitForStart();
-        airplaneLauncher.setPosition(values.airplaneServoResting);
+        //airplaneLauncher.setPosition(values.airplaneServoResting);
         crane.resetEncoders();
             while (opModeIsActive()){
                 telemetry.addData("Status", "Running");
@@ -126,7 +126,7 @@ public class DriverMode extends LinearOpMode {
                 }
                 
                 if(gamepad2.dpad_right){
-                    airplaneLauncher.setPosition(values.airplaneServoFired);
+                    //airplaneLauncher.setPosition(values.airplaneServoFired);
                 }else if(gamepad2.dpad_left){
                     crane.resetEncoders();
                 }else if(gamepad2.dpad_down){

@@ -20,7 +20,7 @@ public class blueBackIfTheyMove extends LinearOpMode {
     private VisionPortal portal;
     private BluePropThreshold blue;
     private DcMotor frontLeft, frontRight, backLeft, backRight;
-    private craneMotors crane = new craneMotors(hardwareMap);
+    private craneMotors crane;
     private Servo leftClawRotator;
     private Servo rightClawRotator;
     private Servo airplaneLauncher;
@@ -92,13 +92,16 @@ public class blueBackIfTheyMove extends LinearOpMode {
 
         // clawRotator.setPosition(0.0);
 
-        airplaneLauncher = hardwareMap.get(Servo.class, "airplaneLauncher");
+        //airplaneLauncher = hardwareMap.get(Servo.class, "airplaneLauncher");
+
+        crane = new craneMotors(hardwareMap);
 
         frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
 
+
         closeClaw();
-        airplaneLauncher.setPosition(0);
+        //airplaneLauncher.setPosition(0);
 
 
         waitForStart();
@@ -109,13 +112,13 @@ public class blueBackIfTheyMove extends LinearOpMode {
             if(blue.getPropPosition()=="center"){
                 telemetry.addData("Center","center");
                 telemetry.update();
-                foward(-2160);
+                foward(-2200);
 
                 pickupPixel();
                 sleep(500);
 
                 rightClawServo.setPosition(0.5);
-                sleep(1000);
+                sleep(1500);
 
                 neutral();
                 foward(-150);
@@ -133,7 +136,7 @@ public class blueBackIfTheyMove extends LinearOpMode {
                 placePixelLow();
                 sleep(3000);
 
-                foward(-230);
+                foward(-600);
 
 //                side(250);
 //                sleep(1000);
@@ -169,7 +172,7 @@ public class blueBackIfTheyMove extends LinearOpMode {
                 telemetry.addData("right","right");
                 telemetry.update();
 
-                foward(-1300);
+                foward(-1350);
 
                 rotate(values.turn90DegreesCounterClockwise);
                 pickupPixel();

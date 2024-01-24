@@ -25,7 +25,7 @@ public class BlueFront extends LinearOpMode {
     private BluePropThreshold blue;
     private DcMotor frontLeft, frontRight, backLeft, backRight;
 
-    private craneMotors crane = new craneMotors(hardwareMap);
+    private craneMotors crane;
     private Servo leftClawRotator;
     private Servo rightClawRotator;
     private Servo airplaneLauncher;
@@ -95,14 +95,16 @@ public class BlueFront extends LinearOpMode {
 
         // clawRotator.setPosition(0.0);
 
-        airplaneLauncher = hardwareMap.get(Servo.class, "airplaneLauncher");
+        //airplaneLauncher = hardwareMap.get(Servo.class, "airplaneLauncher");
+
+        crane = new craneMotors(hardwareMap);
 
 
         frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
 
         closeClaw();
-        airplaneLauncher.setPosition(0);
+        //airplaneLauncher.setPosition(0);
 
 
         waitForStart();
@@ -113,46 +115,51 @@ public class BlueFront extends LinearOpMode {
                 telemetry.addData("Prop","center");
                 telemetry.update();
 
-                foward(-860);
+                foward(-820);
 
-                rotate(values.turn90DegreesClockwise * 2);
+                sleep(700);
 
-                foward(390);
+                rotate(2100);
 
                 pickupPixel();
-                sleep(500);
+
+                foward(250);
+
+
 
                 rightClawServo.setPosition(0.5);
-                sleep(500);
+                sleep(300);
 
                 neutral();
                 sleep(500);
 
-                foward(-200);
+                foward(-100);
 
-                rotate(values.turn90DegreesClockwise);
+                rotate(values.turn90DegreesClockwise-70);
 
                 foward(-1350);
 
                 placePixelLow();
-                sleep(5000);
+                sleep(4000);
+                resetEncoders();
+                side(-370);
 
-                foward(-300);
+                foward(-400);
 
-                side(-300);
+                //side(-);
 
                 leftClawServo.setPosition(1);
                 sleep(300);
 
                 neutral();
-                sleep(2500);
-
-                foward(200);
+                sleep(2000);
+                foward(250);
 
                 side(1350);
 
-                foward(-350);
+                foward(-450);
 
+                //why joe I love you <3 THIS WAS MIGUEL I PROMISE
                 break;
             }
             if(blue.getPropPosition()=="left"){
@@ -226,8 +233,8 @@ public class BlueFront extends LinearOpMode {
 
                 //side(-470);
                 placePixelLow();
-                sleep(5000);
-
+                sleep(2000);
+                foward(-200);
                 leftClawServo.setPosition(1);
                 sleep(500);
 
@@ -260,28 +267,28 @@ public class BlueFront extends LinearOpMode {
     }
 
     public void foward(int distance){
-        moveVertically(frontLeft, distance, 0.5);
-        moveVertically(frontRight, distance, 0.5);
-        moveVertically(backRight, distance, 0.5);
-        moveVertically(backLeft, distance, 0.5);
+        moveVertically(frontLeft, distance, 0.75);
+        moveVertically(frontRight, distance, 0.75);
+        moveVertically(backRight, distance, 0.75);
+        moveVertically(backLeft, distance, 0.75);
 
         waitforwheels();
     }
 
     public void side(int distance){
-        moveVertically(frontLeft, distance, 0.5);
-        moveVertically(frontRight, -distance, 0.5);
-        moveVertically(backRight, distance, 0.5);
-        moveVertically(backLeft, -distance, 0.5);
+        moveVertically(frontLeft, distance, 0.75);
+        moveVertically(frontRight, -distance, 0.75);
+        moveVertically(backRight, distance, 0.75);
+        moveVertically(backLeft, -distance, 0.75);
 
         waitforwheels();
     }
 
     public void rotate(int distance){
-        moveVertically(frontLeft, distance, 0.5);
-        moveVertically(frontRight, -distance, 0.5);
-        moveVertically(backRight, -distance, 0.5);
-        moveVertically(backLeft, distance, 0.5);
+        moveVertically(frontLeft, distance, 0.75);
+        moveVertically(frontRight, -distance, 0.75);
+        moveVertically(backRight, -distance, 0.75);
+        moveVertically(backLeft, distance, 0.75);
 
         waitforwheels();
     }
