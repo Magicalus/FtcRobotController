@@ -112,41 +112,54 @@ public class blueBackIfTheyMove extends LinearOpMode {
             if(blue.getPropPosition()=="center"){
                 telemetry.addData("Center","center");
                 telemetry.update();
-                foward(-2200);
+                foward(-820);
+
+                sleep(700);
+
+                rotate(-2100);
 
                 pickupPixel();
-                sleep(500);
 
                 rightClawServo.setPosition(0.5);
-                sleep(1500);
+                sleep(300);
+
+                foward(250);
 
                 neutral();
-                foward(-150);
+                sleep(500);
 
-                rotate(values.turn90DegreesCounterClockwise);
+                rotate(values.turn90DegreesClockwise-70);
+
+                pickupPixel();
+
+                foward(820);
+
+                closeClaw();
+
+                neutral();
 
                 while(System.currentTimeMillis() - startTime < 18000.0);
 //                side(-2700);
 //                waitforwheels();
 
-                foward(-3670);
-
-                side(1350);
-
-                placePixelLow();
-                sleep(3000);
-
-                foward(-600);
-
-//                side(250);
-//                sleep(1000);
-//                resetEncoders();
-
-                leftClawServo.setPosition(1);
-                sleep(300);
-
-                neutral();
-                sleep(2500);
+//                foward(-3670);
+//
+//                side(1350);
+//
+//                placePixelLow();
+//                sleep(3000);
+//
+//                foward(-300);
+//
+////                side(250);
+////                sleep(1000);
+////                resetEncoders();
+//
+//                leftClawServo.setPosition(1);
+//                sleep(300);
+//
+//                neutral();
+//                sleep(2500);
 
                 break;
             }
@@ -206,10 +219,10 @@ public class blueBackIfTheyMove extends LinearOpMode {
     }
 
     public void foward(int distance){
-        moveVertically(frontLeft, distance, 1);
-        moveVertically(frontRight, distance, 1);
-        moveVertically(backLeft, distance, 1);
-        moveVertically(backRight, distance, 1);
+        moveVertically(frontLeft, distance, 0.75);
+        moveVertically(frontRight, distance, 0.75);
+        moveVertically(backLeft, distance, 0.75);
+        moveVertically(backRight, distance, 0.75);
 
         waitforwheels();
     }
@@ -273,5 +286,6 @@ public class blueBackIfTheyMove extends LinearOpMode {
                 && backLeft.getCurrentPosition() != backLeft.getTargetPosition() && backRight.getCurrentPosition() != backRight.getTargetPosition())
             ;
         resetEncoders();
+        sleep(50);
     }
 }
