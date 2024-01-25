@@ -17,8 +17,8 @@ public class values {
 
 
     //Airplane Servo Positions (REDO)
-    public static double airplaneServoResting = 0;
-    public static double airplaneServoFired = 1;
+    public static double airplaneServoResting = 0.5;
+    public static double airplaneServoFired = 0;
 
 
     //Crane Arm Positions (REDO)
