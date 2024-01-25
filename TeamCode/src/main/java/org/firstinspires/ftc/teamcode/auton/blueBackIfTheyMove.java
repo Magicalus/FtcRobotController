@@ -112,13 +112,16 @@ public class blueBackIfTheyMove extends LinearOpMode {
             if(blue.getPropPosition()=="center"){
                 telemetry.addData("Center","center");
                 telemetry.update();
+                neutral();
                 foward(-820);
+                sleep(1000);
 
-                sleep(700);
-
-                rotate(-2100);
+                rotate(-2150);
+                sleep(1000);
 
                 pickupPixel();
+
+                side(-150);
 
                 rightClawServo.setPosition(0.5);
                 sleep(300);
@@ -128,13 +131,27 @@ public class blueBackIfTheyMove extends LinearOpMode {
                 neutral();
                 sleep(500);
 
+                foward(-250);
+
+                side(150);
+
                 rotate(values.turn90DegreesClockwise-70);
+
+                sleep(1000);
 
                 pickupPixel();
 
-                foward(820);
+                foward(500);
+                sleep(3000);
+
+                side(-350);
+
+                foward(300);
+                sleep(1000);
 
                 closeClaw();
+
+                foward(-670);
 
                 neutral();
 
@@ -219,10 +236,10 @@ public class blueBackIfTheyMove extends LinearOpMode {
     }
 
     public void foward(int distance){
-        moveVertically(frontLeft, distance, 0.75);
-        moveVertically(frontRight, distance, 0.75);
-        moveVertically(backLeft, distance, 0.75);
-        moveVertically(backRight, distance, 0.75);
+        moveVertically(frontLeft, distance, 0.5);
+        moveVertically(frontRight, distance, 0.5);
+        moveVertically(backLeft, distance, 0.5);
+        moveVertically(backRight, distance, 0.5);
 
         waitforwheels();
     }
@@ -251,11 +268,11 @@ public class blueBackIfTheyMove extends LinearOpMode {
     }
 
     public void moveVertically(DcMotor mot, int position, double power){
-        mot.setPower(0);
+        mot.setPower(0.5);
         mot.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         mot.setTargetPosition(0);
         mot.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        mot.setPower(0);
+        mot.setPower(0.5);
 
         mot.setTargetPosition(position);
         mot.setPower(power);
@@ -270,6 +287,8 @@ public class blueBackIfTheyMove extends LinearOpMode {
         crane.setTargetPosition(values.craneResting);
         leftClawRotator.setPosition(0.1);
         rightClawRotator.setPosition(0.85);
+
+        sleep(500);
     }
     public void pickupPixel(){
         crane.setTargetPosition(values.craneResting);
@@ -286,6 +305,5 @@ public class blueBackIfTheyMove extends LinearOpMode {
                 && backLeft.getCurrentPosition() != backLeft.getTargetPosition() && backRight.getCurrentPosition() != backRight.getTargetPosition())
             ;
         resetEncoders();
-        sleep(50);
     }
 }
