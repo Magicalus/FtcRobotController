@@ -28,7 +28,7 @@ public class DriverMode extends LinearOpMode {
         telemetry.update();
 
         wheels = new driveTrain(hardwareMap);
-        wheels.setPower(0.7);
+        wheels.setPower(1);
 
         crane = new craneMotors(hardwareMap);
 
@@ -76,14 +76,27 @@ public class DriverMode extends LinearOpMode {
                         -gamepad1.left_stick_y - gamepad1.left_stick_x - gamepad1.right_stick_x,
                         -gamepad1.left_stick_y - gamepad1.left_stick_x + gamepad1.right_stick_x,
                         -gamepad1.left_stick_y + gamepad1.left_stick_x - gamepad1.right_stick_x);
-            
+
+
+                if(gamepad1.left_bumper){
+                    leftClawServo.setPosition(values.leftClawClosed);
+                }else if(gamepad1.left_trigger>0.4){
+                    leftClawServo.setPosition(values.leftClawOpen);
+                }
 
                 if(gamepad1.right_bumper){
-                    leftHanger.setTargetPosition(values.hangerRaised);
-                    rightHanger.setTargetPosition(values.hangerRaised);
-                }else if(gamepad1.left_bumper){
-                    leftHanger.setTargetPosition(values.hangerHanging);
-                    rightHanger.setTargetPosition(values.hangerHanging);
+                    rightClawServo.setPosition(values.rightClawClosed);
+                }else if(gamepad1.right_trigger>0.4){
+                    rightClawServo.setPosition(values.rightClawOpen);
+                }
+
+                if(gamepad1.a) {
+                    airplaneLauncher.setPosition(values.airplaneServoFired);
+                }
+                if(gamepad1.dpad_down){
+                    wheels.setPower(0.5);
+                } else if (gamepad1.dpad_up) {
+                    wheels.setPower(1);
                 }
                 
                 
@@ -101,23 +114,19 @@ public class DriverMode extends LinearOpMode {
                 }else if(gamepad2.y){
                     placePixel();
                 }
-                
-                
-                if(gamepad2.left_bumper){
-                    leftClawServo.setPosition(values.leftClawClosed);
-                }else if(gamepad2.left_trigger>0.4){
-                    leftClawServo.setPosition(values.leftClawOpen);
-                }
 
                 if(gamepad2.right_bumper){
-                    rightClawServo.setPosition(values.rightClawClosed);
-                }else if(gamepad2.right_trigger>0.4){
-                    rightClawServo.setPosition(values.rightClawOpen);
+                    leftHanger.setTargetPosition(values.hangerRaised);
+                    rightHanger.setTargetPosition(values.hangerRaised);
+                }else if(gamepad2.left_bumper){
+                    leftHanger.setTargetPosition(values.hangerHanging);
+                    rightHanger.setTargetPosition(values.hangerHanging);
+                }else if(gamepad2.left_trigger > 0.4 || gamepad2.right_trigger > 0.4){
+                    leftHanger.setTargetPosition(values.hangerResting);
+                    rightHanger.setTargetPosition(values.hangerResting);
                 }
-                
-                if(gamepad2.dpad_right){
-                    airplaneLauncher.setPosition(values.airplaneServoFired);
-                }else if(gamepad2.dpad_left){
+
+                if(gamepad2.dpad_left){
                     crane.resetEncoders();
                 }else if(gamepad2.dpad_down){
                     crane.setTargetPosition(-3000);
