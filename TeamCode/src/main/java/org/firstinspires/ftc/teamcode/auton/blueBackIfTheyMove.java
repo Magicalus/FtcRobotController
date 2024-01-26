@@ -73,6 +73,7 @@ public class blueBackIfTheyMove extends LinearOpMode {
         airplaneLauncher = hardwareMap.get(Servo.class, "airplaneLauncher");
 
         wheels = new driveTrain(hardwareMap);
+        wheels.isAuton();
 
         crane = new craneMotors(hardwareMap);
 
@@ -90,70 +91,39 @@ public class blueBackIfTheyMove extends LinearOpMode {
                 telemetry.addData("Center","center");
                 telemetry.update();
                 neutral();
-                foward(-820);
-                sleep(1000);
-
-                rotate(-2150);
-                sleep(1000);
+                foward(-2160);
 
                 pickupPixel();
-
-                side(-150);
-
-                rightClawServo.setPosition(0.5);
-                sleep(300);
-
-                foward(250);
-
-                neutral();
                 sleep(500);
 
-                foward(-250);
-
-                side(150);
-
-                rotate(values.turn90DegreesClockwise-70);
-
+                rightClawServo.setPosition(0.5);
                 sleep(1000);
-
-                pickupPixel();
-
-                foward(500);
-                sleep(3000);
-
-                side(-350);
-
-                foward(300);
-                sleep(1000);
-
-                closeClaw();
-
-                foward(-670);
 
                 neutral();
+                foward(-150);
+
+                rotate(values.turn90DegreesCounterClockwise);
 
                 while(System.currentTimeMillis() - startTime < 18000.0);
-//                side(-2700);
-//                waitforwheels();
 
-//                foward(-3670);
-//
-//                side(1350);
-//
-//                placePixelLow();
-//                sleep(3000);
-//
-//                foward(-300);
-//
-////                side(250);
-////                sleep(1000);
-////                resetEncoders();
-//
-//                leftClawServo.setPosition(1);
-//                sleep(300);
-//
-//                neutral();
-//                sleep(2500);
+                foward(-3670);
+
+                side(1350);
+
+                placePixelLow();
+                sleep(3000);
+
+                foward(-300);
+
+//                side(250);
+//                sleep(1000);
+//                resetEncoders();
+
+                leftClawServo.setPosition(1);
+                sleep(300);
+
+                neutral();
+                sleep(2500);
 
                 break;
             }
@@ -216,7 +186,7 @@ public class blueBackIfTheyMove extends LinearOpMode {
     }
 
     public void placePixelLow(){
-        crane.setTargetPosition(values.cranePlaceLowAuton);
+        crane.setTargetPosition(values.cranePlaceHighAuton);
         leftClawRotator.setPosition(0.1);
         rightClawRotator.setPosition(0.85);
     }

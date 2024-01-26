@@ -35,7 +35,7 @@ public class values {
 
 
     //Auton movement values
-    public static int turn90DegreesClockwise = 1100;
+    public static int turn90DegreesClockwise = 1030;
 
     public static int turn90DegreesCounterClockwise = - turn90DegreesClockwise;
 }

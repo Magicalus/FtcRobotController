@@ -61,6 +61,7 @@ public class redBack extends LinearOpMode {
         airplaneLauncher = hardwareMap.get(Servo.class, "airplaneLauncher");
 
         wheels = new driveTrain(hardwareMap);
+        wheels.isAuton();
 
         crane = new craneMotors(hardwareMap);
 
@@ -183,7 +184,7 @@ public class redBack extends LinearOpMode {
     }
 
     public void placePixelLow(){
-        crane.setTargetPosition(values.cranePlaceLowAuton);
+        crane.setTargetPosition(values.cranePlaceHighAuton);
         leftClawRotator.setPosition(0.1);
         rightClawRotator.setPosition(0.85);
     }

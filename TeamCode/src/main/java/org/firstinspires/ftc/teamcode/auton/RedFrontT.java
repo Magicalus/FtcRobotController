@@ -75,6 +75,7 @@ public class RedFrontT extends LinearOpMode {
         airplaneLauncher = hardwareMap.get(Servo.class, "airplaneLauncher");
 
         wheels = new driveTrain(hardwareMap);
+        wheels.isAuton();
 
         crane = new craneMotors(hardwareMap);
 
