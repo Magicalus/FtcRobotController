@@ -75,7 +75,9 @@ public class driveTrain {
         this.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         this.setTargetPosition(0);
         this.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        this.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        this.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        //changed from zeropowerbehavior.float
+        //brake makes it brake on zero power, resisting any change
     }
 
     public void moveByEncoder(DcMotor mot, int target, double power){
