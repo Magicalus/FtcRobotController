@@ -73,22 +73,25 @@ public class blueBackIfTheyMove extends LinearOpMode {
         frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         frontRight.setTargetPosition(0);
         frontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        frontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        frontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        //originally dcmotor.zeropowerbehavior.float
+        //this MAY HAVE BEEN THE ISSUE FOR AUTON DRIFT!!!!
+        //FLOAT BEHAVIOR MAKES AUTON NOT RESIST ANY CHANGES DURING 0 POWER
 
         frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         frontLeft.setTargetPosition(0);
         frontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        frontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        frontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         backRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         backRight.setTargetPosition(0);
         backRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         backLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         backLeft.setTargetPosition(0);
         backLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         // clawRotator.setPosition(0.0);
 
