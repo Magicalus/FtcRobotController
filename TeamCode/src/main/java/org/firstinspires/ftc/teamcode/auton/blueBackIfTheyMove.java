@@ -10,6 +10,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.universalCode.craneMotors;
+import org.firstinspires.ftc.teamcode.universalCode.driveTrain;
 import org.firstinspires.ftc.teamcode.universalCode.values;
 import org.firstinspires.ftc.vision.VisionPortal;
 
@@ -19,7 +20,7 @@ import org.firstinspires.ftc.vision.VisionPortal;
 public class blueBackIfTheyMove extends LinearOpMode {
     private VisionPortal portal;
     private BluePropThreshold blue;
-    private DcMotor frontLeft, frontRight, backLeft, backRight;
+    private driveTrain wheels;
     private craneMotors crane;
     private Servo leftClawRotator;
     private Servo rightClawRotator;
@@ -44,11 +45,6 @@ public class blueBackIfTheyMove extends LinearOpMode {
                 .addProcessor(blue)
                 .build();
 
-        frontLeft = hardwareMap.get(DcMotor.class, "frontLeft");
-        frontRight = hardwareMap.get(DcMotor.class, "frontRight");
-        backLeft = hardwareMap.get(DcMotor.class, "backLeft");
-        backRight = hardwareMap.get(DcMotor.class, "jarmy");
-
         rightClawRotator = hardwareMap.get(Servo.class, "rightClawRotator");
         leftClawRotator = hardwareMap.get(Servo.class, "leftClawRotator");
 
@@ -70,47 +66,25 @@ public class blueBackIfTheyMove extends LinearOpMode {
         //
         // openClaw();
 
-        frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        frontRight.setTargetPosition(0);
-        frontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        frontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        //originally dcmotor.zeropowerbehavior.float
-        //this MAY HAVE BEEN THE ISSUE FOR AUTON DRIFT!!!!
-        //FLOAT BEHAVIOR MAKES AUTON NOT RESIST ANY CHANGES DURING 0 POWER
 
-        frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        frontLeft.setTargetPosition(0);
-        frontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        frontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        backRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        backRight.setTargetPosition(0);
-        backRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        backLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        backLeft.setTargetPosition(0);
-        backLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        // clawRotator.setPosition(0.0);
+        airplaneLauncher = hardwareMap.get(Servo.class, "airplaneLauncher");
 
-        //airplaneLauncher = hardwareMap.get(Servo.class, "airplaneLauncher");
+        wheels = new driveTrain(hardwareMap);
 
         crane = new craneMotors(hardwareMap);
 
-        frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
-        backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
-
 
         closeClaw();
-        //airplaneLauncher.setPosition(0);
+        airplaneLauncher.setPosition(0);
 
 
         waitForStart();
         while(opModeIsActive() && !isStopRequested()){
             startTime = System.currentTimeMillis();
-            resetEncoders();
+            wheels.resetEncoders();
             sleep(5000);
             if(blue.getPropPosition()=="center"){
                 telemetry.addData("Center","center");
@@ -229,60 +203,20 @@ public class blueBackIfTheyMove extends LinearOpMode {
 
     }
 
-    public void resetEncoders(){
-        frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        backRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        backLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
-
-    }
-
     public void foward(int distance){
-        moveVertically(frontLeft, distance, 0.5);
-        moveVertically(frontRight, distance, 0.5);
-        moveVertically(backLeft, distance, 0.5);
-        moveVertically(backRight, distance, 0.5);
-
-        waitforwheels();
+        wheels.foward(distance);
     }
 
     public void side(int distance){
-        moveVertically(frontLeft, distance, 0.5);
-        moveVertically(frontRight, -distance, 0.5);
-        moveVertically(backLeft, -distance, 0.5);
-        moveVertically(backRight, distance, 0.5);
-
-        waitforwheels();
+        wheels.side(distance);
     }
 
     public void rotate(int distance){
-        moveVertically(frontLeft, distance, 0.5);
-        moveVertically(frontRight, -distance, 0.5);
-        moveVertically(backLeft, distance, 0.5);
-        moveVertically(backRight, -distance, 0.5);
-
-        waitforwheels();
-    }
-
-    public void middlePush(){
-
-
-    }
-
-    public void moveVertically(DcMotor mot, int position, double power){
-        mot.setPower(0.5);
-        mot.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        mot.setTargetPosition(0);
-        mot.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        mot.setPower(0.5);
-
-        mot.setTargetPosition(position);
-        mot.setPower(power);
+        wheels.rotate(distance);
     }
 
     public void placePixelLow(){
-        crane.setTargetPosition(values.cranePlaceHighAuton);
+        crane.setTargetPosition(values.cranePlaceLowAuton);
         leftClawRotator.setPosition(0.1);
         rightClawRotator.setPosition(0.85);
     }
@@ -290,8 +224,6 @@ public class blueBackIfTheyMove extends LinearOpMode {
         crane.setTargetPosition(values.craneResting);
         leftClawRotator.setPosition(0.1);
         rightClawRotator.setPosition(0.85);
-
-        sleep(500);
     }
     public void pickupPixel(){
         crane.setTargetPosition(values.craneResting);
@@ -301,12 +233,5 @@ public class blueBackIfTheyMove extends LinearOpMode {
     public void closeClaw() {
         leftClawServo.setPosition(0);
         rightClawServo.setPosition(1);
-    }
-
-    public void waitforwheels() {
-        while (frontLeft.getCurrentPosition() != frontLeft.getTargetPosition() && frontRight.getCurrentPosition() != frontRight.getTargetPosition()
-                && backLeft.getCurrentPosition() != backLeft.getTargetPosition() && backRight.getCurrentPosition() != backRight.getTargetPosition())
-            ;
-        resetEncoders();
     }
 }

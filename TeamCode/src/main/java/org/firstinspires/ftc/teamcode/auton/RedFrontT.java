@@ -10,6 +10,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.universalCode.craneMotors;
+import org.firstinspires.ftc.teamcode.universalCode.driveTrain;
 import org.firstinspires.ftc.teamcode.universalCode.values;
 import org.firstinspires.ftc.vision.VisionPortal;
 
@@ -21,7 +22,6 @@ public class RedFrontT extends LinearOpMode {
     private RedPropThreshold red;
     private DcMotor.ZeroPowerBehavior brake = DcMotor.ZeroPowerBehavior.BRAKE;
     private DcMotor.ZeroPowerBehavior floatt =DcMotor.ZeroPowerBehavior.FLOAT;
-    private DcMotor frontLeft, frontRight, backLeft, backRight;
     private Servo leftClawRotator;
     private Servo rightClawRotator;
     private Servo airplaneLauncher;
@@ -29,6 +29,7 @@ public class RedFrontT extends LinearOpMode {
     private Servo leftClawServo;
     private Servo rightClawServo;
 
+    private driveTrain wheels;
     private craneMotors crane;
     // private Servo goodServo;
     //private Servo badServo;
@@ -46,11 +47,6 @@ public class RedFrontT extends LinearOpMode {
                 .setCameraResolution(new Size(1920, 1080))
                 .addProcessor(red)
                 .build();
-
-        frontLeft = hardwareMap.get(DcMotor.class, "frontLeft");
-        frontRight = hardwareMap.get(DcMotor.class, "frontRight");
-        backLeft = hardwareMap.get(DcMotor.class, "backLeft");
-        backRight = hardwareMap.get(DcMotor.class, "jarmy");
 
         rightClawRotator = hardwareMap.get(Servo.class, "rightClawRotator");
         leftClawRotator = hardwareMap.get(Servo.class, "leftClawRotator");
@@ -70,48 +66,27 @@ public class RedFrontT extends LinearOpMode {
         //starting posistions
 
         // pickupPixel();
-        // sleep(1000);
+        // sleep(1000);+
         // openClaw();
 
-        frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        frontRight.setTargetPosition(0);
-        frontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        frontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-
-        frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        frontLeft.setTargetPosition(0);
-        frontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        frontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-
-        backRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        backRight.setTargetPosition(0);
-        backRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-
-        backLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        backLeft.setTargetPosition(0);
-        backLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
 
         // clawRotator.setPosition(0.0);
 
-        //airplaneLauncher = hardwareMap.get(Servo.class, "airplaneLauncher");
+        airplaneLauncher = hardwareMap.get(Servo.class, "airplaneLauncher");
+
+        wheels = new driveTrain(hardwareMap);
 
         crane = new craneMotors(hardwareMap);
 
-
-        frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
-        backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
-
         closeClaw();
-        //airplaneLauncher.setPosition(0);
+        airplaneLauncher.setPosition(0);
 
 
         waitForStart();
         crane.setPower(0.2);
         while(opModeIsActive() && !isStopRequested()){
             sleep(5000);
-            resetEncoders();
+            wheels.resetEncoders();
 
             if(red.getPropPosition()=="center"){
                 telemetry.addData("Prop","center");
@@ -275,80 +250,16 @@ public class RedFrontT extends LinearOpMode {
 
     }
 
-    public void resetEncoders(){
-        frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        backRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        backLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
-
-    }
-
     public void foward(int distance){
-        moveVertically(frontLeft, distance, 0.75);
-        moveVertically(frontRight, distance, 0.75);
-        moveVertically(backRight, distance, 0.75);
-        moveVertically(backLeft, distance, 0.75);
-
-        waitforwheels();
+        wheels.foward(distance);
     }
 
     public void side(int distance){
-        moveVertically(frontLeft, distance, 0.75);
-        moveVertically(frontRight, -distance, 0.75);
-        moveVertically(backRight, distance, 0.75);
-        moveVertically(backLeft, -distance, 0.75);
-
-        waitforwheels();
+        wheels.side(distance);
     }
 
     public void rotate(int distance){
-        moveVertically(frontLeft, distance, 0.75);
-        moveVertically(frontRight, -distance, 0.75);
-        moveVertically(backRight, -distance, 0.75);
-        moveVertically(backLeft, distance, 0.75);
-
-        waitforwheels();
-    }
-
-    public void middlePush(){
-
-
-    }
-    /*
-
-    public void placePixelLow(){
-        craneArm.setTargetPosition(720);
-        clawRotator.setPosition(0);
-    }
-    public void neutral(){
-        craneArm.setTargetPosition(100);
-        clawRotator.setPosition(0.15);
-    }
-    public void pickupPixel(){
-        craneArm.setTargetPosition(5);
-        clawRotator.setPosition(0.75);
-    }
-    public void openClaw(){
-        goodServo.setPosition(0.35);
-        badServo.setPosition(0.6);
-    }
-
-    public void closeClaw() {
-        goodServo.setPosition(0.6);
-        badServo.setPosition(0.3);
-    }
-    */
-
-    public void moveVertically(DcMotor mot, int position, double power){
-        mot.setPower(0);
-        mot.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        mot.setTargetPosition(0);
-        mot.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        mot.setPower(0);
-
-        mot.setTargetPosition(position);
-        mot.setPower(power);
+        wheels.rotate(distance);
     }
 
     public void placePixelLow(){
@@ -369,12 +280,5 @@ public class RedFrontT extends LinearOpMode {
     public void closeClaw() {
         leftClawServo.setPosition(0);
         rightClawServo.setPosition(1);
-    }
-
-    public void waitforwheels() {
-        while (frontLeft.getCurrentPosition() != frontLeft.getTargetPosition() && frontRight.getCurrentPosition() != frontRight.getTargetPosition()
-                && backLeft.getCurrentPosition() != backLeft.getTargetPosition() && backRight.getCurrentPosition() != backRight.getTargetPosition())
-            ;
-        resetEncoders();
     }
 }

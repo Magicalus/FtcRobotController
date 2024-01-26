@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.teamcode.universalCode.craneMotors;
+import org.firstinspires.ftc.teamcode.universalCode.driveTrain;
 import org.firstinspires.ftc.teamcode.universalCode.values;
 
 @TeleOp(name="Driver Mode", group="Linear Opmode")
@@ -18,31 +19,20 @@ public class DriverMode extends LinearOpMode {
 
     private craneMotors crane;
 
+    private driveTrain wheels;
+
 
     @Override
     public void runOpMode() {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
-        // Initialize the hardware variables. Note that the strings used here as parameters
-        // to 'get' must correspond to the names assigned during the robot configuration
-        // step (using the FTC Robot Controller app on the phone).
-        DcMotor frontRight = hardwareMap.get(DcMotor.class, "frontRight");
-        //frontRight.setDirection(DcMotorSimple.Direction.REVERSE);
-
-        // Declare OpMode members
-        DcMotor frontLeft = hardwareMap.get(DcMotor.class, "frontLeft");
-        frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
-
-        DcMotor jarmy = hardwareMap.get(DcMotor.class, "jarmy");
-        //jarmy.setDirection(DcMotorSimple.Direction.REVERSE);
-
-        DcMotor backLeft = hardwareMap.get(DcMotor.class, "backLeft");
-        backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+        wheels = new driveTrain(hardwareMap);
+        wheels.setPower(0.7);
 
         crane = new craneMotors(hardwareMap);
 
-        //Servo airplaneLauncher = hardwareMap.get(Servo.class, "airplaneLauncher");
+        Servo airplaneLauncher = hardwareMap.get(Servo.class, "airplaneLauncher");
 
 
         Servo leftClawServo = hardwareMap.get(Servo.class, "leftClawServo");
@@ -77,15 +67,15 @@ public class DriverMode extends LinearOpMode {
         // Wait for the game to start (driver presses PLAY)
         telemetry.update();
         waitForStart();
-        //airplaneLauncher.setPosition(values.airplaneServoResting);
+        airplaneLauncher.setPosition(values.airplaneServoResting);
         crane.resetEncoders();
             while (opModeIsActive()){
                 telemetry.addData("Status", "Running");
 
-                frontRight.setPower(((-gamepad1.left_stick_y - gamepad1.left_stick_x) - gamepad1.right_stick_x) *0.7);
-                frontLeft.setPower(((-gamepad1.left_stick_y + gamepad1.left_stick_x) + gamepad1.right_stick_x) * 0.7);
-                jarmy.setPower(((-gamepad1.left_stick_y + gamepad1.left_stick_x) - gamepad1.right_stick_x) *0.7);
-                backLeft.setPower(((-gamepad1.left_stick_y - gamepad1.left_stick_x) + gamepad1.right_stick_x) *0.7);
+                wheels.manualDrive(-gamepad1.left_stick_y + gamepad1.left_stick_x + gamepad1.right_stick_x,
+                        -gamepad1.left_stick_y - gamepad1.left_stick_x - gamepad1.right_stick_x,
+                        -gamepad1.left_stick_y - gamepad1.left_stick_x + gamepad1.right_stick_x,
+                        -gamepad1.left_stick_y + gamepad1.left_stick_x - gamepad1.right_stick_x);
             
 
                 if(gamepad1.right_bumper){
@@ -126,7 +116,7 @@ public class DriverMode extends LinearOpMode {
                 }
                 
                 if(gamepad2.dpad_right){
-                    //airplaneLauncher.setPosition(values.airplaneServoFired);
+                    airplaneLauncher.setPosition(values.airplaneServoFired);
                 }else if(gamepad2.dpad_left){
                     crane.resetEncoders();
                 }else if(gamepad2.dpad_down){
