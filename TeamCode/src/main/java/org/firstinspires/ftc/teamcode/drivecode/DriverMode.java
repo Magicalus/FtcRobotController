@@ -94,7 +94,7 @@ public class DriverMode extends LinearOpMode {
                     airplaneLauncher.setPosition(values.airplaneServoFired);
                 }
                 if(gamepad1.dpad_down){
-                    wheels.setPower(0.5);
+                    wheels.setPower(0.25);
                 } else if (gamepad1.dpad_up) {
                     wheels.setPower(1);
                 }

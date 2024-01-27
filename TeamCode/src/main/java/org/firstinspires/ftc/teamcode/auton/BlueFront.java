@@ -85,7 +85,7 @@ public class BlueFront extends LinearOpMode {
                 telemetry.addData("Prop","center");
                 telemetry.update();
 
-                foward(-870);
+                foward(-820);
 
                 sleep(700);
 
@@ -93,7 +93,7 @@ public class BlueFront extends LinearOpMode {
 
                 pickupPixel();
 
-                foward(250);
+                foward(280);
 
 
 
