@@ -15,6 +15,8 @@ public class TESTER extends LinearOpMode{
     private Servo rightClawRotator, leftClawRotator, rightClawServo, leftClawServo;
 
     private DcMotor leftHanger, rightHanger, leftCraneArm, rightCraneArm;
+
+    private IMUInterface imu;
     
     @Override
     public void runOpMode() {
@@ -42,17 +44,17 @@ public class TESTER extends LinearOpMode{
         frontRight.setTargetPosition(0);
         frontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         frontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-        
+
         frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         frontLeft.setTargetPosition(0);
         frontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         frontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-        
+
         backRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         backRight.setTargetPosition(0);
         backRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-        
+
         backLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         backLeft.setTargetPosition(0);
         backLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -70,6 +72,8 @@ public class TESTER extends LinearOpMode{
         rightHanger.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
 
         craneMotors crane = new craneMotors(hardwareMap, 0);
+
+        imu = new IMUInterface(hardwareMap);
         
         // craneArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         // craneArm.setTargetPosition(0);
@@ -83,8 +87,10 @@ public class TESTER extends LinearOpMode{
 //        telemetry.addData("backLeft position:", frontLeft.getCurrentPosition());
 
 //        telemetry.addData("backRight position:", frontRight.getCurrentPosition());
-        telemetry.addData("Left Crane Motor Position", crane.getCurrentLeftPosition());
-        telemetry.addData("Right Crane Motor Position", crane.getCurrentRightPosition());
+//        telemetry.addData("Left Crane Motor Position", crane.getCurrentLeftPosition());
+//        telemetry.addData("Right Crane Motor Position", crane.getCurrentRightPosition());
+        imu.resetYaw();
+        telemetry.addData("Yaw: ", imu.getYaw());
         telemetry.update();
         waitForStart();
 //        telemetry.addData("right position:", rightHanger.getCurrentPosition());
@@ -92,8 +98,9 @@ public class TESTER extends LinearOpMode{
 //        telemetry.addData("backLeft position:", frontLeft.getCurrentPosition());
 //
 //        telemetry.addData("backRight position:", frontRight.getCurrentPosition());
-        telemetry.addData("Left Crane Motor Position", crane.getCurrentLeftPosition());
-        telemetry.addData("Right Crane Motor Position", crane.getCurrentRightPosition());
+//        telemetry.addData("Left Crane Motor Position", crane.getCurrentLeftPosition());
+//        telemetry.addData("Right Crane Motor Position", crane.getCurrentRightPosition());
+        telemetry.addData("Yaw: ", imu.getYaw());
         telemetry.update();
         sleep(100000);
 
