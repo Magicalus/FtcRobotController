@@ -137,6 +137,15 @@ public class DriverMode extends LinearOpMode {
                     crane.resetEncoders();
                 }
 
+                if(rightHanger.getCurrentPosition() < -10 || (rightHanger.getCurrentPosition() > 15 && leftHanger.getCurrentPosition() < 5)){
+                    rightHanger.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                    leftHanger.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                    leftHanger.setTargetPosition(values.hangerResting);
+                    rightHanger.setTargetPosition(values.hangerResting);
+                    rightHanger.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                    leftHanger.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                }
+
                 telemetry.addData("Left Crane Motor Position", crane.getCurrentLeftPosition());
                 telemetry.addData("Right Crane Motor Position", crane.getCurrentRightPosition());
                 telemetry.update();

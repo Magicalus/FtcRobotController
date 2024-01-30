@@ -173,10 +173,17 @@ public class IMUTestingDriveTrain {
     }
 
     public void waitForWheels(int target, boolean foward) {
-        this.moveByEncoder(frontLeft, target, 0);
-        this.moveByEncoder(frontRight, target, 0);
-        this.moveByEncoder(backLeft, target, 0);
-        this.moveByEncoder(jarmy, target, 0);
+        if(foward){
+            this.moveByEncoder(frontLeft, target, 0);
+            this.moveByEncoder(frontRight, target, 0);
+            this.moveByEncoder(backLeft, target, 0);
+            this.moveByEncoder(jarmy, target, 0);
+        }else {
+            this.moveByEncoder(frontLeft, target, 0);
+            this.moveByEncoder(frontRight, -target, 0);
+            this.moveByEncoder(backLeft, -target, 0);
+            this.moveByEncoder(jarmy, target, 0);
+        }
         while(frontLeft.getCurrentPosition() != frontLeft.getTargetPosition() &&
                 frontRight.getCurrentPosition() != frontRight.getTargetPosition() &&
                 backLeft.getCurrentPosition() != backLeft.getTargetPosition() &&
