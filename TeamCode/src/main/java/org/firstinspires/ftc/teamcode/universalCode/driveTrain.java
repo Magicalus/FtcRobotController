@@ -10,11 +10,20 @@ public class driveTrain {
     private DcMotor backLeft;
     private DcMotor jarmy;
 
+    private IMUInterface imu;
+    double heading;
+    double targetHeading;
+
+    private double fowardSpeed = 0.75;
+    private double rotationSpeed = 0.75;
+    private double sideSpeed = 0.75;
+
+    private double rotationMargin = 5;
     private double speed = 1;
 
     private boolean auton = false;
 
-    public driveTrain (HardwareMap hardwareMap){
+    public driveTrain(HardwareMap hardwareMap){
         // Initialize the hardware variables. Note that the strings used here as parameters
         // to 'get' must correspond to the names assigned during the robot configuration
         // step (using the FTC Robot Controller app on the phone).
@@ -23,11 +32,17 @@ public class driveTrain {
         frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
 
         frontRight = hardwareMap.get(DcMotor.class, "frontRight");
+        //frontRight.setDirection(DcMotorSimple.Direction.REVERSE);
 
         backLeft = hardwareMap.get(DcMotor.class, "backLeft");
         backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
 
         jarmy = hardwareMap.get(DcMotor.class, "jarmy");
+        //jarmy.setDirection(DcMotorSimple.Direction.REVERSE);
+
+        imu = new IMUInterface(hardwareMap);
+
+        targetHeading = 0;
     }
 
     public void manualDrive(double frontLeftPower, double frontRightPower, double backLeftPower, double jarmyPower){
@@ -92,41 +107,99 @@ public class driveTrain {
     }
 
     public void foward(int target){
-        this.moveByEncoder(frontLeft, target, 0.75);
-        this.moveByEncoder(frontRight, target, 0.75);
-        this.moveByEncoder(backLeft, target, 0.75);
-        this.moveByEncoder(jarmy, target, 0.75);
+        imu.resetYaw();
+        targetHeading = 0;
+        waitForWheels(target, true);
+    }
 
-        waitforwheels();
+    private void continueFoward(int target){
+        double leftPower = fowardSpeed - fowardSpeed * (Math.max(imu.getYaw(), 0) / 90);
+        double rightPower = fowardSpeed - fowardSpeed * (Math.max(-imu.getYaw(), 0) / 90);
+        frontLeft.setPower(leftPower);
+        frontRight.setPower(rightPower);
+        backLeft.setPower(leftPower);
+        jarmy.setPower(rightPower);
     }
 
     public void side(int target){
-        this.moveByEncoder(frontLeft, target, 0.75);
-        this.moveByEncoder(frontRight, -target, 0.75);
-        this.moveByEncoder(backLeft, -target, 0.75);
-        this.moveByEncoder(jarmy, target, 0.75);
-
-        waitforwheels();
+        imu.resetYaw();
+        targetHeading = 0;
+        waitForWheels(target, false);
+    }
+    private void continueSide(int target){
+        double frontLeftCorner = fowardSpeed - fowardSpeed * (Math.max(imu.getYaw(), 0) / 90);
+        double frontRightCorner = - fowardSpeed - fowardSpeed * (Math.max(imu.getYaw(), 0) / 90);
+        frontLeft.setPower(frontLeftCorner);
+        frontRight.setPower(frontRightCorner);
+        backLeft.setPower(frontRightCorner);
+        jarmy.setPower(frontLeftCorner);
     }
 
     public void rotate(int target){
-        this.moveByEncoder(frontLeft, target, 0.75);
-        this.moveByEncoder(frontRight, -target, 0.75);
-        this.moveByEncoder(backLeft, target, 0.75);
-        this.moveByEncoder(jarmy, -target, 0.75);
-
-        waitforwheels();
+        imu.resetYaw();
+        heading = 0;
+        this.setPower(0);
+        this.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//        if(target > 120){
+//            targetHeading = target - 100;
+//            waitForHeading();
+//            imu.resetYaw();
+//            heading = 0;
+//            targetHeading = 100;
+//            waitForHeading();
+//        }else if(target < -120){
+//            targetHeading = target + 100;
+//            waitForHeading();
+//            imu.resetYaw();
+//            targetHeading = - 100;
+//            waitForHeading();
+//        }
+        targetHeading = target;
+        waitForHeading();
+    }
+    public void continueRotate(){
+        double leftPower = Math.min(rotationSpeed * Math.abs((targetHeading * 1.5 - heading) / targetHeading), rotationSpeed);
+//        double rightPower = Math.min(Math.abs(targetHeading - heading) / rotationSpeed * 45, rotationSpeed);
+        double rightPower = -leftPower;
+        frontLeft.setPower(leftPower);
+        frontRight.setPower(rightPower);
+        backLeft.setPower(leftPower);
+        jarmy.setPower(rightPower);
     }
 
-    public void waitforwheels() {
+    public void waitForWheels(int target, boolean foward) {
+        if(foward){
+            this.moveByEncoder(frontLeft, target, 0);
+            this.moveByEncoder(frontRight, target, 0);
+            this.moveByEncoder(backLeft, target, 0);
+            this.moveByEncoder(jarmy, target, 0);
+        }else {
+            this.moveByEncoder(frontLeft, target, 0);
+            this.moveByEncoder(frontRight, -target, 0);
+            this.moveByEncoder(backLeft, -target, 0);
+            this.moveByEncoder(jarmy, target, 0);
+        }
         while(frontLeft.getCurrentPosition() != frontLeft.getTargetPosition() &&
                 frontRight.getCurrentPosition() != frontRight.getTargetPosition() &&
                 backLeft.getCurrentPosition() != backLeft.getTargetPosition() &&
-                jarmy.getCurrentPosition() != jarmy.getTargetPosition());
-
+                jarmy.getCurrentPosition() != jarmy.getTargetPosition()
+        ) {
+            if(foward){
+                continueFoward(target);
+            }else{
+                continueSide(target);
+            }
+        }
         resetEncoders();
     }
 
+    public void waitForHeading(){
+        while(!(heading < targetHeading + rotationMargin && heading > targetHeading - rotationMargin)){
+            heading = imu.getYaw();
+            continueRotate();
+        }
+        resetEncoders();
+    }
     public void resetEncoders(){
         frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);

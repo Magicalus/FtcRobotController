@@ -1,15 +1,8 @@
 package org.firstinspires.ftc.teamcode.universalCode;
 
-import static android.os.SystemClock.sleep;
-
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import org.firstinspires.ftc.teamcode.universalCode.craneMotors;
-import org.firstinspires.ftc.teamcode.universalCode.values;
+
 import com.qualcomm.robotcore.hardware.TouchSensor;
 
 public class craneMotors {

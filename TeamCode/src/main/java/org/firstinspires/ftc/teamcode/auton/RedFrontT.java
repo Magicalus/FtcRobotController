@@ -5,14 +5,14 @@ import android.util.Size;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.universalCode.craneMotors;
 import org.firstinspires.ftc.teamcode.universalCode.driveTrain;
-import org.firstinspires.ftc.teamcode.universalCode.values;
 import org.firstinspires.ftc.vision.VisionPortal;
+
+import org.firstinspires.ftc.teamcode.universalCode.values;
 
 
 //@Disabled
@@ -98,7 +98,7 @@ public class RedFrontT extends LinearOpMode {
                 pickupPixel();
                 sleep(700);
 
-                rotate(2200);
+                rotate(values.turn90DegreesClockwise * 2);
 
                 foward(280);
 

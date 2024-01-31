@@ -4,23 +4,23 @@ import android.util.Size;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-import org.firstinspires.ftc.teamcode.universalCode.IMUTestingDriveTrain;
-import org.firstinspires.ftc.teamcode.universalCode.IMUTestingValues;
 import org.firstinspires.ftc.teamcode.universalCode.craneMotors;
+import org.firstinspires.ftc.teamcode.universalCode.driveTrain;
 import org.firstinspires.ftc.teamcode.universalCode.values;
 import org.firstinspires.ftc.vision.VisionPortal;
 
 
 //@Disabled
-@Autonomous(name="IMU Blue Front")
-public class IMUTestingBlueFront extends LinearOpMode {
+@Autonomous(name="Red Back")
+public class redBack extends LinearOpMode {
     private VisionPortal portal;
-    private BluePropThreshold blue;
-    private IMUTestingDriveTrain wheels;
-    private craneMotors crane;
+    private RedPropThreshold red;
+    private DcMotor.ZeroPowerBehavior brake = DcMotor.ZeroPowerBehavior.BRAKE;
+    private DcMotor.ZeroPowerBehavior floatt =DcMotor.ZeroPowerBehavior.FLOAT;
     private Servo leftClawRotator;
     private Servo rightClawRotator;
     private Servo airplaneLauncher;
@@ -28,18 +28,25 @@ public class IMUTestingBlueFront extends LinearOpMode {
     private Servo leftClawServo;
     private Servo rightClawServo;
 
+    private driveTrain wheels;
+    private craneMotors crane;
+    // private Servo goodServo;
+    //private Servo badServo;
+
     private int mid = 80;
     private int turn = 65;
+
+    private long startTime;
 
     @Override
     public void runOpMode() throws InterruptedException {
 
-        blue = new BluePropThreshold();
+        red = new RedPropThreshold();
 
         portal = new VisionPortal.Builder()
                 .setCamera(hardwareMap.get(WebcamName.class, "Webcam 1"))
                 .setCameraResolution(new Size(1920, 1080))
-                .addProcessor(blue)
+                .addProcessor(red)
                 .build();
 
         rightClawRotator = hardwareMap.get(Servo.class, "rightClawRotator");
@@ -63,11 +70,12 @@ public class IMUTestingBlueFront extends LinearOpMode {
         // sleep(1000);
         // openClaw();
 
+
         // clawRotator.setPosition(0.0);
 
         airplaneLauncher = hardwareMap.get(Servo.class, "airplaneLauncher");
 
-        wheels = new IMUTestingDriveTrain(hardwareMap);
+        wheels = new driveTrain(hardwareMap);
         wheels.isAuton();
 
         crane = new craneMotors(hardwareMap);
@@ -78,149 +86,72 @@ public class IMUTestingBlueFront extends LinearOpMode {
 
         waitForStart();
         while(opModeIsActive() && !isStopRequested()){
-            sleep(5000);
+            startTime = System.currentTimeMillis();
             wheels.resetEncoders();
-            if(blue.getPropPosition()=="center"){
-                telemetry.addData("Prop","center");
+            sleep(5000);
+            if(red.getPropPosition()=="center"){
+                telemetry.addData("Center","center");
                 telemetry.update();
 
-                foward(-820);
-
-                sleep(700);
-
-                rotate(IMUTestingValues.turn90DegreesClockwise * 2);
+                foward(-2160);
 
                 pickupPixel();
-
-                foward(280);
-
-
-
-                rightClawServo.setPosition(0.5);
-                sleep(300);
-
-                neutral();
                 sleep(500);
 
-                foward(-100);
-
-                rotate(IMUTestingValues.turn90DegreesClockwise);
-
-                foward(-1350);
-
-                placePixelLow();
-                sleep(4000);
-                wheels.resetEncoders();
-                side(-370);
-
-                foward(-400);
-
-                //side(-);
-
-                leftClawServo.setPosition(1);
-                sleep(300);
+                rightClawServo.setPosition(0.5);
+                sleep(1000);
 
                 neutral();
-                sleep(2000);
-                foward(250);
 
-                side(1350);
+                rotate(values.turn90DegreesClockwise);
 
-                foward(-450);
+                while(System.currentTimeMillis() - startTime < 25000.0);
+//                side(-2700);
+//                waitforwheels();
 
-                //why joe I love you <3 THIS WAS MIGUEL I PROMISE
+                foward(-3670);
+
                 break;
             }
-            if(blue.getPropPosition()=="left"){
-                telemetry.addData("Prop","left");
+            if(red.getPropPosition()=="left"){
+                telemetry.addData("left","left");
                 telemetry.update();
 
                 foward(-1300);
 
-                rotate(IMUTestingValues.turn90DegreesCounterClockwise);
-
+                rotate(values.turn90DegreesClockwise);
                 pickupPixel();
-                sleep(500);
 
-                foward(-900);
-
+                foward(100);
                 rightClawServo.setPosition(0.5);
-                sleep(500);
-
-                neutral();
-                sleep(500);
-
-                foward(-800);
-
-                //side(150);
-                //sleep(1000);
-                //resetEncoders();
-
-                placePixelLow();
-                sleep(5000);
-
-                //foward(-100);
-                //sleep(1000);
-                //resetEncoders();
-
-                side(350);
-
-                leftClawServo.setPosition(1);
                 sleep(500);
 
                 neutral();
                 sleep(2500);
 
-                foward(200);
-
-                side(1050);
-
-                foward(-350);
-
                 break;
             }
-            if(blue.getPropPosition()=="right"){
-                telemetry.addData("Prop","right");
+            if(red.getPropPosition()=="right"){
+                telemetry.addData("right","right");
                 telemetry.update();
 
                 foward(-1300);
 
-                rotate(IMUTestingValues.turn90DegreesCounterClockwise);
-
+                rotate(values.turn90DegreesClockwise);
                 pickupPixel();
-                sleep(500);
 
-                foward(150);
-
+                foward(50);
                 rightClawServo.setPosition(0.5);
-                sleep(500);
-
-                neutral();
-                sleep(500);
-
-                foward(-1600);
-
-                //side(-470);
-                placePixelLow();
-                sleep(2000);
-                foward(-200);
-                leftClawServo.setPosition(1);
                 sleep(500);
 
                 neutral();
                 sleep(2500);
 
-                foward(200);
-
-                side(1600);
-
-                foward(-350);
-
                 break;
             }
-            //The line below can't be reached in the current state; the code always hits a break before hitting here
-            //Good place for error detection, actually
             telemetry.update();
+
+            sleep(50);
         }
 
 
@@ -239,7 +170,7 @@ public class IMUTestingBlueFront extends LinearOpMode {
     }
 
     public void placePixelLow(){
-        crane.setTargetPosition(values.cranePlaceLowAuton);
+        crane.setTargetPosition(values.cranePlaceHighAuton);
         leftClawRotator.setPosition(0.1);
         rightClawRotator.setPosition(0.85);
     }

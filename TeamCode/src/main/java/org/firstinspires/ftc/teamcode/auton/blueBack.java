@@ -5,14 +5,14 @@ import android.util.Size;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.universalCode.craneMotors;
 import org.firstinspires.ftc.teamcode.universalCode.driveTrain;
-import org.firstinspires.ftc.teamcode.universalCode.values;
 import org.firstinspires.ftc.vision.VisionPortal;
+
+import org.firstinspires.ftc.teamcode.universalCode.values;
 
 
 //@Disabled
@@ -104,7 +104,7 @@ public class blueBack extends LinearOpMode {
 
                 neutral();
 
-                rotate(-1070);
+                rotate(values.turn90DegreesCounterClockwise);
 
                 while(System.currentTimeMillis() - startTime < 25000.0);
 //                side(-2700);

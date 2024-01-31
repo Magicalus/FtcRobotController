@@ -4,15 +4,13 @@ import android.util.Size;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.universalCode.craneMotors;
 import org.firstinspires.ftc.teamcode.universalCode.driveTrain;
-import org.firstinspires.ftc.teamcode.universalCode.values;
 import org.firstinspires.ftc.vision.VisionPortal;
+import org.firstinspires.ftc.teamcode.universalCode.values;
 
 
 //@Disabled
@@ -89,7 +87,7 @@ public class BlueFront extends LinearOpMode {
 
                 sleep(700);
 
-                rotate(2100);
+                rotate(values.turn90DegreesClockwise * 2);
 
                 pickupPixel();
 
@@ -105,7 +103,7 @@ public class BlueFront extends LinearOpMode {
 
                 foward(-100);
 
-                rotate(values.turn90DegreesClockwise-70);
+                rotate(values.turn90DegreesClockwise);
 
                 foward(-1350);
 
@@ -158,7 +156,7 @@ public class BlueFront extends LinearOpMode {
                 //resetEncoders();
 
                 placePixelLow();
-                sleep(5000);
+                sleep(2500);
 
                 //foward(-100);
                 //sleep(1000);
