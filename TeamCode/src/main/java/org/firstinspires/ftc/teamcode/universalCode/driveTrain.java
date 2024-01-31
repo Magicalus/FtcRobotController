@@ -4,6 +4,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
+
+
 public class driveTrain {
     private DcMotor frontLeft;
     private DcMotor frontRight;
@@ -140,20 +142,20 @@ public class driveTrain {
         heading = 0;
         this.setPower(0);
         this.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-//        if(target > 120){
-//            targetHeading = target - 100;
-//            waitForHeading();
-//            imu.resetYaw();
-//            heading = 0;
-//            targetHeading = 100;
-//            waitForHeading();
-//        }else if(target < -120){
-//            targetHeading = target + 100;
-//            waitForHeading();
-//            imu.resetYaw();
-//            targetHeading = - 100;
-//            waitForHeading();
-//        }
+        if(target > 120){
+            targetHeading = target - 100;
+            waitForHeading();
+            imu.resetYaw();
+            heading = 0;
+            targetHeading = 100;
+            waitForHeading();
+        }else if(target < -120){
+            targetHeading = target + 100;
+            waitForHeading();
+            imu.resetYaw();
+            targetHeading = - 100;
+            waitForHeading();
+        }
         targetHeading = target;
         waitForHeading();
     }

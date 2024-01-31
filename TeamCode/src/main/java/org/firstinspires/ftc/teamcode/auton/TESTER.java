@@ -11,7 +11,7 @@ import org.firstinspires.ftc.teamcode.universalCode.*;
 public class TESTER extends LinearOpMode{
     private DcMotor.ZeroPowerBehavior brake = DcMotor.ZeroPowerBehavior.BRAKE;
     private DcMotor.ZeroPowerBehavior floatt =DcMotor.ZeroPowerBehavior.FLOAT;
-    private DcMotor frontLeft, frontRight, backLeft, backRight;
+    private DcMotor frontLeft, fr6ontRight, backLeft, backRight;
     private Servo rightClawRotator, leftClawRotator, rightClawServo, leftClawServo;
 
     private DcMotor leftHanger, rightHanger, leftCraneArm, rightCraneArm;
