@@ -20,7 +20,7 @@ public class driveTrain {
     private double rotationSpeed = 0.75;
     private double sideSpeed = 0.75;
 
-    private double rotationMargin = 5;
+    private double rotationMargin = 0.5;
     private double speed = 1;
 
     private boolean auton = false;
