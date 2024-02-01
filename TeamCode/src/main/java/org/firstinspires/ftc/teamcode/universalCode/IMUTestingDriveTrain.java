@@ -5,19 +5,18 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 
-
-public class driveTrain {
+public class IMUTestingDriveTrain {
     private DcMotor frontLeft;
     private DcMotor frontRight;
     private DcMotor backLeft;
     private DcMotor jarmy;
 
     private IMUInterface imu;
-    private double heading;
-    private double targetHeading;
+    public double heading;
+    public double targetHeading;
 
     private double fowardSpeed = 0.75;
-    private double rotationSpeed = 0.75;
+    private double rotationSpeed = 0.3;
     private double sideSpeed = 0.75;
 
     private double rotationMargin = 5;
@@ -25,7 +24,7 @@ public class driveTrain {
 
     private boolean auton = false;
 
-    public driveTrain(HardwareMap hardwareMap){
+    public IMUTestingDriveTrain(HardwareMap hardwareMap){
         // Initialize the hardware variables. Note that the strings used here as parameters
         // to 'get' must correspond to the names assigned during the robot configuration
         // step (using the FTC Robot Controller app on the phone).
@@ -162,7 +161,7 @@ public class driveTrain {
     public void continueRotate(){
         double leftPower = - Math.min(rotationSpeed * (targetHeading * 1.5 - heading / targetHeading), rotationSpeed);
 //        double rightPower = Math.min(Math.abs(targetHeading - heading) / rotationSpeed * 45, rotationSpeed);
-        double rightPower = -leftPower;
+        double rightPower = - leftPower;
         frontLeft.setPower(leftPower);
         frontRight.setPower(rightPower);
         backLeft.setPower(leftPower);
@@ -195,12 +194,8 @@ public class driveTrain {
         resetEncoders();
     }
 
-    public void waitForHeading(){
-        while(!(heading < targetHeading + rotationMargin && heading > targetHeading - rotationMargin)){
-            heading = imu.getYaw();
-            continueRotate();
-        }
-        resetEncoders();
+    public boolean waitForHeading(){
+        return !(heading < targetHeading + rotationMargin && heading > targetHeading - rotationMargin);
     }
     public void resetEncoders(){
         frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);

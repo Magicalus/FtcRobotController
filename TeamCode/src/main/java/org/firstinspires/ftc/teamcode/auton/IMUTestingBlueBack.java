@@ -8,32 +8,28 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.firstinspires.ftc.teamcode.universalCode.IMUInterface;
+import org.firstinspires.ftc.teamcode.universalCode.IMUTestingDriveTrain;
 import org.firstinspires.ftc.teamcode.universalCode.craneMotors;
 import org.firstinspires.ftc.teamcode.universalCode.driveTrain;
-import org.firstinspires.ftc.vision.VisionPortal;
-
 import org.firstinspires.ftc.teamcode.universalCode.values;
+import org.firstinspires.ftc.vision.VisionPortal;
 
 
 //@Disabled
-@Autonomous(name="Blue Back")
-public class blueBack extends LinearOpMode {
+@Autonomous(name="IMU TESTING Blue Back Move")
+public class IMUTestingBlueBack extends LinearOpMode {
     private VisionPortal portal;
     private BluePropThreshold blue;
-    private DcMotor.ZeroPowerBehavior brake = DcMotor.ZeroPowerBehavior.BRAKE;
-    private DcMotor.ZeroPowerBehavior floatt =DcMotor.ZeroPowerBehavior.FLOAT;
+    private IMUTestingDriveTrain wheels;
+    private craneMotors crane;
     private Servo leftClawRotator;
     private Servo rightClawRotator;
     private Servo airplaneLauncher;
 
     private Servo leftClawServo;
     private Servo rightClawServo;
-
-    private driveTrain wheels;
-    private craneMotors crane;
-    // private Servo goodServo;
-    //private Servo badServo;
-
+    private IMUInterface imu;
     private int mid = 80;
     private int turn = 65;
 
@@ -68,18 +64,22 @@ public class blueBack extends LinearOpMode {
         //starting posistions
 
         // pickupPixel();
-        // sleep(1000);
+        //
         // openClaw();
 
 
-        // clawRotator.setPosition(0.0);
+
+
 
         airplaneLauncher = hardwareMap.get(Servo.class, "airplaneLauncher");
 
-        wheels = new driveTrain(hardwareMap);
+        wheels = new IMUTestingDriveTrain(hardwareMap);
         wheels.isAuton();
 
         crane = new craneMotors(hardwareMap);
+
+        imu = new IMUInterface(hardwareMap);
+
 
         closeClaw();
         airplaneLauncher.setPosition(values.airplaneServoResting);
@@ -93,7 +93,7 @@ public class blueBack extends LinearOpMode {
             if(blue.getPropPosition()=="center"){
                 telemetry.addData("Center","center");
                 telemetry.update();
-
+                neutral();
                 foward(-2160);
 
                 pickupPixel();
@@ -103,14 +103,42 @@ public class blueBack extends LinearOpMode {
                 sleep(1000);
 
                 neutral();
+                foward(-150);
 
-                rotate(values.turn90DegreesCounterClockwise);
+                imu.resetYaw();
+                wheels.setPower(0);
+                wheels.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+                wheels.heading = 0;
+                wheels.targetHeading = values.turn90DegreesCounterClockwise;
+                while(wheels.waitForHeading()){
+                    wheels.heading = imu.getYaw();
+                    wheels.continueRotate();
+                    telemetry.addData("Yaw: ", imu.getYaw());
+                    telemetry.addData("Target position", wheels.targetHeading);
+                    telemetry.update();
+                }
+                wheels.resetEncoders();
 
-                while(System.currentTimeMillis() - startTime < 25000.0);
-//                side(-2700);
-//                waitforwheels();
+                while(System.currentTimeMillis() - startTime < 18000.0);
 
                 foward(-3670);
+
+                side(1350);
+
+                placePixelLow();
+                sleep(3000);
+
+                foward(-300);
+
+//                side(250);
+//                sleep(1000);
+//                resetEncoders();
+
+                leftClawServo.setPosition(1);
+                sleep(300);
+
+                neutral();
+                sleep(2500);
 
                 break;
             }
@@ -136,7 +164,7 @@ public class blueBack extends LinearOpMode {
                 telemetry.addData("right","right");
                 telemetry.update();
 
-                foward(-1300);
+                foward(-1350);
 
                 rotate(values.turn90DegreesCounterClockwise);
                 pickupPixel();
@@ -145,11 +173,13 @@ public class blueBack extends LinearOpMode {
                 rightClawServo.setPosition(0.5);
                 sleep(500);
 
+
                 neutral();
                 sleep(2500);
 
                 break;
             }
+
             telemetry.update();
 
             sleep(50);

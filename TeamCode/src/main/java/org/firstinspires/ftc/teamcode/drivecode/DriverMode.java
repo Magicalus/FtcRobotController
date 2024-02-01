@@ -131,6 +131,9 @@ public class DriverMode extends LinearOpMode {
                     crane.resetEncoders();
                 }else if(gamepad2.dpad_down){
                     crane.setTargetPosition(-3000);
+                }else if(gamepad2.dpad_up){
+                    leftHanger.setTargetPosition(values.hangerRaised+1000);
+                    rightHanger.setTargetPosition(values.hangerRaised+1000);
                 }
 
                 //new cranes have INSANE value drift, this is here so they don't rip the belts apart

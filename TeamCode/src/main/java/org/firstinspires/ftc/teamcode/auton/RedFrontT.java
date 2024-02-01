@@ -80,7 +80,7 @@ public class RedFrontT extends LinearOpMode {
         crane = new craneMotors(hardwareMap);
 
         closeClaw();
-        airplaneLauncher.setPosition(0);
+        airplaneLauncher.setPosition(values.airplaneServoResting);
 
 
         waitForStart();

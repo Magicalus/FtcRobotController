@@ -68,7 +68,7 @@ public class redBackifTheyMove extends LinearOpMode {
         closeClaw();
 //        leftClawRotator.setPosition(1);
 //        rightClawRotator.setPosition(0);
-        airplaneLauncher.setPosition(0);
+        airplaneLauncher.setPosition(values.airplaneServoResting);
 
         waitForStart();
         while(opModeIsActive() && !isStopRequested()){

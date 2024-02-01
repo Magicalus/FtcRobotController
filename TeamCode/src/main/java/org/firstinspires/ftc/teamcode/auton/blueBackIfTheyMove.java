@@ -27,7 +27,6 @@ public class blueBackIfTheyMove extends LinearOpMode {
 
     private Servo leftClawServo;
     private Servo rightClawServo;
-
     private int mid = 80;
     private int turn = 65;
 
@@ -78,7 +77,7 @@ public class blueBackIfTheyMove extends LinearOpMode {
 
 
         closeClaw();
-        airplaneLauncher.setPosition(0);
+        airplaneLauncher.setPosition(values.airplaneServoResting);
 
 
         waitForStart();
