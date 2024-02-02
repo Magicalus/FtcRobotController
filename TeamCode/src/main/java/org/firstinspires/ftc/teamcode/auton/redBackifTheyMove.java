@@ -119,9 +119,9 @@ public class redBackifTheyMove extends LinearOpMode {
                 sleep(1000);
 
                 neutral();
-                foward(-150);
+                foward(-250);
 
-                rotate(values.turn90DegreesClockwise);
+                rotate(values.turn90DegreesClockwise+2);
 
                 while(System.currentTimeMillis() - startTime < 18000.0);
 //                side(-2700);
@@ -129,12 +129,12 @@ public class redBackifTheyMove extends LinearOpMode {
 
                 foward(-3670);
 
-                side(-1350);
+                side(-1450);
 
                 placePixelLow();
                 sleep(3000);
 
-                foward(-230);
+                foward(-260);
 
 //                side(250);
 //                sleep(1000);

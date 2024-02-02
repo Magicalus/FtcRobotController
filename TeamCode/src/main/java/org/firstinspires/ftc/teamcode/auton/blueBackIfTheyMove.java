@@ -111,7 +111,7 @@ public class blueBackIfTheyMove extends LinearOpMode {
                 placePixelLow();
                 sleep(3000);
 
-                foward(-300);
+                foward(-400);
 
 //                side(250);
 //                sleep(1000);
@@ -129,14 +129,47 @@ public class blueBackIfTheyMove extends LinearOpMode {
                 telemetry.addData("left","left");
                 telemetry.update();
 
-                foward(-1300);
+                foward(-1100);
 
+//                rotate(values.turn90DegreesCounterClockwise);
+//                rotate(values.turn90DegreesCounterClockwise);
+//                rotate(values.turn90DegreesCounterClockwise);
                 rotate(values.turn90DegreesClockwise);
+
                 pickupPixel();
 
                 foward(100);
                 rightClawServo.setPosition(0.5);
                 sleep(500);
+
+                neutral();
+                foward(-100);
+                sleep(2500);
+
+                rotate(values.turn90DegreesCounterClockwise);
+                sleep(250);
+                rotate(values.turn90DegreesCounterClockwise);
+
+                side(-1300);
+
+                while(System.currentTimeMillis() - startTime < 16000.0);
+
+                foward(-3670);
+
+                side(1520);
+
+                placePixelLow();
+                sleep(3000);
+
+                wheels.setFowardSpeed(0.4);
+                foward(-300);
+
+//                side(250);
+//                sleep(1000);
+//                resetEncoders();
+
+                leftClawServo.setPosition(1);
+                sleep(300);
 
                 neutral();
                 sleep(2500);
@@ -152,13 +185,39 @@ public class blueBackIfTheyMove extends LinearOpMode {
                 rotate(values.turn90DegreesCounterClockwise);
                 pickupPixel();
 
-                foward(50);
+                foward(-150);
                 rightClawServo.setPosition(0.5);
                 sleep(500);
 
 
                 neutral();
+                foward(-50);
                 sleep(2500);
+
+                side(-1050);
+
+                while(System.currentTimeMillis() - startTime < 16000.0);
+
+                foward(-3670);
+
+                side(1020);
+
+                placePixelLow();
+                sleep(3000);
+
+                wheels.setFowardSpeed(0.4);
+                foward(-300);
+
+//                side(250);
+//                sleep(1000);
+//                resetEncoders();
+
+                leftClawServo.setPosition(1);
+                sleep(300);
+
+                neutral();
+                sleep(2500);
+
 
                 break;
             }

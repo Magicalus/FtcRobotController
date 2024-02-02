@@ -62,7 +62,7 @@ public class biggerback extends LinearOpMode {
 
         propPipeline = new PropPipeline();
         portal = new VisionPortal.Builder()
-                .setCamera(hardwareMap.get(WebcamName.class, "Webcam1"))
+                .setCamera(hardwareMap.get(WebcamName.class, "Webcam 1"))
                 .setCameraResolution(new Size(1920, 1080))
                 .addProcessor(propPipeline)
                 .setStreamFormat(VisionPortal.StreamFormat.MJPEG)

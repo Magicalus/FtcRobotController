@@ -9,7 +9,6 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.universalCode.IMUInterface;
-import org.firstinspires.ftc.teamcode.universalCode.IMUTestingDriveTrain;
 import org.firstinspires.ftc.teamcode.universalCode.craneMotors;
 import org.firstinspires.ftc.teamcode.universalCode.driveTrain;
 import org.firstinspires.ftc.teamcode.universalCode.values;
@@ -21,7 +20,7 @@ import org.firstinspires.ftc.vision.VisionPortal;
 public class IMUTestingBlueBack extends LinearOpMode {
     private VisionPortal portal;
     private BluePropThreshold blue;
-    private IMUTestingDriveTrain wheels;
+    private driveTrain wheels;
     private craneMotors crane;
     private Servo leftClawRotator;
     private Servo rightClawRotator;
@@ -73,7 +72,7 @@ public class IMUTestingBlueBack extends LinearOpMode {
 
         airplaneLauncher = hardwareMap.get(Servo.class, "airplaneLauncher");
 
-        wheels = new IMUTestingDriveTrain(hardwareMap);
+        wheels = new driveTrain(hardwareMap);
         wheels.isAuton();
 
         crane = new craneMotors(hardwareMap);
@@ -108,13 +107,12 @@ public class IMUTestingBlueBack extends LinearOpMode {
                 imu.resetYaw();
                 wheels.setPower(0);
                 wheels.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-                wheels.heading = 0;
-                wheels.targetHeading = values.turn90DegreesCounterClockwise;
+                wheels.targetHeading = values.turn90DegreesClockwise;
                 while(wheels.waitForHeading()){
-                    wheels.heading = imu.getYaw();
                     wheels.continueRotate();
                     telemetry.addData("Yaw: ", imu.getYaw());
                     telemetry.addData("Target position", wheels.targetHeading);
+                    telemetry.addData("Heading Offset: ", wheels.headingOffset);
                     telemetry.update();
                 }
                 wheels.resetEncoders();
@@ -122,13 +120,22 @@ public class IMUTestingBlueBack extends LinearOpMode {
                 while(System.currentTimeMillis() - startTime < 18000.0);
 
                 foward(-3670);
+                telemetry.addData("Target position", wheels.targetHeading);
+                telemetry.addData("Heading Offset: ", wheels.headingOffset);
+                telemetry.update();
 
                 side(1350);
+                telemetry.addData("Target position", wheels.targetHeading);
+                telemetry.addData("Heading Offset: ", wheels.headingOffset);
+                telemetry.update();
 
                 placePixelLow();
                 sleep(3000);
 
-                foward(-300);
+                foward(-350);
+                telemetry.addData("Target position", wheels.targetHeading);
+                telemetry.addData("Heading Offset: ", wheels.headingOffset);
+                telemetry.update();
 
 //                side(250);
 //                sleep(1000);
