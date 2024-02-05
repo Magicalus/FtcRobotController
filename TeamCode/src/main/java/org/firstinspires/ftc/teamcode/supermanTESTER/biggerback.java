@@ -24,7 +24,7 @@ import org.firstinspires.ftc.vision.VisionPortal;
 
 
 //@Disabled
-@Autonomous(name="Bigger Back")
+@Autonomous(name="Blue Back")
 public class biggerback extends LinearOpMode {
     private VisionPortal portal;
     private BluePropThreshold blue;
@@ -57,8 +57,6 @@ public class biggerback extends LinearOpMode {
         Globals.IS_AUTO = true;
         Globals.ALLIANCE = Location.BLUE;
         Globals.SIDE = Location.CLOSE;
-
-        blue = new BluePropThreshold();
 
         propPipeline = new PropPipeline();
         portal = new VisionPortal.Builder()
