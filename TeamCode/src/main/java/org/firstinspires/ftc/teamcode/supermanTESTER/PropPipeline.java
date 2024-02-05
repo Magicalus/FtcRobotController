@@ -22,9 +22,9 @@ public class PropPipeline implements VisionProcessor {
     public static int redCenterX = (int) (1365);
     public static int redCenterY = (int) (475);
     public static int blueCenterX = (int) (240);
-    public static int blueCenterY = (int) (525);
-    public static int blueLeftX = (int) (575);
-    public static int blueLeftY = (int) (485);
+    public static int blueCenterY = (int) (625);
+    public static int blueLeftX = (int) (875);
+    public static int blueLeftY = (int) (685);
     public static int centerWidth = (int) (175);
     public static int centerHeight = (int) (100);
     public static int leftWidth = (int) (125);
@@ -97,12 +97,12 @@ public class PropPipeline implements VisionProcessor {
         centerColor = center.val[idx];
 
         if (leftColor > threshold && (left.val[0] + left.val[1] + left.val[2] - left.val[idx] < left.val[idx])) {
-            // left zone has it
-            location = Location.RIGHT;
+            // left zone has itsuper a
+            location = Location.CENTER;
             Imgproc.rectangle(frame, leftZoneArea, new Scalar(255, 255, 255), 10);
         } else if (centerColor > threshold && (center.val[0] + center.val[1] + center.val[2] - center.val[idx] < center.val[idx])) {
             // center zone has it
-            location = Location.CENTER;
+            location = Location.RIGHT;
             Imgproc.rectangle(frame, centerZoneArea, new Scalar(255, 255, 255), 10);
         } else {
             // right zone has it
