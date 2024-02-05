@@ -17,10 +17,10 @@ public class driveTrain {
     public double targetHeading;
 
     private double fowardSpeed = 0.75;
-    private double rotationSpeed = 0.5;
+    private double rotationSpeed = 0.4;
     private double sideSpeed = 0.75;
 
-    private double rotationMargin = 0.5;
+    private double rotationMargin = 1;
     private double speed = 1;
 
     private boolean auton = false;
@@ -115,7 +115,8 @@ public class driveTrain {
     }
 
     public void foward(int target){
-        imu.resetYaw();
+        resetHeadingOffset();
+        imu.resetYaw(this);
         targetHeading = 0 + headingOffset;
         waitForWheels(target, true);
     }
@@ -130,7 +131,8 @@ public class driveTrain {
     }
 
     public void side(int target){
-        imu.resetYaw();
+        resetHeadingOffset();
+        imu.resetYaw(this);
         targetHeading = 0 + headingOffset;
         waitForWheels(target, false);
     }
@@ -144,21 +146,23 @@ public class driveTrain {
     }
 
     public void rotate(int target){
-        imu.resetYaw();
+        imu.resetYaw(this);
         this.setPower(0);
         this.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        double trueTarget = target;
         targetHeading = target + headingOffset;
-        headingOffset = targetHeading - imu.getYaw() + headingOffset;
+        while(waitForHeading()){
+            continueRotate();
+        }
         resetEncoders();
-        imu.resetYaw();
+        this.setPower(0);
+        imu.resetYaw(this);
     }
     public void continueRotate(){
         double leftPower;
         if(targetHeading > 0) {
-            leftPower = - Math.min(rotationSpeed * (targetHeading * 1.2 - imu.getYaw() / targetHeading), rotationSpeed);
+            leftPower = - Math.min(rotationSpeed * (targetHeading * 1.5 - imu.getYaw() / targetHeading), rotationSpeed);
         }else{
-            leftPower =  Math.min(rotationSpeed * - (targetHeading * 1.2 - imu.getYaw() / targetHeading), rotationSpeed);
+            leftPower =  - Math.max(rotationSpeed * (targetHeading * 1.5 - imu.getYaw() / targetHeading), - rotationSpeed);
 
         }
         double rightPower = - leftPower;
@@ -191,7 +195,6 @@ public class driveTrain {
                 continueSide(target);
             }
         }
-        headingOffset = targetHeading - imu.getYaw() + headingOffset;
         resetEncoders();
     }
 
@@ -204,5 +207,9 @@ public class driveTrain {
         frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         jarmy.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         backLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    }
+
+    public void resetHeadingOffset(){
+        headingOffset = targetHeading - imu.getYaw();
     }
 }

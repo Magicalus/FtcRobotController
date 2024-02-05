@@ -27,7 +27,8 @@ public class IMUInterface {
         return imu.getRobotYawPitchRollAngles().getRoll(AngleUnit.DEGREES);
     }
 
-    public void resetYaw(){
+    public void resetYaw(driveTrain wheels){
+        wheels.resetHeadingOffset();
         imu.resetYaw();
     }
 }
