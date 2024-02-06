@@ -17,14 +17,16 @@ import org.opencv.imgproc.Imgproc;
 
 public class PropPipeline implements VisionProcessor {
     private static final boolean DEBUG = true;
-    public static int redLeftX = (int) (815);
-    public static int redLeftY = (int) (550);
-    public static int redCenterX = (int) (1365);
-    public static int redCenterY = (int) (475);
-    public static int blueCenterX = (int) (240);
-    public static int blueCenterY = (int) (525);
-    public static int blueLeftX = (int) (925);
-    public static int blueLeftY = (int) (485);
+    public static int redLeftX = (int) (240);
+    public static int redLeftY = (int) (525);
+    public static int redCenterX = (int) (925);
+    public static int redCenterY = (int) (485);
+
+    public static int blueCenterX = (int) (925);
+    public static int blueCenterY = (int) (485);
+    public static int blueLeftX = (int) (1465);
+    public static int blueLeftY = (int) (525);
+
     public static int centerWidth = (int) (175);
     public static int centerHeight = (int) (100);
     public static int leftWidth = (int) (125);
