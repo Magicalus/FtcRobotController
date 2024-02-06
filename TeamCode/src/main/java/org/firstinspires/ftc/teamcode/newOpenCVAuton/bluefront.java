@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.supermanTESTER;
+package org.firstinspires.ftc.teamcode.newOpenCVAuton;
 
 import android.util.Size;
 
@@ -24,8 +24,8 @@ import org.firstinspires.ftc.vision.VisionPortal;
 
 
 //@Disabled
-@Autonomous(name="bigger back")
-public class biggerback extends LinearOpMode {
+@Autonomous(name="bluefront new")
+public class bluefront extends LinearOpMode {
     private VisionPortal portal;
     private BluePropThreshold blue;
     private DcMotor.ZeroPowerBehavior brake = DcMotor.ZeroPowerBehavior.BRAKE;
@@ -55,7 +55,7 @@ public class biggerback extends LinearOpMode {
 
 
         Globals.IS_AUTO = true;
-        Globals.ALLIANCE = Location.RED;
+        Globals.ALLIANCE = Location.BLUE;
         Globals.SIDE = Location.CLOSE;
 
         propPipeline = new PropPipeline();
@@ -101,20 +101,20 @@ public class biggerback extends LinearOpMode {
             wheels.resetEncoders();
 
             switch (randomization) {
-            case LEFT:
-               leftClawRotator.setPosition(values.leftClawOpen);
-                break;
-            case CENTER:
-                leftClawRotator.setPosition(values.leftClawOpen);
-                rightClawServo.setPosition(values.rightClawOpen);
-                break;
-            case RIGHT:
-                rightClawServo.setPosition(values.rightClawOpen);
-                break;
-            default:
-                break;
+                case LEFT:
+                    leftClawRotator.setPosition(values.leftClawOpen);
+                    break;
+                case CENTER:
+                    leftClawRotator.setPosition(values.leftClawOpen);
+                    rightClawServo.setPosition(values.rightClawOpen);
+                    break;
+                case RIGHT:
+                    rightClawServo.setPosition(values.rightClawOpen);
+                    break;
+                default:
+                    break;
 
-        }
+            }
 
 
 

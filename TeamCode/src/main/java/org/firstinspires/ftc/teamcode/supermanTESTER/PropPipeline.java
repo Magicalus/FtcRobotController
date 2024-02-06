@@ -20,11 +20,11 @@ public class PropPipeline implements VisionProcessor {
     public static int redLeftX = (int) (815);
     public static int redLeftY = (int) (550);
     public static int redCenterX = (int) (1365);
-    public static int redCenterY = (int) (655);
+    public static int redCenterY = (int) (475);
     public static int blueCenterX = (int) (240);
-    public static int blueCenterY = (int) (725);
-    public static int blueLeftX = (int) (675);
-    public static int blueLeftY = (int) (985);
+    public static int blueCenterY = (int) (525);
+    public static int blueLeftX = (int) (925);
+    public static int blueLeftY = (int) (485);
     public static int centerWidth = (int) (175);
     public static int centerHeight = (int) (100);
     public static int leftWidth = (int) (125);
@@ -97,16 +97,16 @@ public class PropPipeline implements VisionProcessor {
         centerColor = center.val[idx];
 
         if (leftColor > threshold && (left.val[0] + left.val[1] + left.val[2] - left.val[idx] < left.val[idx])) {
-            // left zone has itsuper a
-            location = Location.CENTER;
+            // left zone has it
+            location = Location.LEFT;
             Imgproc.rectangle(frame, leftZoneArea, new Scalar(255, 255, 255), 10);
         } else if (centerColor > threshold && (center.val[0] + center.val[1] + center.val[2] - center.val[idx] < center.val[idx])) {
             // center zone has it
-            location = Location.RIGHT;
+            location = Location.CENTER;
             Imgproc.rectangle(frame, centerZoneArea, new Scalar(255, 255, 255), 10);
         } else {
             // right zone has it
-            location = Location.LEFT;
+            location = Location.RIGHT;
         }
 
         leftZone.release();
