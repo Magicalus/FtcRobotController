@@ -100,7 +100,11 @@ public class PropPipeline implements VisionProcessor {
 
         if (leftColor > threshold && (left.val[0] + left.val[1] + left.val[2] - left.val[idx] < left.val[idx])) {
             // left zone has it
-            location = Location.LEFT;
+            if(ALLIANCE == Location.RED && SIDE == Location.FAR || ALLIANCE == Location.BLUE && SIDE == Location.CLOSE) {
+                location = Location.LEFT;
+            }else{
+                location = Location.RIGHT;
+            }
             Imgproc.rectangle(frame, leftZoneArea, new Scalar(255, 255, 255), 10);
         } else if (centerColor > threshold && (center.val[0] + center.val[1] + center.val[2] - center.val[idx] < center.val[idx])) {
             // center zone has it
@@ -108,7 +112,11 @@ public class PropPipeline implements VisionProcessor {
             Imgproc.rectangle(frame, centerZoneArea, new Scalar(255, 255, 255), 10);
         } else {
             // right zone has it
-            location = Location.RIGHT;
+            if(ALLIANCE == Location.RED && SIDE == Location.FAR || ALLIANCE == Location.BLUE && SIDE == Location.CLOSE) {
+                location = Location.RIGHT;
+            }else{
+                location = Location.LEFT;
+            }
         }
 
         leftZone.release();
