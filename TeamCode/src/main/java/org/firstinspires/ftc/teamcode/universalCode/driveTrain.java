@@ -1,9 +1,14 @@
 package org.firstinspires.ftc.teamcode.universalCode;
 
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
 
 
 public class driveTrain {
@@ -12,20 +17,28 @@ public class driveTrain {
     private DcMotor backLeft;
     private DcMotor jarmy;
 
-    private IMUInterface imu;
+    public IMUInterface imu;
     public double headingOffset;
     public double targetHeading;
 
     private double fowardSpeed = 0.75;
-    private double rotationSpeed = 0.4;
     private double sideSpeed = 0.75;
+    private double rotationSpeed = 0.5;
 
-    private double rotationMargin = 1;
+    private double lastAngle;
+    private double currAngle = 0;
+
+    public double rotationMargin = 1;
     private double speed = 1;
 
     private boolean auton = false;
 
-    public driveTrain(HardwareMap hardwareMap){
+    //Should only be true when testing with blue back if they move
+    private boolean debug = false;
+
+    private LinearOpMode opMode;
+
+    public driveTrain(HardwareMap hardwareMap, LinearOpMode opmode){
         // Initialize the hardware variables. Note that the strings used here as parameters
         // to 'get' must correspond to the names assigned during the robot configuration
         // step (using the FTC Robot Controller app on the phone).
@@ -44,9 +57,13 @@ public class driveTrain {
 
         imu = new IMUInterface(hardwareMap);
 
+        lastAngle = imu.getYaw();
+
         targetHeading = 0;
 
         headingOffset = 0;
+
+        opMode = opmode;
     }
 
     public void manualDrive(double frontLeftPower, double frontRightPower, double backLeftPower, double jarmyPower){
@@ -137,39 +154,22 @@ public class driveTrain {
         waitForWheels(target, false);
     }
     private void continueSide(int target){
-        double frontLeftCorner = fowardSpeed - fowardSpeed * (Math.max(imu.getYaw(), 0) / 90);
-        double frontRightCorner = - (fowardSpeed - fowardSpeed * (Math.max(imu.getYaw(), 0) / 90));
+        double frontLeftCorner = sideSpeed - sideSpeed * (Math.max(imu.getYaw(), 0) / 90);
+        double frontRightCorner = - (sideSpeed - sideSpeed * (Math.max(imu.getYaw(), 0) / 90));
         frontLeft.setPower(frontLeftCorner);
         frontRight.setPower(frontRightCorner);
         backLeft.setPower(frontRightCorner);
         jarmy.setPower(frontLeftCorner);
     }
 
-    public void rotate(int target){
+    public void rotate(int target) {
+        setPower(0);
+        setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         imu.resetYaw(this);
-        this.setPower(0);
-        this.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        targetHeading = target + headingOffset;
-        while(waitForHeading()){
-            continueRotate();
-        }
-        resetEncoders();
-        this.setPower(0);
-        imu.resetYaw(this);
-    }
-    public void continueRotate(){
-        double leftPower;
-        if(targetHeading > 0) {
-            leftPower = - Math.min(rotationSpeed * (targetHeading * 1.5 - imu.getYaw() / targetHeading), rotationSpeed);
-        }else{
-            leftPower =  - Math.max(rotationSpeed * (targetHeading * 1.5 - imu.getYaw() / targetHeading), - rotationSpeed);
+        turnTo(-target);
+        targetHeading = target;
+        resetHeadingOffset();
 
-        }
-        double rightPower = - leftPower;
-        frontLeft.setPower(leftPower);
-        frontRight.setPower(rightPower);
-        backLeft.setPower(leftPower);
-        jarmy.setPower(rightPower);
     }
 
     public void waitForWheels(int target, boolean foward) {
@@ -187,7 +187,8 @@ public class driveTrain {
         while(frontLeft.getCurrentPosition() != frontLeft.getTargetPosition() &&
                 frontRight.getCurrentPosition() != frontRight.getTargetPosition() &&
                 backLeft.getCurrentPosition() != backLeft.getTargetPosition() &&
-                jarmy.getCurrentPosition() != jarmy.getTargetPosition()
+                jarmy.getCurrentPosition() != jarmy.getTargetPosition() &&
+                opMode.opModeIsActive()
         ) {
             if(foward){
                 continueFoward(target);
@@ -197,11 +198,6 @@ public class driveTrain {
         }
         resetEncoders();
     }
-
-    public boolean waitForHeading() {
-        return !(imu.getYaw() < targetHeading + rotationMargin && imu.getYaw() > targetHeading - rotationMargin);
-    }
-
     public void resetEncoders(){
         frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -211,5 +207,70 @@ public class driveTrain {
 
     public void resetHeadingOffset(){
         headingOffset = targetHeading - imu.getYaw();
+    }
+
+    public void turnTo(double degrees){
+
+        double yaw = imu.getYaw();
+
+        System.out.println(yaw);
+        double error = degrees - yaw;
+
+        if (error > 180) {
+            error -= 360;
+        } else if (error < -180) {
+            error += 360;
+        }
+
+        turn(error);
+    }
+
+    public void turn(double degrees){
+        resetAngle();
+
+        double error = degrees;
+
+        while (opMode.opModeIsActive() && Math.abs(error) > 5) {
+            double motorPower = (error < 0 ? -rotationSpeed : rotationSpeed);
+            frontLeft.setPower(-motorPower);
+            frontRight.setPower(motorPower);
+            backLeft.setPower(-motorPower);
+            jarmy.setPower(motorPower);
+            error = degrees - getAngle();
+            opMode.telemetry.addData("error", error);
+            opMode.telemetry.update();
+        }
+
+        frontLeft.setPower(0);
+        frontRight.setPower(0);
+        backLeft.setPower(0);
+        jarmy.setPower(0);
+    }
+
+    public double getAngle() {
+
+        // Get current orientation
+        double yaw = imu.getYaw();
+        // Change in angle = current angle - previous angle
+        double deltaAngle = yaw - lastAngle;
+
+        // Gyro only ranges from -179 to 180
+        // If it turns -1 degree over from -179 to 180, subtract 360 from the 359 to get -1
+        if (deltaAngle < -180) {
+            deltaAngle += 360;
+        } else if (deltaAngle > 180) {
+            deltaAngle -= 360;
+        }
+
+        // Add change in angle to current angle to get current angle
+        currAngle += deltaAngle;
+        lastAngle = yaw;
+        opMode.telemetry.addData("gyro", yaw);
+        return currAngle;
+    }
+
+    public void resetAngle() {
+        lastAngle = imu.getYaw();
+        currAngle = 0;
     }
 }

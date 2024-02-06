@@ -28,7 +28,7 @@ public class DriverMode extends LinearOpMode {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
-        wheels = new driveTrain(hardwareMap);
+        wheels = new driveTrain(hardwareMap, this);
         wheels.setPower(1);
 
         crane = new craneMotors(hardwareMap);

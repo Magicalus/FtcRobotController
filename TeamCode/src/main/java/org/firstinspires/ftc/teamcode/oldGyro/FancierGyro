@@ -113,7 +113,7 @@ public class FancierGyro extends LinearOpMode{
             lobertRockatel(87, 3);
             turnTo(-87);
            // sleep(3000);
-            
+
             Intake1.setPosition(0.3);
             resetwheelpos();
             movevertically(-50, 0.6);

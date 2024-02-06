@@ -127,7 +127,7 @@ public class Funkyyyyyyyyyyy extends LinearOpMode{
         // Change in angle = current angle - previous angle
         double deltaAngle = orientation.firstAngle - lastAngles.firstAngle;
 
-        // Gyro only ranges from -179 to 180
+        // Gyro only ranges from -179 to 180`
         // If it turns -1 degree over from -179 to 180, subtract 360 from the 359 to get -1
         if (deltaAngle < -180) {
             deltaAngle += 360;

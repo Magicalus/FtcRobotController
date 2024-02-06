@@ -31,11 +31,11 @@ public class values {
     //Hanging Positions
     public static int hangerResting = 0;
     public static int hangerHanging = 1000;
-    public static int hangerRaised = 2000;
+    public static int hangerRaised = 1800;
 
 
     //Auton movement values
-    public static int turn90DegreesClockwise = - 90;
+    public static int turn90DegreesClockwise = 90;
 
     public static int turn90DegreesCounterClockwise = - turn90DegreesClockwise;
 }
