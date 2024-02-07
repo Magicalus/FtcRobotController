@@ -10,10 +10,10 @@ public class values {
 
 
     //Claw Positions
-    public static double leftClawOpen = 0.5;
+    public static double leftClawOpen = 0.3;
     public static double leftClawClosed = 0;
     public static double rightClawOpen = 0.4;
-    public static double rightClawClosed = 1;
+    public static double rightClawClosed = 0.9;
 
 
     //Airplane Servo Positions (REDO)

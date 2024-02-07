@@ -148,8 +148,8 @@ public class blueBackIfTheyMove extends LinearOpMode {
                 sleep(1000);
 
                 rotate(values.turn90DegreesCounterClockwise);
-                foward(1300);
-//                rotate(values.turn90DegreesCounterClockwise);
+                foward(-1300);
+                rotate(values.turn90DegreesCounterClockwise);
 
                 while(System.currentTimeMillis() - startTime < 16000.0);
 

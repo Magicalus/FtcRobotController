@@ -151,7 +151,7 @@ public class driveTrain {
         resetHeadingOffset();
         imu.resetYaw(this);
         targetHeading = 0 + headingOffset;
-        waitForWheels((int)targetHeading, false);
+        waitForWheels(target, false);
     }
     private void continueSide(){
         double frontLeftCorner = sideSpeed - sideSpeed * (Math.max(imu.getYaw(), 0) / 90);

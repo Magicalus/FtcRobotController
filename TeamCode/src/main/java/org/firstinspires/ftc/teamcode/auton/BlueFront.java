@@ -66,7 +66,7 @@ public class BlueFront extends LinearOpMode {
 
         airplaneLauncher = hardwareMap.get(Servo.class, "airplaneLauncher");
 
-        wheels = new driveTrain(hardwareMap, this);
+        wheels = new driveTrain(hardwareMap, this );
         wheels.isAuton();
 
         crane = new craneMotors(hardwareMap);
