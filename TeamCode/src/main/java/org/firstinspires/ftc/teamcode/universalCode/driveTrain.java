@@ -138,9 +138,9 @@ public class driveTrain {
         waitForWheels(target, true);
     }
 
-    private void continueFoward(int target){
-        double leftPower = fowardSpeed - fowardSpeed * (Math.max(-imu.getYaw(), 0) / 90);
-        double rightPower = fowardSpeed - fowardSpeed * (Math.max(imu.getYaw(), 0) / 90);
+    private void continueFoward(){
+        double leftPower = fowardSpeed - fowardSpeed * (Math.max(imu.getYaw(), 0) / 90);
+        double rightPower = fowardSpeed - fowardSpeed * (Math.max(-imu.getYaw(), 0) / 90);
         frontLeft.setPower(leftPower);
         frontRight.setPower(rightPower);
         backLeft.setPower(leftPower);
@@ -151,9 +151,9 @@ public class driveTrain {
         resetHeadingOffset();
         imu.resetYaw(this);
         targetHeading = 0 + headingOffset;
-        waitForWheels(target, false);
+        waitForWheels((int)targetHeading, false);
     }
-    private void continueSide(int target){
+    private void continueSide(){
         double frontLeftCorner = sideSpeed - sideSpeed * (Math.max(imu.getYaw(), 0) / 90);
         double frontRightCorner = - (sideSpeed - sideSpeed * (Math.max(imu.getYaw(), 0) / 90));
         frontLeft.setPower(frontLeftCorner);
@@ -163,13 +163,13 @@ public class driveTrain {
     }
 
     public void rotate(int target) {
+        resetHeadingOffset();
         setPower(0);
         setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         imu.resetYaw(this);
         turnTo(-target);
-        targetHeading = target;
-        resetHeadingOffset();
-
+        targetHeading = target + headingOffset;
+        resetEncoders();
     }
 
     public void waitForWheels(int target, boolean foward) {
@@ -191,10 +191,17 @@ public class driveTrain {
                 opMode.opModeIsActive()
         ) {
             if(foward){
-                continueFoward(target);
+                continueFoward();
             }else{
-                continueSide(target);
+                continueSide();
             }
+            opMode.telemetry.addData("Yaw: ", imu.getYaw());
+            opMode.telemetry.addData("frontLeft: ",frontLeft.getCurrentPosition());
+            opMode.telemetry.addData("frontRight: ",frontRight.getCurrentPosition());
+            opMode.telemetry.addData("backLeft: ",backLeft.getCurrentPosition());
+            opMode.telemetry.addData("backRight: ", jarmy.getCurrentPosition());
+
+            opMode.telemetry.update();
         }
         resetEncoders();
     }
@@ -206,7 +213,7 @@ public class driveTrain {
     }
 
     public void resetHeadingOffset(){
-        headingOffset = targetHeading - imu.getYaw();
+        //headingOffset = targetHeading - imu.getYaw();
     }
 
     public void turnTo(double degrees){
