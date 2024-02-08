@@ -83,44 +83,40 @@ public class BlueFront extends LinearOpMode {
                 telemetry.addData("Prop","center");
                 telemetry.update();
 
+                neutral();
                 foward(-820);
 
-                sleep(700);
-
-                rotate(values.turn90DegreesClockwise * 2);
+                rotate(values.turn90DegreesCounterClockwise);
 
                 pickupPixel();
 
-                foward(280);
+                foward(-500);
 
+                side(-1250);
 
-
-                rightClawServo.setPosition(0.5);
+                rightClawServo.setPosition(values.rightClawOpen);
                 sleep(300);
 
                 neutral();
-                sleep(500);
 
-                foward(-100);
-
-                rotate(values.turn90DegreesClockwise);
-
-                foward(-1350);
+//                side(-100);
+//
+//                rotate(values.turn90DegreesClockwise);
 
                 placePixelLow();
-                sleep(4000);
-                wheels.resetEncoders();
-                side(-500);
+                foward(-1100);
 
-                foward(-400);
+                side(550);
+//                wheels.resetEncoders();
+//                side(-500);
 
-                //side(-);
+                foward(-50);
 
-                leftClawServo.setPosition(1);
+                leftClawServo.setPosition(values.leftClawOpen);
                 sleep(300);
 
                 neutral();
-                sleep(2000);
+//                sleep(2000);
                 foward(250);
 
                 side(1350);
@@ -143,11 +139,13 @@ public class BlueFront extends LinearOpMode {
 
                 foward(-900);
 
-                rightClawServo.setPosition(0.5);
+                rightClawServo.setPosition(values.rightClawOpen);
                 sleep(500);
 
                 neutral();
                 sleep(500);
+
+                placePixelLow();
 
                 foward(-800);
 
@@ -155,16 +153,13 @@ public class BlueFront extends LinearOpMode {
                 //sleep(1000);
                 //resetEncoders();
 
-                placePixelLow();
-                sleep(2500);
-
                 //foward(-100);
                 //sleep(1000);
                 //resetEncoders();
 
                 side(750);
 
-                leftClawServo.setPosition(1);
+                leftClawServo.setPosition(values.leftClawOpen);
                 sleep(500);
 
                 neutral();
@@ -191,19 +186,19 @@ public class BlueFront extends LinearOpMode {
 
                 foward(150);
 
-                rightClawServo.setPosition(0.5);
+                rightClawServo.setPosition(values.rightClawOpen);
                 sleep(500);
 
                 neutral();
                 sleep(500);
 
+
+                placePixelLow();
                 foward(-1600);
 
                 //side(-470);
-                placePixelLow();
-                sleep(2000);
                 foward(-200);
-                leftClawServo.setPosition(1);
+                leftClawServo.setPosition(values.leftClawOpen);
                 sleep(500);
 
                 neutral();

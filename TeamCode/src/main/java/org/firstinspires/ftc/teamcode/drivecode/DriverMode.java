@@ -44,6 +44,7 @@ public class DriverMode extends LinearOpMode {
         
         //resets the zero position of the drawer slide motor
         DcMotor leftHanger = hardwareMap.get(DcMotor.class, "leftHanger");
+        leftHanger.setDirection(DcMotorSimple.Direction.REVERSE);
         leftHanger.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         leftHanger.setTargetPosition(values.hangerResting);
         leftHanger.setPower(1);
@@ -53,7 +54,6 @@ public class DriverMode extends LinearOpMode {
         
         //resets the zero position of the drawer slide motor
         DcMotor rightHanger = hardwareMap.get(DcMotor.class, "rightHanger");
-        rightHanger.setDirection(DcMotorSimple.Direction.REVERSE);
         rightHanger.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightHanger.setTargetPosition(values.hangerResting);
         rightHanger.setPower(1);
@@ -93,6 +93,8 @@ public class DriverMode extends LinearOpMode {
 
                 if(gamepad1.a) {
                     airplaneLauncher.setPosition(values.airplaneServoFired);
+                }else if(gamepad1.b){
+                    airplaneLauncher.setPosition((values.airplaneServoResting));
                 }
                 if(gamepad1.dpad_down){
                     wheels.setPower(0.25);
@@ -119,6 +121,7 @@ public class DriverMode extends LinearOpMode {
                 if(gamepad2.right_bumper){
                     leftHanger.setTargetPosition(values.hangerRaised);
                     rightHanger.setTargetPosition(values.hangerRaised);
+                    neutral();
                 }else if(gamepad2.left_bumper){
                     leftHanger.setTargetPosition(values.hangerHanging);
                     rightHanger.setTargetPosition(values.hangerHanging);
@@ -129,11 +132,8 @@ public class DriverMode extends LinearOpMode {
 
                 if(gamepad2.dpad_left){
                     crane.resetEncoders();
-                }else if(gamepad2.dpad_down){
+                }else if(gamepad2.dpad_down) {
                     crane.setTargetPosition(-3000);
-                }else if(gamepad2.dpad_up){
-                    leftHanger.setTargetPosition(values.hangerRaised+1000);
-                    rightHanger.setTargetPosition(values.hangerRaised+1000);
                 }
 
                 //new cranes have INSANE value drift, this is here so they don't rip the belts apart

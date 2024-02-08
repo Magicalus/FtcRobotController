@@ -25,17 +25,19 @@ public class values {
     public static int craneResting = 0;
     public static int cranePlaceTeleop = 1950;
     public static int cranePlaceHighAuton = 1900;
-    public static int cranePlaceLowAuton = 2000;
+    public static int cranePlaceLowAuton = 2100;
 
 
     //Hanging Positions
     public static int hangerResting = 0;
     public static int hangerHanging = 1000;
-    public static int hangerRaised = 1800;
+    public static int hangerRaised = 2600;
+
+    public static int hangerMax = 2800;
 
 
     //Auton movement values
-    public static int turn90DegreesClockwise = 88;
+    public static int turn90DegreesClockwise = 89;
 
     public static int turn90DegreesCounterClockwise = - turn90DegreesClockwise;
 }

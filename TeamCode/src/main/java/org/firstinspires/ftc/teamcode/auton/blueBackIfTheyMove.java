@@ -107,13 +107,13 @@ public class blueBackIfTheyMove extends LinearOpMode {
 
                 foward(-4000);
 
-                side(1050);
+                side(1463);
 
                 placePixelLow();
                 sleep(3000);
 
                 wheels.setFowardSpeed(0.4);
-                foward(-505);
+                foward(-50);
 
 //                side(250);
 //                sleep(1000);
@@ -130,12 +130,9 @@ public class blueBackIfTheyMove extends LinearOpMode {
             if(blue.getPropPosition()=="left"){
                 telemetry.addData("left","left");
                 telemetry.update();
-
+                neutral();
                 foward(-1100);
 
-//                rotate(values.turn90DegreesCounterClockwise);
-//                rotate(values.turn90DegreesCounterClockwise);
-//                rotate(values.turn90DegreesCounterClockwise);
                 pickupPixel();
                 rotate(values.turn90DegreesClockwise);
 
@@ -148,20 +145,21 @@ public class blueBackIfTheyMove extends LinearOpMode {
                 sleep(1000);
 
                 rotate(values.turn90DegreesCounterClockwise);
-                foward(-1300);
+                wheels.setFowardSpeed(0.4);
+                foward(-1200);
                 rotate(values.turn90DegreesCounterClockwise);
 
-                while(System.currentTimeMillis() - startTime < 16000.0);
+                while(System.currentTimeMillis() - startTime < 18000.0);
 
-                foward(-3670);
+                foward(-4000);
 
-                side(1520);
+                side(1700);
 
                 placePixelLow();
                 sleep(3000);
 
                 wheels.setFowardSpeed(0.4);
-                foward(-300);
+                foward(-50);
 
 //                side(250);
 //                sleep(1000);
@@ -178,16 +176,14 @@ public class blueBackIfTheyMove extends LinearOpMode {
             if(blue.getPropPosition()=="right"){
                 telemetry.addData("right","right");
                 telemetry.update();
-
+                neutral();
                 foward(-1350);
 
                 rotate(values.turn90DegreesCounterClockwise);
                 pickupPixel();
 
-                foward(-150);
                 rightClawServo.setPosition(0.5);
                 sleep(500);
-
 
                 neutral();
                 foward(-50);
@@ -195,17 +191,17 @@ public class blueBackIfTheyMove extends LinearOpMode {
 
                 side(-1050);
 
-                while(System.currentTimeMillis() - startTime < 16000.0);
+                while(System.currentTimeMillis() - startTime < 18000.0);
 
-                foward(-3670);
+                foward(-4000);
 
-                side(1100);
+                side(1400);
 
                 placePixelLow();
                 sleep(3000);
 
                 wheels.setFowardSpeed(0.4);
-                foward(-300);
+                foward(-50);
 
 //                side(250);
 //                sleep(1000);

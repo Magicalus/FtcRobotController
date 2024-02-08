@@ -109,7 +109,13 @@ public class redBack extends LinearOpMode {
 //                side(-2700);
 //                waitforwheels();
 
-                foward(-3670);
+                foward(-4500);
+
+                pickupPixel();
+
+                leftClawServo.setPosition(values.leftClawOpen);
+
+                neutral();
 
                 break;
             }
@@ -129,23 +135,55 @@ public class redBack extends LinearOpMode {
                 neutral();
                 sleep(2500);
 
+                foward(-50);
+                sleep(2500);
+
+                side(1050);
+
+                while(System.currentTimeMillis() - startTime < 25000.0);
+
+                foward(-4500);
+
+                pickupPixel();
+
+                leftClawServo.setPosition(values.leftClawOpen);
+
+                neutral();
+
                 break;
             }
             if(red.getPropPosition()=="right"){
                 telemetry.addData("right","right");
                 telemetry.update();
 
-                foward(-1300);
+                neutral();
+                foward(-1100);
 
-                rotate(values.turn90DegreesClockwise);
                 pickupPixel();
+                rotate(values.turn90DegreesCounterClockwise);
 
-                foward(50);
+                foward(100);
                 rightClawServo.setPosition(0.5);
                 sleep(500);
 
                 neutral();
-                sleep(2500);
+                foward(-100);
+                sleep(1000);
+
+                rotate(values.turn90DegreesClockwise);
+                wheels.setFowardSpeed(0.4);
+                foward(-1200);
+                rotate(values.turn90DegreesClockwise);
+
+                while(System.currentTimeMillis() - startTime < 25000.0);
+
+                foward(-4500);
+
+                pickupPixel();
+
+                leftClawServo.setPosition(values.leftClawOpen);
+
+                neutral();
 
                 break;
             }

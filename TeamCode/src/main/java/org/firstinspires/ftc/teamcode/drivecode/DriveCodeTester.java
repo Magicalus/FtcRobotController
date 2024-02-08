@@ -16,9 +16,6 @@ public class DriveCodeTester extends LinearOpMode{
 //    private DcMotor frontLeft, frontRight, backLeft, backRight, craneArm;
     private Servo rightClawRotator, leftClawRotator, rightClawServo, leftClawServo;
 
-    private DcMotor leftRobotLifter;
-    private DcMotor rightRobotLifter;
-
     private IMUInterface imu;
     
     @Override
@@ -73,32 +70,31 @@ public class DriveCodeTester extends LinearOpMode{
 //        leftClawRotator = hardwareMap.get(Servo.class, "leftClawRotator");
 //        rightClawRotator = hardwareMap.get(Servo.class, "rightClawRotator");
 //
-//        leftRobotLifter = hardwareMap.get(DcMotor.class, "leftRobotLifter");
-//        leftRobotLifter.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//        leftRobotLifter.setTargetPosition(0);
-//        leftRobotLifter.setPower(1);
-//        leftRobotLifter.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//        // Baller bro that's absolutely crazy
-//        // On god bro frfr
-//
-//        //resets the zero position of the drawer slide motor
-//        rightRobotLifter = hardwareMap.get(DcMotor.class, "robotLifter");
-//        rightRobotLifter.setDirection(DcMotorSimple.Direction.REVERSE);
-//        rightRobotLifter.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//        rightRobotLifter.setTargetPosition(0);
-//        rightRobotLifter.setPower(1);
-//        rightRobotLifter.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        DcMotor leftHanger = hardwareMap.get(DcMotor.class, "leftHanger");
+        leftHanger.setDirection(DcMotorSimple.Direction.REVERSE);
+        leftHanger.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        leftHanger.setTargetPosition(values.hangerResting);
+        leftHanger.setPower(1);
+        leftHanger.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        // Baller bro that's absolutely crazy
+        // On god bro frfr
+
+        //resets the zero position of the drawer slide motor
+        DcMotor rightHanger = hardwareMap.get(DcMotor.class, "rightHanger");
+        rightHanger.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightHanger.setTargetPosition(values.hangerResting);
+        rightHanger.setPower(1);
+        rightHanger.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         imu = new IMUInterface(hardwareMap);
 
         waitForStart();
 
-        int i = 0;
         while(opModeIsActive()){
-            i++;
-            telemetry.addData("Yaw: ", imu.getYaw());
-            telemetry.addData("Test value: ", i);
-            telemetry.update();
+            leftHanger.setPower(0.3);
+            rightHanger.setPower(0.3);
+            leftHanger.setTargetPosition(100);
+            rightHanger.setTargetPosition(100);
         }
 
 

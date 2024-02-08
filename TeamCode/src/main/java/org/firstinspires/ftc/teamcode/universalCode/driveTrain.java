@@ -155,7 +155,7 @@ public class driveTrain {
     }
     private void continueSide(){
         double frontLeftCorner = sideSpeed - sideSpeed * (Math.max(imu.getYaw(), 0) / 90);
-        double frontRightCorner = - (sideSpeed - sideSpeed * (Math.max(imu.getYaw(), 0) / 90));
+        double frontRightCorner = - (sideSpeed - sideSpeed * (Math.max(-imu.getYaw(), 0) / 90));
         frontLeft.setPower(frontLeftCorner);
         frontRight.setPower(frontRightCorner);
         backLeft.setPower(frontRightCorner);

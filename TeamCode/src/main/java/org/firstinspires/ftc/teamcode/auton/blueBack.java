@@ -93,13 +93,13 @@ public class blueBack extends LinearOpMode {
             if(blue.getPropPosition()=="center"){
                 telemetry.addData("Center","center");
                 telemetry.update();
-
+                neutral();
                 foward(-2160);
 
                 pickupPixel();
                 sleep(500);
 
-                rightClawServo.setPosition(0.5);
+                rightClawServo.setPosition(values.rightClawOpen);
                 sleep(1000);
 
                 neutral();
@@ -110,25 +110,42 @@ public class blueBack extends LinearOpMode {
 //                side(-2700);
 //                waitforwheels();
 
-                foward(-3670);
+                foward(-4500);
+
+                pickupPixel();
+
+                leftClawServo.setPosition(values.leftClawOpen);
+
+                neutral();
 
                 break;
             }
             if(blue.getPropPosition()=="left"){
                 telemetry.addData("left","left");
                 telemetry.update();
-
+                neutral();
                 foward(-1300);
 
                 rotate(values.turn90DegreesClockwise);
                 pickupPixel();
 
                 foward(100);
-                rightClawServo.setPosition(0.5);
+                rightClawServo.setPosition(values.rightClawOpen);
                 sleep(500);
 
                 neutral();
                 sleep(2500);
+
+                rotate(values.turn90DegreesCounterClockwise);
+
+                while(System.currentTimeMillis() - startTime < 18000.0);
+
+                foward(-4500);
+
+                pickupPixel();
+
+                leftClawServo.setPosition(values.leftClawOpen);
+                neutral();
 
                 break;
             }
@@ -136,17 +153,30 @@ public class blueBack extends LinearOpMode {
                 telemetry.addData("right","right");
                 telemetry.update();
 
-                foward(-1300);
+                neutral();
+                foward(-1350);
 
                 rotate(values.turn90DegreesCounterClockwise);
                 pickupPixel();
 
-                foward(50);
-                rightClawServo.setPosition(0.5);
+                rightClawServo.setPosition(values.rightClawOpen);
                 sleep(500);
 
                 neutral();
+                foward(-50);
                 sleep(2500);
+
+                side(-1050);
+
+                while(System.currentTimeMillis() - startTime < 18000.0);
+
+                foward(-4500);
+
+                pickupPixel();
+
+                leftClawServo.setPosition(values.leftClawOpen);
+
+                neutral();
 
                 break;
             }

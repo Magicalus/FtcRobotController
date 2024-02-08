@@ -56,7 +56,7 @@ public class bluefront extends LinearOpMode {
 
         Globals.IS_AUTO = true;
         Globals.ALLIANCE = Location.BLUE;
-        Globals.SIDE = Location.CLOSE;
+        Globals.SIDE = Location.FAR;
 
         propPipeline = new PropPipeline();
         portal = new VisionPortal.Builder()
@@ -105,8 +105,44 @@ public class bluefront extends LinearOpMode {
                     leftClawRotator.setPosition(values.leftClawOpen);
                     break;
                 case CENTER:
-                    leftClawRotator.setPosition(values.leftClawOpen);
-                    rightClawServo.setPosition(values.rightClawOpen);
+                    telemetry.addData("Center","center");
+                    telemetry.update();
+                    neutral();
+                    foward(-2160);
+
+                    pickupPixel();
+                    sleep(500);
+
+                    rightClawServo.setPosition(0.5);
+                    sleep(1000);
+
+                    neutral();
+                    foward(-150);
+                    sleep(1000);
+
+                    rotate(values.turn90DegreesCounterClockwise);
+
+                    while(System.currentTimeMillis() - startTime < 18000.0);
+
+                    foward(-4000);
+
+                    side(1550);
+
+                    placePixelLow();
+                    sleep(3000);
+
+                    wheels.setFowardSpeed(0.4);
+                    foward(-505);
+
+//                side(250);
+//                sleep(1000);
+//                resetEncoders();
+
+                    leftClawServo.setPosition(1);
+                    sleep(300);
+
+                    neutral();
+                    sleep(2500);
                     break;
                 case RIGHT:
                     rightClawServo.setPosition(values.rightClawOpen);

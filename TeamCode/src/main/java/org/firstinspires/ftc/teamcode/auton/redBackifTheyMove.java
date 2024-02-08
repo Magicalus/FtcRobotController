@@ -79,23 +79,53 @@ public class redBackifTheyMove extends LinearOpMode {
             if(red.getPropPosition() == "right") {
                 telemetry.addData("Prop","right");
                 telemetry.update();
-
+                neutral();
                 foward(-1100);
 
                 pickupPixel();
-                rotate(values.turn90DegreesClockwise);
+                rotate(values.turn90DegreesCounterClockwise);
 
                 foward(100);
                 rightClawServo.setPosition(0.5);
                 sleep(500);
 
                 neutral();
+                foward(-100);
+                sleep(1000);
+
+                rotate(values.turn90DegreesClockwise);
+                wheels.setFowardSpeed(0.4);
+                foward(-1200);
+                rotate(values.turn90DegreesClockwise);
+
+                while(System.currentTimeMillis() - startTime < 16000.0);
+
+                foward(-4000);
+
+                side(-1700);
+
+                placePixelLow();
+                sleep(3000);
+
+                wheels.setFowardSpeed(0.4);
+                foward(-50);
+
+//                side(250);
+//                sleep(1000);
+//                resetEncoders();
+
+                leftClawServo.setPosition(1);
+                sleep(300);
+
+                neutral();
+                sleep(2500);
+
                 break;
 
             }else if(red.getPropPosition() == "center") {
                 telemetry.addData("Prop","center");
                 telemetry.update();
-
+                neutral();
                 foward(-2160);
 
                 pickupPixel();
@@ -111,22 +141,16 @@ public class redBackifTheyMove extends LinearOpMode {
                 rotate(values.turn90DegreesClockwise);
 
                 while(System.currentTimeMillis() - startTime < 18000.0);
-//                side(-2700);
-//                waitforwheels();
 
-                foward(-3670);
+                foward(-4000);
 
-                side(-1050);
+                side(-1463);
 
                 placePixelLow();
                 sleep(3000);
 
                 wheels.setFowardSpeed(0.4);
-                foward(-260);
-
-//                side(250);
-//                sleep(1000);
-//                resetEncoders();
+                foward(-50);
 
                 leftClawServo.setPosition(1);
                 sleep(300);
@@ -139,16 +163,14 @@ public class redBackifTheyMove extends LinearOpMode {
             }else {
                 telemetry.addData("Prop","left");
                 telemetry.update();
-
+                neutral();
                 foward(-1350);
 
                 rotate(values.turn90DegreesClockwise);
                 pickupPixel();
 
-                foward(-150);
                 rightClawServo.setPosition(0.5);
                 sleep(500);
-
 
                 neutral();
                 foward(-50);
@@ -158,15 +180,15 @@ public class redBackifTheyMove extends LinearOpMode {
 
                 while(System.currentTimeMillis() - startTime < 16000.0);
 
-                foward(-3670);
+                foward(-4000);
 
-                side(-1100);
+                side(-1400);
 
                 placePixelLow();
                 sleep(3000);
 
                 wheels.setFowardSpeed(0.4);
-                foward(-300);
+                foward(-50);
 
 //                side(250);
 //                sleep(1000);
