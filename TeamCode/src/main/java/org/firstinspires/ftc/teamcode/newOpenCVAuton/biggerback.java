@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.supermanTESTER;
+package org.firstinspires.ftc.teamcode.newOpenCVAuton;
 
 import android.util.Size;
 
@@ -24,7 +24,7 @@ import org.firstinspires.ftc.vision.VisionPortal;
 
 
 //@Disabled
-@Autonomous(name="blue back \uD83D\uDD35")
+@Autonomous(name="blue back IF THEY MOVE\uD83D\uDD35")
 public class biggerback extends LinearOpMode {
     private VisionPortal portal;
     private BluePropThreshold blue;
