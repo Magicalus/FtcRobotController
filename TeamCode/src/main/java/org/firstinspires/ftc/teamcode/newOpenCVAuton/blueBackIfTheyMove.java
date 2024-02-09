@@ -14,18 +14,14 @@ import org.firstinspires.ftc.teamcode.universalCode.driveTrain;
 import org.firstinspires.ftc.teamcode.universalCode.values;
 import org.firstinspires.ftc.vision.VisionPortal;
 
-import com.qualcomm.robotcore.util.ElapsedTime;
-
 import org.firstinspires.ftc.teamcode.supermanTESTER.Globals;
 import org.firstinspires.ftc.teamcode.supermanTESTER.Location;
 import org.firstinspires.ftc.teamcode.supermanTESTER.PropPipeline;
-import org.firstinspires.ftc.vision.VisionPortal;
-
 
 
 //@Disabled
 @Autonomous(name="blue back IF THEY MOVE\uD83D\uDD35")
-public class biggerback extends LinearOpMode {
+public class blueBackIfTheyMove extends LinearOpMode {
     private VisionPortal portal;
     private BluePropThreshold blue;
     private DcMotor.ZeroPowerBehavior brake = DcMotor.ZeroPowerBehavior.BRAKE;

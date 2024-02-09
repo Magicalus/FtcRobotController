@@ -235,12 +235,7 @@ public class redFront extends LinearOpMode {
 
                     break;
             }
-
-
-
-            telemetry.update();
-
-            sleep(50);
+            break;
         }
 
 
