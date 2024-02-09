@@ -89,7 +89,7 @@ public class blueBackIfTheyMove extends LinearOpMode {
                 telemetry.addData("Center","center");
                 telemetry.update();
                 neutral();
-                foward(-2160);
+                foward(-2110);
 
                 pickupPixel();
                 sleep(500);
@@ -105,7 +105,7 @@ public class blueBackIfTheyMove extends LinearOpMode {
 
                 while(System.currentTimeMillis() - startTime < 18000.0);
 
-                foward(-4000);
+                foward(-3900);
 
                 side(1463);
 
@@ -151,7 +151,7 @@ public class blueBackIfTheyMove extends LinearOpMode {
 
                 while(System.currentTimeMillis() - startTime < 18000.0);
 
-                foward(-4000);
+                foward(-3900);
 
                 side(1700);
 
@@ -193,7 +193,7 @@ public class blueBackIfTheyMove extends LinearOpMode {
 
                 while(System.currentTimeMillis() - startTime < 18000.0);
 
-                foward(-4000);
+                foward(-3900);
 
                 side(1400);
 

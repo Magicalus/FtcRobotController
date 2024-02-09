@@ -24,10 +24,10 @@ public class PropPipeline implements VisionProcessor {
 
     public static int blueCenterX = (int) (925);
     public static int blueCenterY = (int) (485);
-    public static int blueLeftX = (int) (1465);
+    public static int blueLeftX = (int) (1505);
     public static int blueLeftY = (int) (525);
 
-    public static int centerWidth = (int) (175);
+    public static int centerWidth = (int) (100);
     public static int centerHeight = (int) (100);
     public static int leftWidth = (int) (125);
     public static int leftHeight = (int) (125);

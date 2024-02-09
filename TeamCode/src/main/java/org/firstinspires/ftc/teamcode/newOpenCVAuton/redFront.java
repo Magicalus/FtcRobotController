@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.supermanTESTER;
+package org.firstinspires.ftc.teamcode.newOpenCVAuton;
 
 import android.util.Size;
 
@@ -12,6 +12,10 @@ import org.firstinspires.ftc.teamcode.auton.BluePropThreshold;
 import org.firstinspires.ftc.teamcode.universalCode.craneMotors;
 import org.firstinspires.ftc.teamcode.universalCode.driveTrain;
 import org.firstinspires.ftc.teamcode.universalCode.values;
+
+import org.firstinspires.ftc.teamcode.universalCode.craneMotors;
+import org.firstinspires.ftc.teamcode.universalCode.driveTrain;
+
 import org.firstinspires.ftc.vision.VisionPortal;
 
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -24,10 +28,9 @@ import org.firstinspires.ftc.vision.VisionPortal;
 
 
 //@Disabled
-@Autonomous(name="blue back \uD83D\uDD35")
-public class biggerback extends LinearOpMode {
+@Autonomous(name="redFront \uD83D\uDD34")
+public class redFront extends LinearOpMode {
     private VisionPortal portal;
-    private BluePropThreshold blue;
     private DcMotor.ZeroPowerBehavior brake = DcMotor.ZeroPowerBehavior.BRAKE;
     private DcMotor.ZeroPowerBehavior floatt =DcMotor.ZeroPowerBehavior.FLOAT;
     private Servo leftClawRotator;
@@ -55,8 +58,8 @@ public class biggerback extends LinearOpMode {
 
 
         Globals.IS_AUTO = true;
-        Globals.ALLIANCE = Location.BLUE;
-        Globals.SIDE = Location.FAR;
+        Globals.ALLIANCE = Location.RED;
+        Globals.SIDE = Location.CLOSE;
 
         propPipeline = new PropPipeline();
         portal = new VisionPortal.Builder()
@@ -101,135 +104,137 @@ public class biggerback extends LinearOpMode {
             wheels.resetEncoders();
 
             switch (randomization) {
-            case LEFT:
-                telemetry.addData("left","left");
-                telemetry.update();
-                neutral();
-                foward(-1100);
+                case LEFT:
+                    telemetry.addData("Prop","left");
+                    telemetry.update();
 
-                pickupPixel();
-                rotate(values.turn90DegreesClockwise);
+                    foward(-1300);
 
-                foward(100);
-                rightClawServo.setPosition(0.5);
-                sleep(500);
+                    rotate(values.turn90DegreesClockwise);
 
-                neutral();
-                foward(-100);
-                sleep(1000);
+                    pickupPixel();
+                    sleep(500);
 
-                rotate(values.turn90DegreesCounterClockwise);
-                wheels.setFowardSpeed(0.4);
-                foward(-1200);
-                rotate(values.turn90DegreesCounterClockwise);
+                    foward(-900);
 
-                while(System.currentTimeMillis() - startTime < 18000.0);
+                    rightClawServo.setPosition(values.rightClawOpen);
+                    sleep(500);
 
-                foward(-4000);
+                    neutral();
+                    sleep(500);
 
-                side(1700);
+                    placePixelLow();
 
-                placePixelLow();
-                sleep(3000);
+                    foward(-800);
 
-                wheels.setFowardSpeed(0.4);
-                foward(-50);
+                    //side(150);
+                    //sleep(1000);
+                    //resetEncoders();
 
-//                side(250);
-//                sleep(1000);
-//                resetEncoders();
+                    //foward(-100);
+                    //sleep(1000);
+                    //resetEncoders();
 
-                leftClawServo.setPosition(1);
-                sleep(300);
+                    side(-750);
 
-                neutral();
-                sleep(2500);
+                    leftClawServo.setPosition(values.leftClawOpen);
+                    sleep(500);
 
-                break;
-            case CENTER:
-                telemetry.addData("Center","center");
-                telemetry.update();
-                neutral();
-                foward(-2160);
+                    neutral();
+                    sleep(2500);
 
-                pickupPixel();
-                sleep(500);
+                    foward(200);
 
-                rightClawServo.setPosition(0.5);
-                sleep(1000);
+                    side(-1050);
 
-                neutral();
-                foward(-150);
-                sleep(1000);
+                    foward(-350);
 
-                rotate(values.turn90DegreesCounterClockwise);
+                    break;
+                case CENTER:
+                    telemetry.addData("Prop","center");
+                    telemetry.update();
 
-                while(System.currentTimeMillis() - startTime < 18000.0);
+                    neutral();
+                    foward(-820);
 
-                foward(-4000);
+                    rotate(values.turn90DegreesClockwise);
 
-                side(1050);
+                    pickupPixel();
 
-                placePixelLow();
-                sleep(3000);
+                    foward(-500);
 
-                wheels.setFowardSpeed(0.4);
-                foward(-505);
+                    side(-1250);
 
-//                side(250);
-//                sleep(1000);
-//                resetEncoders();
+                    rightClawServo.setPosition(values.rightClawOpen);
+                    sleep(300);
 
-                leftClawServo.setPosition(1);
-                sleep(300);
+                    neutral();
 
-                neutral();
-                sleep(2500);
-                break;
-            case RIGHT:
-                telemetry.addData("right","right");
-                telemetry.update();
-                neutral();
-                foward(-1350);
+//                side(-100);
+//
+//                rotate(values.turn90DegreesClockwise);
 
-                rotate(values.turn90DegreesCounterClockwise);
-                pickupPixel();
+                    placePixelLow();
+                    foward(-1100);
 
-                rightClawServo.setPosition(0.5);
-                sleep(500);
+                    side(-550);
+//                wheels.resetEncoders();
+//                side(-500);
 
-                neutral();
-                foward(-50);
-                sleep(2500);
+                    foward(-50);
 
-                side(-1050);
+                    leftClawServo.setPosition(values.leftClawOpen);
+                    sleep(300);
 
-                while(System.currentTimeMillis() - startTime < 18000.0);
+                    neutral();
+//                sleep(2000);
+                    foward(250);
 
-                foward(-4000);
+                    side(-1350);
 
-                side(1400);
+                    foward(-450);
 
-                placePixelLow();
-                sleep(3000);
+                    //why joe I love you <3 THIS WAS MIGUEL I PROMISE
+                    break;
+                case RIGHT:
+                    telemetry.addData("Prop","right");
+                    telemetry.update();
 
-                wheels.setFowardSpeed(0.4);
-                foward(-50);
+                    foward(-1300);
 
-//                side(250);
-//                sleep(1000);
-//                resetEncoders();
+                    rotate(values.turn90DegreesCounterClockwise);
 
-                leftClawServo.setPosition(1);
-                sleep(300);
+                    pickupPixel();
+                    sleep(500);
 
-                neutral();
-                sleep(2500);
+                    foward(150);
+
+                    rightClawServo.setPosition(values.rightClawOpen);
+                    sleep(700);
+
+                    neutral();
+                    sleep(500);
 
 
-                break;
+                    placePixelLow();
+                    foward(-1800);
 
-        }
+                    //side(-470);
+                    foward(-300);
+                    leftClawServo.setPosition(values.leftClawOpen);
+                    sleep(500);
+
+                    neutral();
+                    sleep(2500);
+
+                    foward(200);
+
+                    side(-1600);
+
+                    foward(-350);
+
+                    break;
+            }
 
 
 

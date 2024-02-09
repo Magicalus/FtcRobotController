@@ -28,7 +28,7 @@ import org.firstinspires.ftc.vision.VisionPortal;
 
 
 //@Disabled
-@Autonomous(name="bluefront new")
+@Autonomous(name="bluefront \uD83D\uDD35")
 public class bluefront extends LinearOpMode {
     private VisionPortal portal;
     private BluePropThreshold blue;
@@ -60,7 +60,7 @@ public class bluefront extends LinearOpMode {
 
         Globals.IS_AUTO = true;
         Globals.ALLIANCE = Location.BLUE;
-        Globals.SIDE = Location.FAR;
+        Globals.SIDE = Location.CLOSE;
 
         propPipeline = new PropPipeline();
         portal = new VisionPortal.Builder()
@@ -106,61 +106,137 @@ public class bluefront extends LinearOpMode {
 
             switch (randomization) {
                 case LEFT:
-                    leftClawRotator.setPosition(values.leftClawOpen);
-                    break;
-                case CENTER:
-                    telemetry.addData("Center","center");
+                    telemetry.addData("Prop","left");
                     telemetry.update();
-                    neutral();
-                    foward(-2160);
+
+                    foward(-1300);
+
+                    rotate(values.turn90DegreesCounterClockwise);
 
                     pickupPixel();
                     sleep(500);
 
-                    rightClawServo.setPosition(0.5);
-                    sleep(1000);
+                    foward(-900);
+
+                    rightClawServo.setPosition(values.rightClawOpen);
+                    sleep(500);
 
                     neutral();
-                    foward(-150);
-                    sleep(1000);
-
-                    rotate(values.turn90DegreesCounterClockwise);
-
-                    while(System.currentTimeMillis() - startTime < 18000.0);
-
-                    foward(-4000);
-
-                    side(1550);
+                    sleep(500);
 
                     placePixelLow();
-                    sleep(3000);
 
-                    wheels.setFowardSpeed(0.4);
-                    foward(-505);
+                    foward(-800);
 
-//                side(250);
-//                sleep(1000);
-//                resetEncoders();
+                    //side(150);
+                    //sleep(1000);
+                    //resetEncoders();
 
-                    leftClawServo.setPosition(1);
-                    sleep(300);
+                    //foward(-100);
+                    //sleep(1000);
+                    //resetEncoders();
+
+                    side(750);
+
+                    leftClawServo.setPosition(values.leftClawOpen);
+                    sleep(500);
 
                     neutral();
                     sleep(2500);
+
+                    foward(200);
+
+                    side(1050);
+
+                    foward(-350);
+
+                    break;
+                case CENTER:
+                    telemetry.addData("Prop","center");
+                    telemetry.update();
+
+                    neutral();
+                    foward(-820);
+
+                    rotate(values.turn90DegreesCounterClockwise);
+
+                    pickupPixel();
+
+                    foward(-500);
+
+                    side(-1250);
+
+                    rightClawServo.setPosition(values.rightClawOpen);
+                    sleep(300);
+
+                    neutral();
+
+//                side(-100);
+//
+//                rotate(values.turn90DegreesClockwise);
+
+                    placePixelLow();
+                    foward(-1100);
+
+                    side(1200);
+//                wheels.resetEncoders();
+//                side(-500);
+
+                    foward(-200);
+
+                    leftClawServo.setPosition(values.leftClawOpen);
+                    sleep(300);
+
+                    neutral();
+//                sleep(2000);
+                    foward(250);
+
+                    side(1350);
+
+                    foward(-450);
+
+                    //why joe I love you <3 THIS WAS MIGUEL I PROMISE
                     break;
                 case RIGHT:
+                    telemetry.addData("Prop","right");
+                    telemetry.update();
+
+                    foward(-1300);
+
+                    rotate(values.turn90DegreesCounterClockwise);
+
+                    pickupPixel();
+                    sleep(500);
+
+                    foward(150);
+
                     rightClawServo.setPosition(values.rightClawOpen);
-                    break;
-                default:
-                    break;
+                    sleep(700);
 
+                    neutral();
+                    sleep(500);
+
+
+                    placePixelLow();
+                    foward(-1800);
+
+                    //side(-470);
+                    foward(-300);
+                    leftClawServo.setPosition(values.leftClawOpen);
+                    sleep(500);
+
+                    neutral();
+                    sleep(2500);
+
+                    foward(200);
+
+                    side(1600);
+
+                    foward(-350);
+
+                    break;
             }
-
-
-
-            telemetry.update();
-
-            sleep(50);
+            break;
         }
 
 
@@ -179,7 +255,7 @@ public class bluefront extends LinearOpMode {
     }
 
     public void placePixelLow(){
-        crane.setTargetPosition(values.cranePlaceHighAuton);
+        crane.setTargetPosition(values.cranePlaceLowAuton);
         leftClawRotator.setPosition(0.1);
         rightClawRotator.setPosition(0.85);
     }
