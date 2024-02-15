@@ -98,95 +98,110 @@ public class redBack extends LinearOpMode {
                     telemetry.addData("left","left");
                     telemetry.update();
 
-                    foward(-1300);
+                    neutral();
+                    foward(-1350);
 
-                    rotate(values.turn90DegreesClockwise);
                     pickupPixel();
+                    rotate(values.turn90DegreesClockwise);
 
-                    foward(100);
+                    sleep(500);
+
                     rightClawServo.setPosition(0.5);
                     sleep(500);
 
                     neutral();
-                    sleep(2500);
-
                     foward(-50);
                     sleep(2500);
 
-                    side(1050);
+                    side(1000);
 
-                    while(System.currentTimeMillis() - startTime < 25000.0);
+                    while(System.currentTimeMillis() - startTime < 23000.0);
 
-                    foward(-4500);
+                    foward(-4100);
 
                     pickupPixel();
 
+                    sleep(750);
+
                     leftClawServo.setPosition(values.leftClawOpen);
+
+                    sleep(500);
 
                     neutral();
 
+                    sleep(500);
                     break;
                 case CENTER:
                     telemetry.addData("Center","center");
                     telemetry.update();
-
+                    neutral();
                     foward(-2160);
 
                     pickupPixel();
                     sleep(500);
 
-                    rightClawServo.setPosition(0.5);
+                    rightClawServo.setPosition(values.rightClawOpen);
                     sleep(1000);
 
                     neutral();
+                    foward(-150);
+                    sleep(1000);
 
                     rotate(values.turn90DegreesClockwise);
 
-                    while(System.currentTimeMillis() - startTime < 25000.0);
-//                side(-2700);
-//                waitforwheels();
+                    while(System.currentTimeMillis() - startTime < 23000.0);
 
-                    foward(-4500);
+                    foward(-4100);
 
                     pickupPixel();
+
+                    sleep(500);
 
                     leftClawServo.setPosition(values.leftClawOpen);
 
-                    neutral();
-
-                    break;
-                case RIGHT:
-                    telemetry.addData("right","right");
-                    telemetry.update();
-
-                    neutral();
-                    foward(-1100);
-
-                    pickupPixel();
-                    rotate(values.turn90DegreesCounterClockwise);
-
-                    foward(100);
-                    rightClawServo.setPosition(0.5);
                     sleep(500);
 
                     neutral();
+
+                    sleep(500);
+                    break;
+                case RIGHT:
+                    telemetry.addData("left","left");
+                    telemetry.update();
+                    neutral();
+                    foward(-1300);
+                    side(200);
+
+                    pickupPixel();
+                    sleep(500);
+
+                    rotate(values.turn90DegreesCounterClockwise);
+                    foward(100);
+
+                    rightClawServo.setPosition(values.rightClawOpen);
+                    sleep(500);
+
                     foward(-100);
-                    sleep(1000);
 
-                    rotate(values.turn90DegreesClockwise);
-                    wheels.setFowardSpeed(0.4);
-                    foward(-1200);
-                    rotate(values.turn90DegreesClockwise);
+                    neutral();
 
-                    while(System.currentTimeMillis() - startTime < 25000.0);
+                    side(-1100);
 
-                    foward(-4500);
+                    while(System.currentTimeMillis() - startTime < 23000.0);
+
+                    foward(4000);
 
                     pickupPixel();
 
+                    sleep(750);
+
                     leftClawServo.setPosition(values.leftClawOpen);
 
+                    sleep(500);
+
                     neutral();
+
+                    sleep(500);
 
                     break;
             }

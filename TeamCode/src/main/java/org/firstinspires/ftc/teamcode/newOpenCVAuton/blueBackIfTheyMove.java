@@ -8,7 +8,6 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-import org.firstinspires.ftc.teamcode.auton.BluePropThreshold;
 import org.firstinspires.ftc.teamcode.universalCode.craneMotors;
 import org.firstinspires.ftc.teamcode.universalCode.driveTrain;
 import org.firstinspires.ftc.teamcode.universalCode.values;
@@ -23,7 +22,6 @@ import org.firstinspires.ftc.teamcode.supermanTESTER.PropPipeline;
 @Autonomous(name="blue back IF THEY MOVE\uD83D\uDD35")
 public class blueBackIfTheyMove extends LinearOpMode {
     private VisionPortal portal;
-    private BluePropThreshold blue;
     private DcMotor.ZeroPowerBehavior brake = DcMotor.ZeroPowerBehavior.BRAKE;
     private DcMotor.ZeroPowerBehavior floatt =DcMotor.ZeroPowerBehavior.FLOAT;
     private Servo leftClawRotator;

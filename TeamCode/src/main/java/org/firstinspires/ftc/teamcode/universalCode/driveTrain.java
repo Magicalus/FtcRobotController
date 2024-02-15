@@ -170,6 +170,8 @@ public class driveTrain {
         turnTo(-target);
         targetHeading = target + headingOffset;
         resetEncoders();
+        opMode.sleep(100);
+
     }
 
     public void waitForWheels(int target, boolean foward) {

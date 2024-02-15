@@ -8,7 +8,6 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-import org.firstinspires.ftc.teamcode.auton.BluePropThreshold;
 import org.firstinspires.ftc.teamcode.universalCode.craneMotors;
 import org.firstinspires.ftc.teamcode.universalCode.driveTrain;
 import org.firstinspires.ftc.teamcode.universalCode.values;
@@ -31,7 +30,6 @@ import org.firstinspires.ftc.vision.VisionPortal;
 @Autonomous(name="bluefront \uD83D\uDD35")
 public class bluefront extends LinearOpMode {
     private VisionPortal portal;
-    private BluePropThreshold blue;
     private DcMotor.ZeroPowerBehavior brake = DcMotor.ZeroPowerBehavior.BRAKE;
     private DcMotor.ZeroPowerBehavior floatt =DcMotor.ZeroPowerBehavior.FLOAT;
     private Servo leftClawRotator;
@@ -109,12 +107,18 @@ public class bluefront extends LinearOpMode {
                     telemetry.addData("Prop","left");
                     telemetry.update();
 
-                    foward(-1300);
-
-                    rotate(values.turn90DegreesCounterClockwise);
+                    foward(-1250);
 
                     pickupPixel();
                     sleep(500);
+
+                    rotate(3*values.turn90DegreesClockwise);
+//                    rotate(values.turn90DegreesCounterClockwise);
+//                    rotate(values.turn90DegreesCounterClockwise);
+//                    rotate(values.turn90DegreesCounterClockwise);
+//                    rotate(values.turn90DegreesCounterClockwise);
+
+
 
                     foward(-900);
 
@@ -123,6 +127,7 @@ public class bluefront extends LinearOpMode {
 
                     neutral();
                     sleep(500);
+                    rightClawServo.setPosition(values.rightClawClosed);
 
                     placePixelLow();
 
@@ -136,7 +141,7 @@ public class bluefront extends LinearOpMode {
                     //sleep(1000);
                     //resetEncoders();
 
-                    side(750);
+                    side(800);
 
                     leftClawServo.setPosition(values.leftClawOpen);
                     sleep(500);
@@ -156,7 +161,7 @@ public class bluefront extends LinearOpMode {
                     telemetry.update();
 
                     neutral();
-                    foward(-820);
+                    foward(-920);
 
                     rotate(values.turn90DegreesCounterClockwise);
 
@@ -164,7 +169,7 @@ public class bluefront extends LinearOpMode {
 
                     foward(-500);
 
-                    side(-1250);
+                    side(-700);
 
                     rightClawServo.setPosition(values.rightClawOpen);
                     sleep(300);
@@ -178,7 +183,7 @@ public class bluefront extends LinearOpMode {
                     placePixelLow();
                     foward(-1100);
 
-                    side(1200);
+                    side(600);
 //                wheels.resetEncoders();
 //                side(-500);
 
@@ -191,7 +196,7 @@ public class bluefront extends LinearOpMode {
 //                sleep(2000);
                     foward(250);
 
-                    side(1350);
+                    side(1300);
 
                     foward(-450);
 
@@ -202,14 +207,17 @@ public class bluefront extends LinearOpMode {
                     telemetry.update();
 
                     foward(-1300);
-
-                    rotate(values.turn90DegreesCounterClockwise);
+                    side(200);
 
                     pickupPixel();
                     sleep(500);
+
+                    rotate(values.turn90DegreesCounterClockwise);
+                    foward(100);
+
+
 //
 //                    foward(150);
-
                     rightClawServo.setPosition(values.rightClawOpen);
                     sleep(700);
 

@@ -17,14 +17,14 @@ import org.opencv.imgproc.Imgproc;
 
 public class PropPipeline implements VisionProcessor {
     private static final boolean DEBUG = true;
-    public static int redLeftX = (int) (240);
+    public static int redLeftX = (int) (255);
     public static int redLeftY = (int) (525);
-    public static int redCenterX = (int) (925);
-    public static int redCenterY = (int) (485);
+    public static int redCenterX = (int) (960);
+    public static int redCenterY = (int) (500);
 
-    public static int blueCenterX = (int) (925);
+    public static int blueCenterX = (int) (955);
     public static int blueCenterY = (int) (485);
-    public static int blueLeftX = (int) (1505);
+    public static int blueLeftX = (int) (1585);
     public static int blueLeftY = (int) (525);
 
     public static int centerWidth = (int) (100);
@@ -43,19 +43,12 @@ public class PropPipeline implements VisionProcessor {
 
 //    Location ALLIANCE = Location.RED;
 
-    public PropPipeline() {
-        this(null);
-    }
-
-    public PropPipeline(Telemetry telemetry) {
-        this.telemetry = telemetry;
-    }
+    public PropPipeline() {}
 
     @Override
     public void init(int width, int height, CameraCalibration calibration) {
 
     }
-
     @Override
     public Object processFrame(Mat frame, long captureTimeNanos) {
         Rect leftZoneArea;
@@ -100,7 +93,7 @@ public class PropPipeline implements VisionProcessor {
 
         if (leftColor > threshold && (left.val[0] + left.val[1] + left.val[2] - left.val[idx] < left.val[idx])) {
             // left zone has it
-            if(ALLIANCE == Location.RED && SIDE == Location.FAR || ALLIANCE == Location.BLUE && SIDE == Location.CLOSE) {
+            if((ALLIANCE == Location.RED && SIDE == Location.FAR) || (ALLIANCE == Location.BLUE && SIDE == Location.CLOSE)){
                 location = Location.LEFT;
             }else{
                 location = Location.RIGHT;
@@ -112,7 +105,7 @@ public class PropPipeline implements VisionProcessor {
             Imgproc.rectangle(frame, centerZoneArea, new Scalar(255, 255, 255), 10);
         } else {
             // right zone has it
-            if(ALLIANCE == Location.RED && SIDE == Location.FAR || ALLIANCE == Location.BLUE && SIDE == Location.CLOSE) {
+            if((ALLIANCE == Location.RED && SIDE == Location.FAR )|| (ALLIANCE == Location.BLUE && SIDE == Location.CLOSE)) {
                 location = Location.RIGHT;
             }else{
                 location = Location.LEFT;

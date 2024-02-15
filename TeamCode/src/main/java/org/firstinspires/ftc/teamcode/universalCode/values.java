@@ -12,8 +12,8 @@ public class values {
     //Claw Positions
     public static double leftClawOpen = 0.5;
     public static double leftClawClosed = 0;
-    public static double rightClawOpen = 0.4;
-    public static double rightClawClosed = 0.8;
+    public static double rightClawOpen = 0.6;
+    public static double rightClawClosed = 0.9;
 
 
     //Airplane Servo Positions (REDO)
@@ -23,9 +23,9 @@ public class values {
 
     //Crane Arm Positions (REDO)
     public static int craneResting = 0;
-    public static int cranePlaceTeleop = 1950;
-    public static int cranePlaceHighAuton = 1900;
-    public static int cranePlaceLowAuton = 2050;
+    public static int cranePlaceTeleop = 1850;
+    public static int cranePlaceHighAuton = 1750;
+    public static int cranePlaceLowAuton = 1950;
 
 
     //Hanging Positions
@@ -37,7 +37,7 @@ public class values {
 
 
     //Auton movement values
-    public static int turn90DegreesClockwise = 89;
+    public static int turn90DegreesClockwise = 90;
 
     public static int turn90DegreesCounterClockwise = - turn90DegreesClockwise;
 }

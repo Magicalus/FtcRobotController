@@ -18,10 +18,9 @@ import org.firstinspires.ftc.vision.VisionPortal;
 
 
 //@Disabled
-@Autonomous(name="red Back If They Move\uD83D\uDD34")
-public class redBackIfTheyMove extends LinearOpMode {
-    private VisionPortal portal;
-    private DcMotor.ZeroPowerBehavior brake = DcMotor.ZeroPowerBehavior.BRAKE;
+@Autonomous(name="blue back super man \uD83D\uDD35")
+public class blueBackcopy extends LinearOpMode {
+    private VisionPortal portal;private DcMotor.ZeroPowerBehavior brake = DcMotor.ZeroPowerBehavior.BRAKE;
     private DcMotor.ZeroPowerBehavior floatt =DcMotor.ZeroPowerBehavior.FLOAT;
     private Servo leftClawRotator;
     private Servo rightClawRotator;
@@ -48,7 +47,7 @@ public class redBackIfTheyMove extends LinearOpMode {
 
 
         Globals.IS_AUTO = true;
-        Globals.ALLIANCE = Location.RED;
+        Globals.ALLIANCE = Location.BLUE;
         Globals.SIDE = Location.FAR;
 
         propPipeline = new PropPipeline();
@@ -95,32 +94,34 @@ public class redBackIfTheyMove extends LinearOpMode {
 
             switch (randomization) {
                 case LEFT:
-                    telemetry.addData("Prop","left");
+                    telemetry.addData("left","left");
                     telemetry.update();
                     neutral();
-                    foward(-1100);
+                    foward(-1300);
+                    side(-200);
 
                     pickupPixel();
-                    rotate(values.turn90DegreesCounterClockwise);
-
-                    foward(100);
-                    rightClawServo.setPosition(0.5);
                     sleep(500);
 
-                    neutral();
+                    rotate(values.turn90DegreesClockwise);
+                    foward(100);
+
+                    rightClawServo.setPosition(values.rightClawOpen);
+                    sleep(500);
+
                     foward(-100);
-                    sleep(1000);
 
-                    rotate(values.turn90DegreesClockwise);
-                    wheels.setFowardSpeed(0.4);
-                    foward(-1200);
-                    rotate(values.turn90DegreesClockwise);
+                    neutral();
 
-                    while(System.currentTimeMillis() - startTime < 16000.0);
+                    side(1100);
+
+                    rotate(values.turn90DegreesCounterClockwise * 2);
+
+                    while(System.currentTimeMillis() - startTime < 18000.0);
 
                     foward(-4000);
 
-                    side(-1700);
+                    side(1700);
 
                     placePixelLow();
                     sleep(3000);
@@ -139,70 +140,73 @@ public class redBackIfTheyMove extends LinearOpMode {
                     sleep(2500);
 
                     break;
+
                 case CENTER:
-                    telemetry.addData("Prop","center");
+                    telemetry.addData("Center","center");
                     telemetry.update();
                     neutral();
                     foward(-2160);
 
                     pickupPixel();
-                    sleep(500);
+                    sleep(750);
 
-                    rightClawServo.setPosition(0.5);
+                    rightClawServo.setPosition(values.rightClawOpen);
                     sleep(1000);
 
                     neutral();
                     foward(-150);
                     sleep(1000);
 
-                    rotate(values.turn90DegreesClockwise);
+                    rotate(values.turn90DegreesCounterClockwise);
 
                     while(System.currentTimeMillis() - startTime < 18000.0);
 
                     foward(-4000);
 
-                    side(-1463);
+                    side(1050);
 
                     placePixelLow();
                     sleep(3000);
 
                     wheels.setFowardSpeed(0.4);
-                    foward(-50);
+                    foward(-505);
+
+//                side(250);
+//                sleep(1000);
+//                resetEncoders();
 
                     leftClawServo.setPosition(1);
                     sleep(300);
 
                     neutral();
                     sleep(2500);
-
                     break;
                 case RIGHT:
-                    telemetry.addData("Prop","right");
+                    telemetry.addData("right","right");
                     telemetry.update();
+
                     neutral();
-                    foward(-1160);
+                    foward(-1350);
 
-                    pickupPixel();
                     rotate(values.turn90DegreesCounterClockwise);
+                    pickupPixel();
 
-                    foward(100);
+                    sleep(500);
+
                     rightClawServo.setPosition(0.5);
                     sleep(500);
 
                     neutral();
-                    foward(-100);
-                    sleep(1000);
+                    foward(-50);
+                    sleep(2500);
 
-                    rotate(values.turn90DegreesClockwise);
-                    wheels.setFowardSpeed(0.4);
-                    foward(-1200);
-                    rotate(values.turn90DegreesClockwise);
+                    side(-1000);
 
-                    while(System.currentTimeMillis() - startTime < 16000.0);
+                    while(System.currentTimeMillis() - startTime < 18000.0);
 
                     foward(-4000);
 
-                    side(-1750);
+                    side(1400);
 
                     placePixelLow();
                     sleep(3000);
@@ -219,6 +223,7 @@ public class redBackIfTheyMove extends LinearOpMode {
 
                     neutral();
                     sleep(2500);
+
 
                     break;
             }
@@ -241,7 +246,7 @@ public class redBackIfTheyMove extends LinearOpMode {
     }
 
     public void placePixelLow(){
-        crane.setTargetPosition(values.cranePlaceHighAuton);
+        crane.setTargetPosition(values.cranePlaceLowAuton);
         leftClawRotator.setPosition(0.1);
         rightClawRotator.setPosition(0.85);
     }
