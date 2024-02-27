@@ -12,10 +12,10 @@ import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
 
 
 public class driveTrain {
-    private DcMotor frontLeft;
-    private DcMotor frontRight;
-    private DcMotor backLeft;
-    private DcMotor jarmy;
+    public DcMotor frontLeft;
+    public DcMotor frontRight;
+    public DcMotor backLeft;
+    public DcMotor jarmy;
 
     public IMUInterface imu;
     public double headingOffset;
@@ -37,6 +37,8 @@ public class driveTrain {
     private boolean debug = false;
 
     private LinearOpMode opMode;
+
+    private crane crane;
 
     public driveTrain(HardwareMap hardwareMap, LinearOpMode opmode){
         // Initialize the hardware variables. Note that the strings used here as parameters
@@ -64,7 +66,11 @@ public class driveTrain {
         headingOffset = 0;
 
         opMode = opmode;
+
+        //this.crane = opmode.crane;
     }
+
+    public driveTrain(HardwareMap hardwareMap, LinearOpMode opmode, crane crane){this(hardwareMap, opmode);}
 
     public void manualDrive(double frontLeftPower, double frontRightPower, double backLeftPower, double jarmyPower){
         frontLeft.setPower(frontLeftPower * speed);
@@ -192,6 +198,7 @@ public class driveTrain {
                 jarmy.getCurrentPosition() != jarmy.getTargetPosition() &&
                 opMode.opModeIsActive()
         ) {
+            crane.craneMaintenance();
             if(foward){
                 continueFoward();
             }else{
@@ -240,6 +247,7 @@ public class driveTrain {
         double error = degrees;
 
         while (opMode.opModeIsActive() && Math.abs(error) > 5) {
+            crane.craneMaintenance();
             double motorPower = (error < 0 ? -rotationSpeed : rotationSpeed);
             frontLeft.setPower(-motorPower);
             frontRight.setPower(motorPower);

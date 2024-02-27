@@ -2,13 +2,6 @@ package org.firstinspires.ftc.teamcode.universalCode;
 
 public class values {
 
-    //Claw Rotator Positions
-    public static double pickupPixelLeftClawRotator = 0.53;
-    public static double pickupPixelRightClawRotator = 0.42;
-    public static double defaultLeftClawRotator = 0.1;
-    public static double defaultRightClawRotator = 0.85;
-
-
     //Claw Positions
     public static double leftClawOpen = 0.5;
     public static double leftClawClosed = 0;
@@ -23,17 +16,13 @@ public class values {
 
     //Crane Arm Positions (REDO)
     public static int craneResting = 0;
+    public static int craneNeutral = 100;
     public static int cranePlaceTeleop = 1850;
-    public static int cranePlaceHighAuton = 1750;
-    public static int cranePlaceLowAuton = 1950;
+    public static int cranePlaceLowAuton = 400;
+    public static int cranePlaceHighAuton = 500;
+    public static int craneMax = 2800;
 
-
-    //Hanging Positions
-    public static int hangerResting = 0;
-    public static int hangerHanging = 1000;
-    public static int hangerRaised = 2600;
-
-    public static int hangerMax = 2800;
+    public static boolean craneByPower = false;
 
 
     //Auton movement values
