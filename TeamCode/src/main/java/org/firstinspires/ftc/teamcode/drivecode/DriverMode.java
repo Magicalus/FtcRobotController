@@ -8,9 +8,9 @@ import org.firstinspires.ftc.teamcode.universalCode.values;
 @TeleOp(name="Driver Mode", group="Linear Opmode")
 //@Disabled
 public class DriverMode extends universalOpMode {
-
     @Override
     public void runOpMode() {
+        setup();
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
@@ -57,6 +57,7 @@ public class DriverMode extends universalOpMode {
             } else if (gamepad1.b) {
                 airplaneLauncher.setPosition((values.airplaneServoResting));
             }
+
             if (gamepad1.dpad_down) {
                 wheels.setPower(0.25);
             } else if (gamepad1.dpad_up) {
@@ -71,12 +72,20 @@ public class DriverMode extends universalOpMode {
             B is the Red Circle
             Y is the Green Triangle
             */
-            if(gamepad1.right_trigger > 0.1 && values.craneByPower) {
-                crane.move(-gamepad1.right_trigger);
-            }else if(gamepad1.left_trigger > 0.1 && values.craneByPower){
-                crane.move(gamepad1.left_trigger);
+            if(gamepad2.right_trigger > 0.1 && values.craneByPower) {
+                crane.move(-gamepad2.right_trigger);
+            }else if(gamepad2.left_trigger > 0.1 && values.craneByPower){
+                crane.move(gamepad2.left_trigger);
             }else if(values.craneByPower){
                 crane.move(0);
+            }else if(gamepad2.a) {
+                crane.move(0);
+            }else if(gamepad2.x){
+                crane.move(950);
+            }else if(gamepad2.y) {
+                crane.move(1900);
+            }else if(gamepad2.b){
+                crane.move(values.craneMax);
             }
 
             telemetry.addData("Left Crane Motor Position", crane.getCurrentLeftPosition());

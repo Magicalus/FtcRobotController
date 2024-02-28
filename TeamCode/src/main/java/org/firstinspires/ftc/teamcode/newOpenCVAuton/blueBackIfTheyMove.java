@@ -25,8 +25,7 @@ public class blueBackIfTheyMove extends universalOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
-
-
+        setup();
         Globals.IS_AUTO = true;
         Globals.ALLIANCE = Location.BLUE;
         Globals.SIDE = Location.FAR;

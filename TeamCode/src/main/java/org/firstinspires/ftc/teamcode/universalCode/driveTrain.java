@@ -40,7 +40,7 @@ public class driveTrain {
 
     private crane crane;
 
-    public driveTrain(HardwareMap hardwareMap, LinearOpMode opmode){
+    public driveTrain(HardwareMap hardwareMap, universalOpMode opmode){
         // Initialize the hardware variables. Note that the strings used here as parameters
         // to 'get' must correspond to the names assigned during the robot configuration
         // step (using the FTC Robot Controller app on the phone).
@@ -67,11 +67,8 @@ public class driveTrain {
 
         opMode = opmode;
 
-        //this.crane = opmode.crane;
+        this.crane = opmode.crane;
     }
-
-    public driveTrain(HardwareMap hardwareMap, LinearOpMode opmode, crane crane){this(hardwareMap, opmode);}
-
     public void manualDrive(double frontLeftPower, double frontRightPower, double backLeftPower, double jarmyPower){
         frontLeft.setPower(frontLeftPower * speed);
         frontRight.setPower(frontRightPower * speed);

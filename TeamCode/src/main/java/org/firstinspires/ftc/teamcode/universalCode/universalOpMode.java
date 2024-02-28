@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.universalCode;
 import android.util.Size;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
@@ -12,22 +13,35 @@ import org.firstinspires.ftc.vision.VisionPortal;
 
 public abstract class universalOpMode extends LinearOpMode {
 
-    public crane crane = new crane(hardwareMap, true);
-    public driveTrain wheels = new driveTrain(hardwareMap, this);
-    public Servo leftClawServo = hardwareMap.get(Servo.class, "leftClawServo");
-    public Servo rightClawServo = hardwareMap.get(Servo.class, "rightClawServo");
-    public Servo airplaneLauncher = hardwareMap.get(Servo.class, "airplaneLauncher");
-    public PropPipeline propPipeline = new PropPipeline();
-    public VisionPortal portal = new VisionPortal.Builder()
-            .setCamera(hardwareMap.get(WebcamName.class, "Webcam 1"))
-            .setCameraResolution(new Size(1920, 1080))
-            .addProcessor(propPipeline)
-            .setStreamFormat(VisionPortal.StreamFormat.MJPEG)
-            .enableLiveView(true)
-            .setAutoStopLiveView(true)
-            .build();
+    public crane crane;
+    public driveTrain wheels;
+    public Servo leftClawServo;
+    public Servo rightClawServo;
+    public Servo airplaneLauncher;
+    public PropPipeline propPipeline;
+    public VisionPortal portal;
     public long startTime;
     public Location randomization;
+
+    public void setup(){
+        setup(0.5);
+    }
+    public void setup(double cranePower){
+        crane = new crane(hardwareMap, 0,true);
+        wheels = new driveTrain(hardwareMap, this);
+        leftClawServo = hardwareMap.get(Servo.class, "leftClawServo");
+        rightClawServo = hardwareMap.get(Servo.class, "rightClawServo");
+        airplaneLauncher = hardwareMap.get(Servo.class, "airplaneLauncher");
+        propPipeline = new PropPipeline();
+        portal = new VisionPortal.Builder()
+                .setCamera(hardwareMap.get(WebcamName.class, "Webcam 1"))
+                .setCameraResolution(new Size(1920, 1080))
+                .addProcessor(propPipeline)
+                .setStreamFormat(VisionPortal.StreamFormat.MJPEG)
+                .enableLiveView(true)
+                .setAutoStopLiveView(true)
+                .build();
+    }
 
     //0 is Front Auton, 1 is Back Auton, any other value is TeleOp
     //(Though with the new placement system, TeleOp isn't REALLY applicable for placePixel)

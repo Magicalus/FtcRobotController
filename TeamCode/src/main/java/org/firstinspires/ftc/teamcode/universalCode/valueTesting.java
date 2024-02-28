@@ -1,25 +1,25 @@
 package org.firstinspires.ftc.teamcode.universalCode;
 
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.robotcore.external.Telemetry;
-
-public class valueTesting extends LinearOpMode{
-    private driveTrain wheels;
-    private crane crane;
-    Servo leftClawServo = hardwareMap.get(Servo.class, "leftClawServo");
-    Servo rightClawServo = hardwareMap.get(Servo.class, "rightClawServo");
+@TeleOp(name="Value Testing", group="Linear Opmode")
+public class valueTesting extends universalOpMode{
     @Override
     public void runOpMode() {
-        crane = new crane(hardwareMap, false);
-        wheels = new driveTrain(hardwareMap, this, crane);
-
+        values.craneByPower = false;
+        setup(0);
+        crane.clawAintBack();
+        crane.resetClawSpinnies();
+        wheels.setPower(0);
         waitForStart();
+        crane.move(1000);
         while(opModeIsActive()){
             telemetry.addData("Left Crane: ", crane.getCurrentLeftPosition());
             telemetry.addData("Right Crane: ", crane.getCurrentRightPosition());
+            telemetry.addData("Is Claw Back? ", crane.clawIsBack);
+            telemetry.addData("Spinnies position: ", crane.getCurrentSpinniesPosition());
             telemetry.update();
+            crane.craneMaintenance();
         }
     }
 }
