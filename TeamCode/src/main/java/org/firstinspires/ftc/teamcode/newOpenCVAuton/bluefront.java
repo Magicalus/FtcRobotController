@@ -76,7 +76,7 @@ public class bluefront extends universalOpMode {
 
                     placePixel();
 
-                    foward(800);
+                    foward(700);
                     //this may or may not just fully bump the purple out
 
                     //side(150);
@@ -129,7 +129,7 @@ public class bluefront extends universalOpMode {
                     placePixel();
                     sleep(1300);
 
-//                    side(-500);
+                    side(500);
 
 //                    foward(400);
 
