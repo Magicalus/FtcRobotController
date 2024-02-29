@@ -60,29 +60,24 @@ public class bluefront extends universalOpMode {
 
                     foward(-1250);
 
-                    pickupPixel();
-                    sleep(500);
+//                    pickupPixel();
+//                    sleep(500);
 
-                    rotate(3*values.turn90DegreesClockwise);
-//                    rotate(values.turn90DegreesCounterClockwise);
-//                    rotate(values.turn90DegreesCounterClockwise);
-//                    rotate(values.turn90DegreesCounterClockwise);
-//                    rotate(values.turn90DegreesCounterClockwise);
+                    rotate(values.turn90DegreesClockwise);
 
-
-
-                    foward(-900);
+                    foward(900);
 
                     rightClawServo.setPosition(values.rightClawOpen);
                     sleep(500);
 
-                    neutral();
-                    sleep(500);
-                    rightClawServo.setPosition(values.rightClawClosed);
+//                    neutral();
+//                    sleep(500);
+//                    rightClawServo.setPosition(values.rightClawClosed);
 
                     placePixel();
 
-                    foward(-800);
+                    foward(800);
+                    //this may or may not just fully bump the purple out
 
                     //side(150);
                     //sleep(1000);
@@ -92,70 +87,65 @@ public class bluefront extends universalOpMode {
                     //sleep(1000);
                     //resetEncoders();
 
-                    side(800);
+                    side(-800);
 
                     leftClawServo.setPosition(values.leftClawOpen);
                     sleep(500);
 
                     neutral();
-                    sleep(2500);
+                    sleep(1000);
 
-                    foward(200);
+                    foward(-200);
 
-                    side(1050);
+                    side(-1050);
 
-                    foward(-350);
+                    foward(350);
 
                     break;
                 case CENTER:
                     telemetry.addData("Prop","center");
                     telemetry.update();
 
-                   // neutral();
-                    foward(-920);
+                    foward(-820);
 
-                    rotate(values.turn90DegreesCounterClockwise);
+                    rotate(values.turn90DegreesClockwise * 2);
 
-                    foward(-500);
+                    //pickupPixel();
 
-                    side(-1050);
-
-                    pickupPixel();
+                    foward(280);
 
                     rightClawServo.setPosition(values.rightClawOpen);
                     sleep(300);
 
-                    //neutral();
+//                    neutral();
+//                    sleep(500);
 
+                    foward(-100);
 
+                    rotate(values.turn90DegreesCounterClockwise);
 
-//                side(-100);
-//
-//                rotate(values.turn90DegreesClockwise);
-                    foward(-400);
-
-                    rotate(values.turn90DegreesClockwise);
-                    rotate(values.turn90DegreesClockwise);
+                    foward(1750);
 
                     placePixel();
-                    foward(900);
+                    sleep(1300);
 
-                    side(-600);
-//                wheels.resetEncoders();
-//                side(-500);
+//                    side(-500);
 
-                    foward(200);
+//                    foward(400);
 
-                    leftClawServo.setPosition(values.leftClawOpen);
+                    //side(-);
+
+                    leftClawServo.setPosition(1);
                     sleep(300);
 
                     neutral();
-//                sleep(2000);
-                    foward(250);
+                    sleep(1300);
+                    foward(-250);
 
-                    side(1300);
+                    side(-1850);
+                    //originally side(-1350);
 
-                    foward(-450);
+                    foward(450);
 
                     //why joe I love you <3 THIS WAS MIGUEL I PROMISE
                     break;
@@ -164,10 +154,10 @@ public class bluefront extends universalOpMode {
                     telemetry.update();
 
                     foward(-1300);
-                    side(200);
+//                    side(200);
 
-                    pickupPixel();
-                    sleep(500);
+//                    pickupPixel();
+//                    sleep(500);
 
                     rotate(values.turn90DegreesCounterClockwise);
                     foward(100);
@@ -178,26 +168,27 @@ public class bluefront extends universalOpMode {
                     rightClawServo.setPosition(values.rightClawOpen);
                     sleep(700);
 
-                    neutral();
-                    sleep(500);
+//                    neutral();
+//                    sleep(500);
 
-
-                    placePixel();
                     foward(-1800);
+                    placePixel();
+
+                    rotate(values.turn90DegreesCounterClockwise*2);
 
                     //side(-470);
-                    foward(-300);
+                    foward(300);
                     leftClawServo.setPosition(values.leftClawOpen);
                     sleep(500);
 
-                    neutral();
-                    sleep(2500);
+//                    neutral();
+//                    sleep(2500);
 
-                    foward(200);
+                    foward(-200);
 
-                    side(1600);
+                    side(-1600);
 
-                    foward(-350);
+                    foward(350);
 
                     break;
             }
