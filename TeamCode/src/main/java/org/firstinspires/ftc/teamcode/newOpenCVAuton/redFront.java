@@ -57,89 +57,87 @@ public class redFront extends universalOpMode {
                     telemetry.addData("Prop","left");
                     telemetry.update();
 
-                    telemetry.addData("Prop","right");
-                    telemetry.update();
-
                     foward(-1300);
                     side(-200);
 
-                    pickupPixel();
-                    sleep(500);
+//                    pickupPixel();
+//                    sleep(500);
 
                     rotate(values.turn90DegreesClockwise);
                     foward(100);
 
 
-//
-//                    foward(150);
+
+                    foward(150);
                     rightClawServo.setPosition(values.rightClawOpen);
                     sleep(700);
 
-                    neutral();
-                    sleep(500);
+//                    neutral();
+//                    sleep(500);
 
-
-                    placePixel();
                     foward(-1600);
+                    rotate(values.turn90DegreesClockwise*2);
+                    placePixel();
 
-                    side(300);
-                    foward(-300);
+                    side(-300);
+                    foward(300);
                     leftClawServo.setPosition(values.leftClawOpen);
                     sleep(500);
 
-                    neutral();
-                    sleep(2500);
+//                    neutral();
+//                    sleep(2500);
 
-                    foward(200);
+                    foward(-200);
 
-                    side(-1800);
+                    side(1800);
 
-                    foward(-350);
+                    foward(350);
 
                     break;
                 case CENTER:
                     telemetry.addData("Prop","center");
                     telemetry.update();
 
-                    neutral();
                     foward(-820);
 
-                    rotate(values.turn90DegreesClockwise);
+                    rotate(values.turn90DegreesCounterClockwise * 2);
 
-                    pickupPixel();
+                    //pickupPixel();
 
-                    foward(-500);
-
-                    side(900);
+                    foward(280);
 
                     rightClawServo.setPosition(values.rightClawOpen);
                     sleep(300);
 
-                    neutral();
+//                    neutral();
+//                    sleep(500);
 
-//                side(-100);
-//
-//                rotate(values.turn90DegreesClockwise);
+                    foward(-100);
+
+                    rotate(values.turn90DegreesClockwise);
+
+                    foward(1750);
 
                     placePixel();
-                    foward(-1100);
+                    sleep(1300);
 
-                    side(-600);
-//                wheels.resetEncoders();
-//                side(-500);
+//                    side(-500);
 
-                    foward(-200);
+//                    foward(400);
 
-                    leftClawServo.setPosition(values.leftClawOpen);
+                    //side(-);
+
+                    leftClawServo.setPosition(1);
                     sleep(300);
 
                     neutral();
-//                sleep(2000);
-                    foward(250);
+                    sleep(1300);
+                    foward(-250);
 
-                    side(-1350);
+                    side(1850);
+                    //originally side(1350);
 
-                    foward(-450);
+                    foward(450);
 
                     //why joe I love you <3 THIS WAS MIGUEL I PROMISE
                     break;
@@ -148,22 +146,24 @@ public class redFront extends universalOpMode {
                     telemetry.update();
                     foward(-1250);
 
-                    pickupPixel();
-                    sleep(500);
+//                    pickupPixel();
+//                    sleep(500);
 
-                    rotate(3*values.turn90DegreesCounterClockwise);
+                    rotate(values.turn90DegreesCounterClockwise);
+                    //may need to use turn90DegreesClockwise*3 to not hit the truss
 
-                    foward(-900);
+                    foward(900);
 
                     rightClawServo.setPosition(values.rightClawOpen);
                     sleep(500);
 
-                    neutral();
-                    sleep(500);
+//                    neutral();
+//                    sleep(500);
+
+                    foward(800);
+                    //(this may or may not just bump the purple pixel)
 
                     placePixel();
-
-                    foward(-800);
 
                     //side(150);
                     //sleep(1000);
@@ -173,19 +173,19 @@ public class redFront extends universalOpMode {
                     //sleep(1000);
                     //resetEncoders();
 
-                    side(-300);
+                    side(300);
 
                     leftClawServo.setPosition(values.leftClawOpen);
                     sleep(500);
 
                     neutral();
-                    sleep(2500);
+                    sleep(1300);
 
-                    foward(200);
+                    foward(-200);
 
-                    side(-1050);
+                    side(1050);
 
-                    foward(-450);
+                    foward(450);
 
                     break;
             }

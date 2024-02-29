@@ -54,38 +54,38 @@ public class blueBackIfTheyMove extends universalOpMode {
 
             switch (randomization) {
             case LEFT:
-                telemetry.addData("left","left");
+                telemetry.addData("Prop","left");
                 telemetry.update();
-                neutral();
-                foward(-1100);
+//                    neutral();
+                foward(-1300);
+                side(-200);
 
-                pickupPixel();
+//                    pickupPixel();
+//                    sleep(500);
+
                 rotate(values.turn90DegreesClockwise);
+                foward(200);
 
-                foward(100);
-                rightClawServo.setPosition(0.5);
+                rightClawServo.setPosition(values.rightClawOpen);
                 sleep(500);
 
-                neutral();
-                foward(-100);
-                sleep(1000);
+                foward(-200);
 
-                rotate(values.turn90DegreesCounterClockwise);
-                wheels.setFowardSpeed(0.4);
-                foward(-1200);
-                rotate(values.turn90DegreesCounterClockwise);
+//                    neutral();
+
+                side(1100);
 
                 while(System.currentTimeMillis() - startTime < 18000.0);
 
-                foward(-4000);
+                foward(4000);
 
-                side(1700);
+                side(-1700);
 
                 placePixel();
-                sleep(3000);
+                sleep(2000);
 
                 wheels.setFowardSpeed(0.4);
-                foward(-50);
+                foward(100);
 
 //                side(250);
 //                sleep(1000);
@@ -101,7 +101,7 @@ public class blueBackIfTheyMove extends universalOpMode {
             case CENTER:
                 telemetry.addData("Center","center");
                 telemetry.update();
-                neutral();
+//                neutral();
                 foward(-2160);
 
                 pickupPixel();
@@ -110,23 +110,23 @@ public class blueBackIfTheyMove extends universalOpMode {
                 rightClawServo.setPosition(0.5);
                 sleep(1000);
 
-                neutral();
+//                neutral();
                 foward(-150);
                 sleep(1000);
 
-                rotate(values.turn90DegreesCounterClockwise);
+                rotate(values.turn90DegreesClockwise);
 
                 while(System.currentTimeMillis() - startTime < 18000.0);
 
-                foward(-4000);
+                foward(4000);
 
-                side(1050);
+                side(-1050);
 
                 placePixel();
-                sleep(3000);
+                sleep(2000);
 
                 wheels.setFowardSpeed(0.4);
-                foward(-505);
+                foward(150);
 
 //                side(250);
 //                sleep(1000);
@@ -141,32 +141,34 @@ public class blueBackIfTheyMove extends universalOpMode {
             case RIGHT:
                 telemetry.addData("right","right");
                 telemetry.update();
-                neutral();
+//                neutral();
                 foward(-1350);
 
                 rotate(values.turn90DegreesCounterClockwise);
-                pickupPixel();
+//                pickupPixel();
+                foward(100);
 
                 rightClawServo.setPosition(0.5);
                 sleep(500);
 
-                neutral();
-                foward(-50);
-                sleep(2500);
+//                neutral();
+                foward(-100);
 
                 side(-1050);
 
+                rotate(values.turn90DegreesCounterClockwise*2);
+
                 while(System.currentTimeMillis() - startTime < 18000.0);
 
-                foward(-4000);
+                foward(4000);
 
-                side(1400);
+                side(-1400);
 
                 placePixel();
-                sleep(3000);
+                sleep(2000);
 
                 wheels.setFowardSpeed(0.4);
-                foward(-50);
+                foward(100);
 
 //                side(250);
 //                sleep(1000);

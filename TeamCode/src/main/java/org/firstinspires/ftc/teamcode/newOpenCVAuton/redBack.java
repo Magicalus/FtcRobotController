@@ -56,20 +56,20 @@ public class redBack extends universalOpMode {
                     telemetry.addData("left","left");
                     telemetry.update();
 
-                    neutral();
+//                    neutral();
                     foward(-1350);
 
                     pickupPixel();
                     rotate(values.turn90DegreesClockwise);
 
-                    sleep(500);
+//                    sleep(500);
 
                     rightClawServo.setPosition(0.5);
                     sleep(500);
 
-                    neutral();
+//                    neutral();
                     foward(-50);
-                    sleep(2500);
+//                    sleep(2500);
 
                     side(1000);
 
@@ -92,7 +92,7 @@ public class redBack extends universalOpMode {
                 case CENTER:
                     telemetry.addData("Center","center");
                     telemetry.update();
-                    neutral();
+//                    neutral();
                     foward(-2160);
 
                     pickupPixel();
@@ -101,7 +101,7 @@ public class redBack extends universalOpMode {
                     rightClawServo.setPosition(values.rightClawOpen);
                     sleep(1000);
 
-                    neutral();
+//                    neutral();
                     foward(-150);
                     sleep(1000);
 
@@ -124,9 +124,9 @@ public class redBack extends universalOpMode {
                     sleep(500);
                     break;
                 case RIGHT:
-                    telemetry.addData("left","left");
+                    telemetry.addData("Prop","Right");
                     telemetry.update();
-                    neutral();
+//                    neutral();
                     foward(-1300);
                     side(200);
 
@@ -141,7 +141,7 @@ public class redBack extends universalOpMode {
 
                     foward(-100);
 
-                    neutral();
+//                    neutral();
 
                     side(-1100);
 

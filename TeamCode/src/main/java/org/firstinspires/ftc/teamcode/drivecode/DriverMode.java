@@ -15,7 +15,6 @@ public class DriverMode extends universalOpMode {
         telemetry.update();
 
         wheels.setPower(1);
-        values.craneByPower = true;
 
         setOpModeType(2);
         crane.clawAintBack();
@@ -72,11 +71,8 @@ public class DriverMode extends universalOpMode {
             B is the Red Circle
             Y is the Green Triangle
             */
-            if(gamepad2.right_trigger > 0.1 && values.craneByPower) {
-                crane.move(-gamepad2.right_trigger);
-            }else if(gamepad2.left_trigger > 0.1 && values.craneByPower){
-                crane.move(gamepad2.left_trigger);
-            }else if(values.craneByPower){
+            if(gamepad2.right_trigger > 0.05 || gamepad2.left_trigger > 0.05) {
+                crane.move(-gamepad2.right_trigger + gamepad2.left_trigger);
                 crane.move(0);
             }else if(gamepad2.a) {
                 crane.move(0);
@@ -87,6 +83,8 @@ public class DriverMode extends universalOpMode {
             }else if(gamepad2.b){
                 crane.move(values.craneMax);
             }
+
+            crane.craneMaintenance();
 
             telemetry.addData("Left Crane Motor Position", crane.getCurrentLeftPosition());
             telemetry.addData("Right Crane Motor Position", crane.getCurrentRightPosition());

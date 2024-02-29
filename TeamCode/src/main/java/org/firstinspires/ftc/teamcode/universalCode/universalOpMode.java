@@ -27,7 +27,7 @@ public abstract class universalOpMode extends LinearOpMode {
         setup(0.5);
     }
     public void setup(double cranePower){
-        crane = new crane(hardwareMap, 0,true);
+        crane = new crane(hardwareMap, cranePower,true, false);
         wheels = new driveTrain(hardwareMap, this);
         leftClawServo = hardwareMap.get(Servo.class, "leftClawServo");
         rightClawServo = hardwareMap.get(Servo.class, "rightClawServo");
@@ -77,7 +77,7 @@ public abstract class universalOpMode extends LinearOpMode {
         crane.setTargetPosition(values.craneResting);
     }
     public void closeClaw() {
-        leftClawServo.setPosition(0);
-        rightClawServo.setPosition(1);
+        leftClawServo.setPosition(values.leftClawClosed);
+        rightClawServo.setPosition(values.rightClawClosed);
     }
 }
