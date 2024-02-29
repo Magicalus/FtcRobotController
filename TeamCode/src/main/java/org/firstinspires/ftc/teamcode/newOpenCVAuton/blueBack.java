@@ -51,32 +51,30 @@ public class blueBack extends universalOpMode {
 
             switch (randomization) {
                 case LEFT:
-                    telemetry.addData("left","left");
+                    telemetry.addData("Prop","left");
                     telemetry.update();
-                    neutral();
+//                    neutral();
                     foward(-1300);
                     side(-200);
 
-                    pickupPixel();
-                    sleep(500);
+//                    pickupPixel();
+//                    sleep(500);
 
                     rotate(values.turn90DegreesClockwise);
-                    foward(100);
+                    foward(200);
 
                     rightClawServo.setPosition(values.rightClawOpen);
                     sleep(500);
 
-                    foward(-100);
+                    foward(-200);
 
-                    neutral();
+//                    neutral();
 
                     side(1100);
 
-                    rotate(values.turn90DegreesCounterClockwise * 2);
-
                     while(System.currentTimeMillis() - startTime < 23000.0);
 
-                    foward(-4100);
+                    foward(4100);
 
                     pickupPixel();
 
@@ -94,16 +92,16 @@ public class blueBack extends universalOpMode {
                 case CENTER:
                     telemetry.addData("Center","center");
                     telemetry.update();
-                    neutral();
+//                    neutral();
                     foward(-2160);
 
-                    pickupPixel();
-                    sleep(750);
+//                    pickupPixel();
+//                    sleep(750);
 
                     rightClawServo.setPosition(values.rightClawOpen);
                     sleep(1000);
 
-                    neutral();
+//                    neutral();
                     foward(-150);
                     sleep(1000);
 
@@ -128,7 +126,7 @@ public class blueBack extends universalOpMode {
                     telemetry.addData("right","right");
                     telemetry.update();
 
-                    neutral();
+//                    neutral();
                     foward(-1350);
 
                     rotate(values.turn90DegreesCounterClockwise);
@@ -139,7 +137,7 @@ public class blueBack extends universalOpMode {
                     rightClawServo.setPosition(0.5);
                     sleep(500);
 
-                    neutral();
+//                    neutral();
                     foward(-50);
                     sleep(2500);
 

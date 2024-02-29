@@ -54,36 +54,33 @@ public class redBackIfTheyMove extends universalOpMode {
                 case LEFT:
                     telemetry.addData("Prop","left");
                     telemetry.update();
-                    neutral();
-                    foward(-1100);
+                    foward(-1350);
 
-                    pickupPixel();
-                    rotate(values.turn90DegreesCounterClockwise);
-
+                    rotate(values.turn90DegreesClockwise);
+//                pickupPixel();
                     foward(100);
+
                     rightClawServo.setPosition(0.5);
                     sleep(500);
 
-                    neutral();
+//                neutral();
                     foward(-100);
-                    sleep(1000);
 
-                    rotate(values.turn90DegreesClockwise);
-                    wheels.setFowardSpeed(0.4);
-                    foward(-1200);
-                    rotate(values.turn90DegreesClockwise);
+                    side(1050);
 
-                    while(System.currentTimeMillis() - startTime < 16000.0);
+                    rotate(values.turn90DegreesCounterClockwise*2);
 
-                    foward(-4000);
+                    while(System.currentTimeMillis() - startTime < 18000.0);
 
-                    side(-1700);
+                    foward(4000);
+
+                    side(1400);
 
                     placePixel();
-                    sleep(3000);
+                    sleep(2000);
 
                     wheels.setFowardSpeed(0.4);
-                    foward(-50);
+                    foward(100);
 
 //                side(250);
 //                sleep(1000);
@@ -99,7 +96,6 @@ public class redBackIfTheyMove extends universalOpMode {
                 case CENTER:
                     telemetry.addData("Prop","center");
                     telemetry.update();
-                    neutral();
                     foward(-2160);
 
                     pickupPixel();
@@ -108,64 +104,23 @@ public class redBackIfTheyMove extends universalOpMode {
                     rightClawServo.setPosition(0.5);
                     sleep(1000);
 
-                    neutral();
+//                neutral();
                     foward(-150);
                     sleep(1000);
 
-                    rotate(values.turn90DegreesClockwise);
+                    rotate(values.turn90DegreesCounterClockwise);
 
                     while(System.currentTimeMillis() - startTime < 18000.0);
 
-                    foward(-4000);
+                    foward(4000);
 
-                    side(-1463);
-
-                    placePixel();
-                    sleep(3000);
-
-                    wheels.setFowardSpeed(0.4);
-                    foward(-50);
-
-                    leftClawServo.setPosition(1);
-                    sleep(300);
-
-                    neutral();
-                    sleep(2500);
-
-                    break;
-                case RIGHT:
-                    telemetry.addData("Prop","right");
-                    telemetry.update();
-                    neutral();
-                    foward(-1160);
-
-                    pickupPixel();
-                    rotate(values.turn90DegreesCounterClockwise);
-
-                    foward(100);
-                    rightClawServo.setPosition(0.5);
-                    sleep(500);
-
-                    neutral();
-                    foward(-100);
-                    sleep(1000);
-
-                    rotate(values.turn90DegreesClockwise);
-                    wheels.setFowardSpeed(0.4);
-                    foward(-1200);
-                    rotate(values.turn90DegreesClockwise);
-
-                    while(System.currentTimeMillis() - startTime < 16000.0);
-
-                    foward(-4000);
-
-                    side(-1750);
+                    side(1050);
 
                     placePixel();
-                    sleep(3000);
+                    sleep(2000);
 
                     wheels.setFowardSpeed(0.4);
-                    foward(-50);
+                    foward(150);
 
 //                side(250);
 //                sleep(1000);
@@ -177,6 +132,49 @@ public class redBackIfTheyMove extends universalOpMode {
                     neutral();
                     sleep(2500);
 
+                    break;
+                case RIGHT:
+                    telemetry.addData("Prop","right");
+                    telemetry.update();
+                    foward(-1300);
+                    side(200);
+
+//                    pickupPixel();
+//                    sleep(500);
+
+                    rotate(values.turn90DegreesCounterClockwise);
+                    foward(200);
+
+                    rightClawServo.setPosition(values.rightClawOpen);
+                    sleep(500);
+
+                    foward(-200);
+
+//                    neutral();
+
+                    side(-1100);
+
+                    while(System.currentTimeMillis() - startTime < 18000.0);
+
+                    foward(4000);
+
+                    side(1700);
+
+                    placePixel();
+                    sleep(2000);
+
+                    wheels.setFowardSpeed(0.4);
+                    foward(100);
+
+//                side(250);
+//                sleep(1000);
+//                resetEncoders();
+
+                    leftClawServo.setPosition(1);
+                    sleep(300);
+
+                    neutral();
+                    sleep(2500);
                     break;
             }
             break;
