@@ -32,17 +32,18 @@ public class crane {
         this.clawIsBack = clawIsBack;
         targetPosition = 0;
 
-        setPower(power);
+        setPower(power, false);
+        this.power = power;
         setTargetPosition(0);
-        leftDrawerSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rightDrawerSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
+        setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
     public void setTargetPosition(int target){
-        setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        setPower(0.5, false);
         leftDrawerSlide.setTargetPosition(target);
         rightDrawerSlide.setTargetPosition(target);
+        setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        setPower(power, false);
         targetPosition = target;
     }
 
@@ -51,7 +52,7 @@ public class crane {
         rightDrawerSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         setTargetPosition(0);
-        setPower(power);
+        setPower(power, false);
 
         leftDrawerSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         rightDrawerSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -83,24 +84,29 @@ public class crane {
         }
     }
 
-    public void move(double movement){
+    public void move(double movement, boolean byPower){
         if(movement <= 1 &&
-                (getCurrentLeftPosition() + getCurrentRightPosition()) / 2 < values.craneMax){
+                movement >= -1 &&
+                getCurrentLeftPosition() < values.craneMax && byPower){
 
-            setPower(movement);
-        }else if(movement <= 1){
-            setPower(0);
+            setPower(movement, true);
+        }else if(byPower){
+            setPower(0, true);
         }else if(movement > values.craneMax){
             setTargetPosition(values.craneMax);
         }else{
             setTargetPosition((int)movement);
         }
     }
-    public void setPower(double power){
-        this.power = power;
-        setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+    public void setPower(double power, boolean powerDrive){
+        if(powerDrive) {
+            setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        }else{
+            this.power = power;
+        }
         leftDrawerSlide.setPower(power);
         rightDrawerSlide.setPower(power);
+
     }
 
     public int getCurrentLeftPosition() { return leftDrawerSlide.getCurrentPosition(); }

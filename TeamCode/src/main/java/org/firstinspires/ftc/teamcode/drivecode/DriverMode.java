@@ -72,16 +72,17 @@ public class DriverMode extends universalOpMode {
             Y is the Green Triangle
             */
             if(gamepad2.right_trigger > 0.05 || gamepad2.left_trigger > 0.05) {
-                crane.move(-gamepad2.right_trigger + gamepad2.left_trigger);
-                crane.move(0);
+                crane.move(-gamepad2.right_trigger + gamepad2.left_trigger, true);
             }else if(gamepad2.a) {
-                crane.move(0);
+                crane.move(0, false);
             }else if(gamepad2.x){
-                crane.move(950);
+                crane.move(950, false);
             }else if(gamepad2.y) {
-                crane.move(1900);
+                crane.move(1900, false);
             }else if(gamepad2.b){
-                crane.move(values.craneMax);
+                crane.move(values.craneMax, false);
+            }else{
+                crane.setPower(0, true);
             }
 
             crane.craneMaintenance();
