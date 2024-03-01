@@ -29,7 +29,7 @@ public class crane {
         clawSpinnies.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         clawSpinnies.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         clawSpinnies.setDirection(DcMotorSimple.Direction.REVERSE);
-        this.clawIsBack = clawIsBack;
+         this.clawIsBack = clawIsBack;
         targetPosition = 0;
 
         setPower(power, false);
@@ -115,7 +115,7 @@ public class crane {
     public int getCurrentSpinniesPosition(){return clawSpinnies.getCurrentPosition();}
 
     public boolean offCheck(){
-        return (getCurrentLeftPosition() > 10 && getCurrentRightPosition() < 0) || (getCurrentLeftPosition() < 0 && getCurrentRightPosition() > 10) || (getCurrentLeftPosition() < 0 && getCurrentRightPosition() < 0);
+        return (getCurrentLeftPosition() > 3 && getCurrentRightPosition() < 0) || (getCurrentLeftPosition() < 0 && getCurrentRightPosition() > 3) || (getCurrentLeftPosition() < 0 && getCurrentRightPosition() < 0);
     }
 
     public void clawAintBack(){
