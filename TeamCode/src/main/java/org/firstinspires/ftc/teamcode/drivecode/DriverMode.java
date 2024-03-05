@@ -82,7 +82,7 @@ public class DriverMode extends universalOpMode {
             }else if(gamepad2.b){
                 crane.move(values.craneMax, false);
             }else{
-                crane.setPower(0, true);
+                crane.move(crane.getCurrentLeftPosition(), false);
             }
 
             crane.craneMaintenance();

@@ -76,9 +76,9 @@ public class crane {
             clawIsBack = false;
             resetClawSpinnies();
         }else if(clawIsBack){
-            clawSpinnies.setTargetPosition(-2575);
+            clawSpinnies.setTargetPosition(-2475);
         }else if(leftDrawerSlide.getCurrentPosition() > 500){
-            clawSpinnies.setTargetPosition(500);
+            clawSpinnies.setTargetPosition(600);
         }else{
             clawSpinnies.setTargetPosition(0);
         }
@@ -115,7 +115,7 @@ public class crane {
     public int getCurrentSpinniesPosition(){return clawSpinnies.getCurrentPosition();}
 
     public boolean offCheck(){
-        return (getCurrentLeftPosition() > 3 && getCurrentRightPosition() < 0) || (getCurrentLeftPosition() < 0 && getCurrentRightPosition() > 3) || (getCurrentLeftPosition() < 0 && getCurrentRightPosition() < 0);
+        return getCurrentLeftPosition() < 0 && getCurrentRightPosition() < 0;
     }
 
     public void clawAintBack(){

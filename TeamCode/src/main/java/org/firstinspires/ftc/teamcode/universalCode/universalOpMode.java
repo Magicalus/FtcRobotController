@@ -71,7 +71,7 @@ public abstract class universalOpMode extends LinearOpMode {
         }
     }
     public void neutral(){
-        crane.setTargetPosition(values.craneResting);
+        crane.setTargetPosition(values.craneNeutral);
     }
     public void pickupPixel(){
         crane.setTargetPosition(values.craneResting);
