@@ -87,7 +87,8 @@ public class crane {
     public void move(double movement, boolean byPower){
         if(movement <= 1 &&
                 movement >= -1 &&
-                getCurrentLeftPosition() < values.craneMax && byPower){
+                getCurrentLeftPosition() < values.craneMax &&
+                byPower && ''){
 
             setPower(movement, true);
         }else if(byPower){
@@ -115,7 +116,8 @@ public class crane {
     public int getCurrentSpinniesPosition(){return clawSpinnies.getCurrentPosition();}
 
     public boolean offCheck(){
-        return getCurrentLeftPosition() < 0 && getCurrentRightPosition() < 0;
+        return (getCurrentLeftPosition() > 3 && getCurrentRightPosition() < 0) || (getCurrentLeftPosition() < 0 && getCurrentRightPosition() > 3) || (getCurrentLeftPosition() < 0 && getCurrentRightPosition() < 0);
+
     }
 
     public void clawAintBack(){
