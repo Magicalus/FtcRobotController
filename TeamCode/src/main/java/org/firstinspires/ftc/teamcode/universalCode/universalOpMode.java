@@ -23,6 +23,7 @@ public abstract class universalOpMode extends LinearOpMode {
     public long startTime;
     public Location randomization;
 
+
     public void setup(){
         setup(0.5);
     }
@@ -64,8 +65,10 @@ public abstract class universalOpMode extends LinearOpMode {
     public void placePixel(){
         if(opModeType == 0){
             crane.setTargetPosition(values.cranePlaceLowAuton);
+            //crane.setSpinniesPosition(600);
         }else if(opModeType == 1){
             crane.setTargetPosition(values.cranePlaceHighAuton);
+            //crane.setSpinniesPosition(100);
         }else{
             crane.setTargetPosition(values.cranePlaceTeleop);
         }

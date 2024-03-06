@@ -207,6 +207,9 @@ public class driveTrain {
             opMode.telemetry.addData("backLeft: ",backLeft.getCurrentPosition());
             opMode.telemetry.addData("backRight: ", jarmy.getCurrentPosition());
 
+            opMode.telemetry.addData("left draw slide", crane.getCurrentLeftPosition());
+            opMode.telemetry.addData("claw spin", crane.getCurrentSpinniesPosition());
+
             opMode.telemetry.update();
         }
         resetEncoders();
@@ -243,7 +246,7 @@ public class driveTrain {
 
         double error = degrees;
 
-        while (opMode.opModeIsActive() && Math.abs(error) > 5) {
+        while (opMode.opModeIsActive() && Math.abs(error) > 0.5) {
             crane.craneMaintenance();
             double motorPower = (error < 0 ? -rotationSpeed : rotationSpeed);
             frontLeft.setPower(-motorPower);
@@ -253,6 +256,7 @@ public class driveTrain {
             error = degrees - getAngle();
             opMode.telemetry.addData("error", error);
             opMode.telemetry.update();
+            crane.craneMaintenance();
         }
 
         frontLeft.setPower(0);

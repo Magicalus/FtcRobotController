@@ -24,6 +24,7 @@ import org.firstinspires.ftc.teamcode.supermanTESTER.PropPipeline;
 @Autonomous(name="bluefront \uD83D\uDD35")
 public class bluefront extends universalOpMode {
 
+
     @Override
     public void runOpMode() throws InterruptedException {
         setup();
@@ -113,28 +114,31 @@ public class bluefront extends universalOpMode {
                     //foward(300);
 
                     rotate(values.turn90DegreesClockwise*2);
+// why is it turning counter clockwise????
 
                     rightClawServo.setPosition(values.rightClawOpen);
                     sleep(300);
 
-                    neutral();
+                    //neutral();
 
 
                     foward(-100);
+
+                    neutral();
 
                     rotate(values.turn90DegreesCounterClockwise);
 
                     foward(1450);
 
-                    pickupPixel();
+//                    pickupPixel();
+//                    sleep(500);
                     //?
 
                     placePixel();
-                    sleep(1300);
 
-                    //side(500);
+                    side(300);
 
-//                    foward(400);
+                    foward(100);
 
                     //side(-);
 
@@ -148,7 +152,7 @@ public class bluefront extends universalOpMode {
                     side(-1050);
                     //originally side(-1350);
 
-                    foward(150);
+                    foward(450);
                     //originally foward(450);
 
                     //why joe I love you <3 THIS WAS MIGUEL I PROMISE

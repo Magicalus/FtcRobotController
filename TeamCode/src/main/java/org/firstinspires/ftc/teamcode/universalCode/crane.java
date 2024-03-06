@@ -72,11 +72,11 @@ public class crane {
         if(offCheck() && targetPosition == 0){
             resetEncoders();
         }
-        if(clawSpinnies.getCurrentPosition() < -2574){
+        if(clawSpinnies.getCurrentPosition() < -2274){
             clawIsBack = false;
             resetClawSpinnies();
         }else if(clawIsBack){
-            clawSpinnies.setTargetPosition(-2475);
+            clawSpinnies.setTargetPosition(-2275);
         }else if(leftDrawerSlide.getCurrentPosition() > 500){
             clawSpinnies.setTargetPosition(600);
         }else{
@@ -87,8 +87,8 @@ public class crane {
     public void move(double movement, boolean byPower){
         if(movement <= 1 &&
                 movement >= -1 &&
-                getCurrentLeftPosition() < values.craneMax &&
-                byPower && ''){
+                (((getCurrentLeftPosition() + getCurrentRightPosition()) / 2 < values.craneMax && movement > 0) ||
+                ((getCurrentLeftPosition() + getCurrentRightPosition()) / 2 > 0 && movement < 0)) && byPower){
 
             setPower(movement, true);
         }else if(byPower){
@@ -113,12 +113,9 @@ public class crane {
     public int getCurrentLeftPosition() { return leftDrawerSlide.getCurrentPosition(); }
 
     public int getCurrentRightPosition() { return rightDrawerSlide.getCurrentPosition(); }
-    public int getCurrentSpinniesPosition(){return clawSpinnies.getCurrentPosition();}
+    public int getCurrentSpinniesPosition() { return clawSpinnies.getCurrentPosition(); }
 
-    public boolean offCheck(){
-        return (getCurrentLeftPosition() > 3 && getCurrentRightPosition() < 0) || (getCurrentLeftPosition() < 0 && getCurrentRightPosition() > 3) || (getCurrentLeftPosition() < 0 && getCurrentRightPosition() < 0);
-
-    }
+    public boolean offCheck(){ return getCurrentLeftPosition() < 0 || getCurrentRightPosition() < 0; }
 
     public void clawAintBack(){
         clawIsBack = false;
