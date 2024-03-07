@@ -136,7 +136,7 @@ public class bluefront extends universalOpMode {
 
                     placePixel();
 
-                    side(300);
+                    //side(300);
 
                     foward(100);
 

@@ -135,8 +135,7 @@ public class driveTrain {
     }
 
     public void foward(int target){
-        resetHeadingOffset();
-        imu.resetYaw(this);
+        imu.resetYaw();
         targetHeading = 0 + headingOffset;
         waitForWheels(target, true);
     }
@@ -151,8 +150,7 @@ public class driveTrain {
     }
 
     public void side(int target){
-        resetHeadingOffset();
-        imu.resetYaw(this);
+        imu.resetYaw();
         targetHeading = 0 + headingOffset;
         waitForWheels(target, false);
     }
@@ -166,10 +164,9 @@ public class driveTrain {
     }
 
     public void rotate(int target) {
-        resetHeadingOffset();
         setPower(0);
         setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        imu.resetYaw(this);
+        imu.resetYaw();
         turnTo(-target);
         targetHeading = target + headingOffset;
         resetEncoders();
@@ -221,22 +218,17 @@ public class driveTrain {
         backLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
 
-    public void resetHeadingOffset(){
-        //headingOffset = targetHeading - imu.getYaw();
-    }
-
     public void turnTo(double degrees){
 
         double yaw = imu.getYaw();
 
-        System.out.println(yaw);
         double error = degrees - yaw;
 
-        if (error > 180) {
-            error -= 360;
-        } else if (error < -180) {
-            error += 360;
-        }
+//        if (error > 180) {
+//            error -= 360;
+//        } else if (error < -180) {
+//            error += 360;
+//        }
 
         turn(error);
     }
@@ -245,15 +237,24 @@ public class driveTrain {
         resetAngle();
 
         double error = degrees;
+        ElapsedTime inMargin = new ElapsedTime();
+        inMargin.reset();
+        double motorPower = 0;
 
-        while (opMode.opModeIsActive() && Math.abs(error) > 0.5) {
+        while (opMode.opModeIsActive() && (Math.abs(error) > 0.5 || Math.abs(error) < 359.5) && inMargin.time() < 1) {
             crane.craneMaintenance();
-            double motorPower = (error < 0 ? -rotationSpeed : rotationSpeed);
+            if(Math.abs(error) < 20 || Math.abs(error) > 340){
+                rotationSpeed = 0.2;
+            }else if(Math.abs(error) < 0.5 || Math.abs(error) > 359.5){
+                inMargin.reset();
+                rotationSpeed = 0.5;
+            }
+            motorPower = (error < 180 ? -rotationSpeed : rotationSpeed);
             frontLeft.setPower(-motorPower);
             frontRight.setPower(motorPower);
             backLeft.setPower(-motorPower);
             jarmy.setPower(motorPower);
-            error = degrees - getAngle();
+            error -= getAngle();
             opMode.telemetry.addData("error", error);
             opMode.telemetry.update();
             crane.craneMaintenance();
@@ -284,11 +285,12 @@ public class driveTrain {
         currAngle += deltaAngle;
         lastAngle = yaw;
         opMode.telemetry.addData("gyro", yaw);
-        return currAngle;
+        return deltaAngle;
     }
 
     public void resetAngle() {
         lastAngle = imu.getYaw();
         currAngle = 0;
+        imu.resetYaw();
     }
 }
