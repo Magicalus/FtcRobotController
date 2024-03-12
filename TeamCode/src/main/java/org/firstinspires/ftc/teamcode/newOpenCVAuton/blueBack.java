@@ -1,21 +1,10 @@
 package org.firstinspires.ftc.teamcode.newOpenCVAuton;
 
-import android.util.Size;
-
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.Servo;
-
-import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.supermanTESTER.Globals;
 import org.firstinspires.ftc.teamcode.supermanTESTER.Location;
-import org.firstinspires.ftc.teamcode.supermanTESTER.PropPipeline;
-import org.firstinspires.ftc.teamcode.universalCode.crane;
-import org.firstinspires.ftc.teamcode.universalCode.driveTrain;
 import org.firstinspires.ftc.teamcode.universalCode.universalOpMode;
 import org.firstinspires.ftc.teamcode.universalCode.values;
-import org.firstinspires.ftc.vision.VisionPortal;
 
 
 //@Disabled
@@ -45,13 +34,13 @@ public class blueBack extends universalOpMode {
         portal.close();
 
         waitForStart();
-        while(opModeIsActive() && !isStopRequested()){
+        while (opModeIsActive() && !isStopRequested()) {
             startTime = System.currentTimeMillis();
             wheels.resetEncoders();
 
             switch (randomization) {
                 case LEFT:
-                    telemetry.addData("Prop","left");
+                    telemetry.addData("Prop", "left");
                     telemetry.update();
 //                    neutral();
                     foward(-1300);
@@ -72,7 +61,7 @@ public class blueBack extends universalOpMode {
 
                     side(1100);
 
-                    while(System.currentTimeMillis() - startTime < 23000.0);
+                    while (System.currentTimeMillis() - startTime < 23000.0) ;
 
                     foward(4100);
 

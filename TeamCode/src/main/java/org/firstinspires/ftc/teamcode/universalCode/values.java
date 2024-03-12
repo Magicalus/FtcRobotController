@@ -3,10 +3,10 @@ package org.firstinspires.ftc.teamcode.universalCode;
 public class values {
 
     //Claw Positions
-    public static double leftClawOpen = 0.25;
+    public static double leftClawOpen = 0.3;
     public static double leftClawClosed = 0;
-    public static double rightClawOpen = 0.5;
-    public static double rightClawClosed = 0.8;
+    public static double rightClawOpen = 0.7;
+    public static double rightClawClosed = 1;
 
 
     //Airplane Servo Positions (REDO)

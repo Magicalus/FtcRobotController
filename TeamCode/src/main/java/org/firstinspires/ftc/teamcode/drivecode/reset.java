@@ -1,13 +1,7 @@
 package org.firstinspires.ftc.teamcode.drivecode;
 
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.Servo;
 
-import org.firstinspires.ftc.teamcode.universalCode.crane;
-import org.firstinspires.ftc.teamcode.universalCode.driveTrain;
 import org.firstinspires.ftc.teamcode.universalCode.universalOpMode;
 import org.firstinspires.ftc.teamcode.universalCode.values;
 
@@ -20,7 +14,7 @@ public class reset extends universalOpMode {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
-        crane.resetEncoders();
+        slides.resetEncoders();
 
         airplaneLauncher.setPosition(values.airplaneServoResting);
     }

@@ -1,14 +1,8 @@
 package org.firstinspires.ftc.teamcode.universalCode;
 
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.util.ElapsedTime;
-
-import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
-import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
 
 
 public class driveTrain {
@@ -18,27 +12,20 @@ public class driveTrain {
     public DcMotor jarmy;
 
     public IMUInterface imu;
-    public double headingOffset;
     public double targetHeading;
 
     private double fowardSpeed = 0.75;
-    private double sideSpeed = 0.75;
-    private double rotationSpeed = 0.5;
 
     private double lastAngle;
     private double currAngle = 0;
-
-    public double rotationMargin = 1;
     private double speed = 1;
+    private double headingOffset = 0;
 
     private boolean auton = false;
 
-    //Should only be true when testing with blue back if they move
-    private boolean debug = false;
+    private final universalOpMode opMode;
 
-    private LinearOpMode opMode;
-
-    private crane crane;
+    private final crane crane;
 
     public driveTrain(HardwareMap hardwareMap, universalOpMode opmode){
         // Initialize the hardware variables. Note that the strings used here as parameters
@@ -63,11 +50,9 @@ public class driveTrain {
 
         targetHeading = 0;
 
-        headingOffset = 0;
-
         opMode = opmode;
 
-        this.crane = opmode.crane;
+        crane = opMode.slides;
     }
     public void manualDrive(double frontLeftPower, double frontRightPower, double backLeftPower, double jarmyPower){
         frontLeft.setPower(frontLeftPower * speed);
@@ -135,8 +120,8 @@ public class driveTrain {
     }
 
     public void foward(int target){
-        imu.resetYaw();
-        targetHeading = 0 + headingOffset;
+       resetAngle();
+        targetHeading = 0 - headingOffset;
         waitForWheels(target, true);
     }
 
@@ -150,11 +135,12 @@ public class driveTrain {
     }
 
     public void side(int target){
-        imu.resetYaw();
-        targetHeading = 0 + headingOffset;
+        resetAngle();
+        targetHeading = 0 - headingOffset;
         waitForWheels(target, false);
     }
     private void continueSide(){
+        double sideSpeed = 0.75;
         double frontLeftCorner = sideSpeed - sideSpeed * (Math.max(imu.getYaw(), 0) / 90);
         double frontRightCorner = - (sideSpeed - sideSpeed * (Math.max(-imu.getYaw(), 0) / 90));
         frontLeft.setPower(frontLeftCorner);
@@ -164,11 +150,11 @@ public class driveTrain {
     }
 
     public void rotate(int target) {
+        resetAngle();
         setPower(0);
         setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        imu.resetYaw();
         turnTo(-target);
-        targetHeading = target + headingOffset;
+        targetHeading = target;
         resetEncoders();
         opMode.sleep(100);
 
@@ -180,7 +166,7 @@ public class driveTrain {
             this.moveByEncoder(frontRight, target, 0);
             this.moveByEncoder(backLeft, target, 0);
             this.moveByEncoder(jarmy, target, 0);
-        }else {
+        }else{
             this.moveByEncoder(frontLeft, target, 0);
             this.moveByEncoder(frontRight, -target, 0);
             this.moveByEncoder(backLeft, -target, 0);
@@ -208,6 +194,7 @@ public class driveTrain {
             opMode.telemetry.addData("claw spin", crane.getCurrentSpinniesPosition());
 
             opMode.telemetry.update();
+            crane.craneMaintenance();
         }
         resetEncoders();
     }
@@ -219,43 +206,46 @@ public class driveTrain {
     }
 
     public void turnTo(double degrees){
-
+        resetAngle();
         double yaw = imu.getYaw();
 
-        double error = degrees - yaw;
+        System.out.println(yaw);
+        double error = degrees - yaw - headingOffset;
+        boolean one80 = false;
 
-//        if (error > 180) {
-//            error -= 360;
-//        } else if (error < -180) {
-//            error += 360;
-//        }
+        if (error > 180){
+            one80 = true;
+            error -= 90;
+        }else if(error < -180) {
+            one80 = true;
+            error += 90;
+        }
 
-        turn(error);
+        turn(error, one80);
     }
 
-    public void turn(double degrees){
-        resetAngle();
+    public void turn(double degrees, boolean one80){
 
         double error = degrees;
-        ElapsedTime inMargin = new ElapsedTime();
-        inMargin.reset();
-        double motorPower = 0;
 
-        while (opMode.opModeIsActive() && (Math.abs(error) > 0.5 || Math.abs(error) < 359.5) && inMargin.time() < 1) {
+        while (opMode.opModeIsActive() && Math.abs(error) > 1.5) {
             crane.craneMaintenance();
-            if(Math.abs(error) < 20 || Math.abs(error) > 340){
-                rotationSpeed = 0.2;
-            }else if(Math.abs(error) < 0.5 || Math.abs(error) > 359.5){
-                inMargin.reset();
-                rotationSpeed = 0.5;
+            double motorPower = (error < 0 ? -0.5 : 0.5);
+            motorPower *= Math.min(1, Math.abs(error /20));
+            if(Math.abs(motorPower) < 0.001){
+                break;
             }
-            motorPower = (error < 180 ? -rotationSpeed : rotationSpeed);
             frontLeft.setPower(-motorPower);
             frontRight.setPower(motorPower);
             backLeft.setPower(-motorPower);
             jarmy.setPower(motorPower);
-            error -= getAngle();
+            error = degrees - getAngle();
+            if(one80 && Math.abs(error) < 80){
+                error += (error < 0 ? -90 : 90);
+                one80 = false;
+            }
             opMode.telemetry.addData("error", error);
+            opMode.telemetry.addData("raw yaw", imu.getYaw());
             opMode.telemetry.update();
             crane.craneMaintenance();
         }
@@ -282,14 +272,15 @@ public class driveTrain {
         }
 
         // Add change in angle to current angle to get current angle
+        lastAngle = currAngle;
         currAngle += deltaAngle;
-        lastAngle = yaw;
         opMode.telemetry.addData("gyro", yaw);
-        return deltaAngle;
+        return currAngle;
     }
 
     public void resetAngle() {
-        lastAngle = imu.getYaw();
+        headingOffset = currAngle;
+        lastAngle = 0;
         currAngle = 0;
         imu.resetYaw();
     }

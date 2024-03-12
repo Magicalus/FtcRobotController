@@ -18,7 +18,7 @@ public class DriverMode extends universalOpMode {
         wheels.setPower(1);
 
         setOpModeType(2);
-        crane.clawAintBack();
+        slides.clawAintBack();
 
         telemetry.update();
 
@@ -30,7 +30,7 @@ public class DriverMode extends universalOpMode {
         telemetry.update();
         waitForStart();
         airplaneLauncher.setPosition(values.airplaneServoResting);
-        crane.resetEncoders();
+        slides.resetEncoders();
         while (opModeIsActive()) {
             telemetry.addData("Status", "Running");
 
@@ -73,23 +73,23 @@ public class DriverMode extends universalOpMode {
             Y is the Green Triangle
             */
             if(gamepad2.right_trigger > 0.05 || gamepad2.left_trigger > 0.05) {
-                crane.move(-gamepad2.right_trigger + gamepad2.left_trigger, true);
+                slides.move(-gamepad2.right_trigger + gamepad2.left_trigger, true);
             }else if(gamepad2.a) {
-                crane.move(0, false);
+                slides.move(0, false);
             }else if(gamepad2.x){
-                crane.move(750, false);
+                slides.move(750, false);
             }else if(gamepad2.y) {
-                crane.move(1700, false);
+                slides.move(1700, false);
             }else if(gamepad2.b){
-                crane.move(values.craneMax, false);
+                slides.move(values.craneMax, false);
             }else{
-                crane.move(crane.getCurrentLeftPosition(), false);
+                slides.move(slides.getCurrentLeftPosition(), false);
             }
 
-            crane.craneMaintenance();
+            slides.craneMaintenance();
 
-            telemetry.addData("Left Crane Motor Position", crane.getCurrentLeftPosition());
-            telemetry.addData("Right Crane Motor Position", crane.getCurrentRightPosition());
+            telemetry.addData("Left Crane Motor Position", slides.getCurrentLeftPosition());
+            telemetry.addData("Right Crane Motor Position", slides.getCurrentRightPosition());
             telemetry.update();
 
         }

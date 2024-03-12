@@ -8,14 +8,16 @@ public class valueTesting extends universalOpMode{
     public void runOpMode() {
         setup();
         wheels.setPower(0);
+        slides.clawAintBack();
+        slides.setPower(0, true);
         waitForStart();
         while(opModeIsActive()){
-            telemetry.addData("Left Crane: ", crane.getCurrentLeftPosition());
-            telemetry.addData("Right Crane: ", crane.getCurrentRightPosition());
-            telemetry.addData("Is Claw Back? ", crane.clawIsBack);
-            telemetry.addData("Spinnies position: ", crane.getCurrentSpinniesPosition());
-            telemetry.update();
-            crane.craneMaintenance();
+            leftClawServo.setPosition(values.leftClawClosed);
+            rightClawServo.setPosition(values.rightClawClosed);
+            sleep(5000);
+            leftClawServo.setPosition(values.leftClawOpen);
+            rightClawServo.setPosition(values.rightClawOpen);
+            sleep(5000);
         }
     }
 }

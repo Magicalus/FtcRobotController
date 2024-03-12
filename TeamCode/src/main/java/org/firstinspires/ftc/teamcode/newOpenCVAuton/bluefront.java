@@ -1,23 +1,12 @@
 package org.firstinspires.ftc.teamcode.newOpenCVAuton;
 
-import android.util.Size;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.Servo;
-
-import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-import org.firstinspires.ftc.teamcode.universalCode.crane;
-import org.firstinspires.ftc.teamcode.universalCode.driveTrain;
 import org.firstinspires.ftc.teamcode.universalCode.universalOpMode;
 import org.firstinspires.ftc.teamcode.universalCode.values;
 
-import org.firstinspires.ftc.vision.VisionPortal;
-
 import org.firstinspires.ftc.teamcode.supermanTESTER.Globals;
 import org.firstinspires.ftc.teamcode.supermanTESTER.Location;
-import org.firstinspires.ftc.teamcode.supermanTESTER.PropPipeline;
 
 
 //@Disabled

@@ -3,7 +3,6 @@ package org.firstinspires.ftc.teamcode.universalCode;
 import android.util.Size;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
@@ -13,7 +12,7 @@ import org.firstinspires.ftc.vision.VisionPortal;
 
 public abstract class universalOpMode extends LinearOpMode {
 
-    public crane crane;
+    public crane slides;
     public driveTrain wheels;
     public Servo leftClawServo;
     public Servo rightClawServo;
@@ -23,12 +22,14 @@ public abstract class universalOpMode extends LinearOpMode {
     public long startTime;
     public Location randomization;
 
+//    public Servo goose;
+
 
     public void setup(){
         setup(0.5);
     }
     public void setup(double cranePower){
-        crane = new crane(hardwareMap, cranePower,true, false);
+        slides = new crane(hardwareMap, cranePower,true, false);
         wheels = new driveTrain(hardwareMap, this);
         leftClawServo = hardwareMap.get(Servo.class, "leftClawServo");
         rightClawServo = hardwareMap.get(Servo.class, "rightClawServo");
@@ -64,20 +65,20 @@ public abstract class universalOpMode extends LinearOpMode {
     }
     public void placePixel(){
         if(opModeType == 0){
-            crane.setTargetPosition(values.cranePlaceLowAuton);
+            slides.setTargetPosition(values.cranePlaceLowAuton);
             //crane.setSpinniesPosition(600);
         }else if(opModeType == 1){
-            crane.setTargetPosition(values.cranePlaceHighAuton);
+            slides.setTargetPosition(values.cranePlaceHighAuton);
             //crane.setSpinniesPosition(100);
         }else{
-            crane.setTargetPosition(values.cranePlaceTeleop);
+            slides.setTargetPosition(values.cranePlaceTeleop);
         }
     }
     public void neutral(){
-        crane.setTargetPosition(values.craneNeutral);
+        slides.setTargetPosition(values.craneNeutral);
     }
     public void pickupPixel(){
-        crane.setTargetPosition(values.craneResting);
+        slides.setTargetPosition(values.craneResting);
     }
     public void closeClaw() {
         leftClawServo.setPosition(values.leftClawClosed);
