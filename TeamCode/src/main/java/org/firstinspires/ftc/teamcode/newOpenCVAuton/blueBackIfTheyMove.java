@@ -118,15 +118,15 @@ public class blueBackIfTheyMove extends universalOpMode {
 
                 while(System.currentTimeMillis() - startTime < 18000.0);
 
-                foward(4000);
+                foward(3600);
 
-                side(-1050);
+                side(-1550);
 
                 placePixel();
                 sleep(2000);
 
                 wheels.setFowardSpeed(0.4);
-                foward(150);
+                foward(350);
 
 //                side(250);
 //                sleep(1000);
@@ -134,6 +134,8 @@ public class blueBackIfTheyMove extends universalOpMode {
 
                 leftClawServo.setPosition(1);
                 sleep(300);
+
+                foward(-300);
 
                 neutral();
                 sleep(2500);
