@@ -58,9 +58,9 @@ public class DriverMode extends universalOpMode {
                 airplaneLauncher.setPosition((values.airplaneServoResting));
             }
 
-            if (gamepad1.dpad_down) {
+            if (gamepad1.dpad_left) {
                 wheels.setPower(0.25);
-            } else if (gamepad1.dpad_up) {
+            } else if (gamepad1.dpad_right) {
                 wheels.setPower(1);
             }
                 
@@ -72,8 +72,8 @@ public class DriverMode extends universalOpMode {
             B is the Red Circle
             Y is the Green Triangle
             */
-            if((gamepad2.right_trigger > 0.05 || gamepad2.left_trigger > 0.05) && false) {
-                slides.move(-gamepad2.right_trigger + gamepad2.left_trigger, true);
+            if(gamepad2.right_trigger > 0.05 || gamepad2.left_trigger > 0.05) {
+                slides.move(gamepad2.right_trigger - gamepad2.left_trigger, true);
             }else if(gamepad2.a) {
                 slides.move(0, false);
             }else if(gamepad2.x){
@@ -90,6 +90,7 @@ public class DriverMode extends universalOpMode {
 
             telemetry.addData("Left Crane Motor Position", slides.getCurrentLeftPosition());
             telemetry.addData("Right Crane Motor Position", slides.getCurrentRightPosition());
+            telemetry.addData("Trigger total:", gamepad2.right_trigger + gamepad2.left_trigger);
             telemetry.update();
 
         }

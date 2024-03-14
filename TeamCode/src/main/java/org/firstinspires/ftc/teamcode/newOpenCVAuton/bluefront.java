@@ -48,14 +48,12 @@ public class bluefront extends universalOpMode {
                     telemetry.addData("Prop","left");
                     telemetry.update();
 
-                    foward(-1250);
+                    foward(-1050);
 
                     rotate(values.turn90DegreesCounterClockwise);
-                    foward(-100);
-                    side(700);
 
-                    foward(-800);
-                    side(-700);
+                    foward(-900);
+                    side(-400);
 
                     rightClawServo.setPosition(values.rightClawOpen);
                     sleep(500);
@@ -68,14 +66,13 @@ public class bluefront extends universalOpMode {
                     rotate(values.turn90DegreesClockwise);
 
 
-                    foward(500);
-
-                    side(-600);
+                    side(-700);
+                    foward(400);
 
                     leftClawServo.setPosition(values.leftClawOpen);
                     sleep(500);
 
-                    neutral();
+                    pickupPixel();
                     sleep(1000);
 
                     foward(-200);

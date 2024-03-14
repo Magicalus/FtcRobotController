@@ -67,7 +67,7 @@ public class blueBackIfTheyMove extends universalOpMode {
                 foward(200);
 
                 rightClawServo.setPosition(values.rightClawOpen);
-                sleep(500);
+                sleep(100);
 
                 foward(-200);
 
@@ -75,26 +75,26 @@ public class blueBackIfTheyMove extends universalOpMode {
 
                 side(1100);
 
-                while(System.currentTimeMillis() - startTime < 18000.0);
+                while(System.currentTimeMillis() - startTime < 16000.0);
 
-                foward(4000);
+                foward(3500);
 
-                side(-1700);
+                side(-1400);
 
                 placePixel();
-                sleep(2000);
 
-                wheels.setFowardSpeed(0.4);
-                foward(100);
+                foward(25);
 
 //                side(250);
 //                sleep(1000);
 //                resetEncoders();
 
                 leftClawServo.setPosition(1);
-                sleep(300);
+                sleep(100);
 
-                neutral();
+                foward(-100);
+
+                placePixel();
                 sleep(2500);
 
                 break;
@@ -112,77 +112,55 @@ public class blueBackIfTheyMove extends universalOpMode {
                 foward(-200);
                 rotate(values.turn90DegreesClockwise);
                 foward(600);
-                side(-1600);
+                side(-1500);
 
-                while(System.currentTimeMillis() - startTime < 18000.0);
+                while(System.currentTimeMillis() - startTime < 16000.0);
 
-                foward(-2750);
-                side(1600);
+                foward(-3350);
+                side(1500);
+                placePixel();
                 rotate(values.turn90DegreesClockwise);
                 sleep(50);
                 rotate(values.turn90DegreesClockwise);
-                placePixel();
-                foward(350);
-
-
-                foward(300);
+                foward(1150);
 
                 leftClawServo.setPosition(values.leftClawOpen);
-                sleep(300);
+                sleep(100);
 
-                neutral();
+                pickupPixel();
 
                 //why joe I love you <3 THIS WAS MIGUEL I PROMISE
                 break;
             case RIGHT:
                 telemetry.addData("Prop","Right");
                 telemetry.update();
-                foward(-1120);
-
-                //rotate(values.turn90DegreesClockwise);
-                //pickupPixel();
-
-                //foward(300);
-
-                rotate(values.turn90DegreesClockwise);
-                sleep(50);
-                rotate(values.turn90DegreesClockwise);
+                foward(-1920);
+                side(-750);
 
                 rightClawServo.setPosition(values.rightClawOpen);
-                sleep(300);
+                sleep(100);
 
                 //neutral();
 
 
-                foward(-100);
+                foward(-400);
 
-                rotate(values.turn90DegreesClockwise);
+                rotate(values.turn90DegreesCounterClockwise);
 
-                while(System.currentTimeMillis() - startTime < 20000.0);
+                while(System.currentTimeMillis() - startTime < 18000.0);
 
-                foward(1450);
+                foward(-3350);
+                side(1200);
+                placePixel();
                 rotate(values.turn90DegreesClockwise);
                 sleep(50);
                 rotate(values.turn90DegreesClockwise);
-                placePixel();
-                foward(1450);
-
-//                    pickupPixel();
-//                    sleep(500);
-                //?
-
-
-                //side(300);
-
-                foward(300);
-                side(200);
-
-                //side(-);
+                foward(1150);
 
                 leftClawServo.setPosition(values.leftClawOpen);
-                sleep(300);
+                sleep(100);
 
-                neutral();
+                pickupPixel();
 
                 //why joe I love you <3 THIS WAS MIGUEL I PROMISE
                 break;

@@ -228,7 +228,7 @@ public class driveTrain {
 
         double error = degrees;
 
-        while (opMode.opModeIsActive() && Math.abs(error) > 1.5) {
+        while (opMode.opModeIsActive() && Math.abs(error) > 0.5) {
             crane.craneMaintenance();
             double motorPower = (error < 0 ? -0.5 : 0.5);
             motorPower *= Math.min(1, Math.abs(error /20));

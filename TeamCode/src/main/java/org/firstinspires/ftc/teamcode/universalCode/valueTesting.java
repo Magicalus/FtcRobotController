@@ -9,7 +9,6 @@ public class valueTesting extends universalOpMode{
         setup();
         wheels.setPower(0);
         slides.clawAintBack();
-        slides.setPower(0, true);
         waitForStart();
         while(opModeIsActive()){
             leftClawServo.setPosition(values.leftClawClosed);
