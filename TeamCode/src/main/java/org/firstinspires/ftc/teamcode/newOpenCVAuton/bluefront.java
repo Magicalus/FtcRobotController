@@ -50,34 +50,27 @@ public class bluefront extends universalOpMode {
 
                     foward(-1250);
 
-//                    pickupPixel();
-//                    sleep(500);
+                    rotate(values.turn90DegreesCounterClockwise);
+                    foward(-100);
+                    side(700);
 
-                    rotate(values.turn90DegreesClockwise);
-
-                    foward(900);
+                    foward(-800);
+                    side(-700);
 
                     rightClawServo.setPosition(values.rightClawOpen);
                     sleep(500);
 
-//                    neutral();
-//                    sleep(500);
-//                    rightClawServo.setPosition(values.rightClawClosed);
+                    foward(-300);
 
                     placePixel();
+                    rotate(values.turn90DegreesClockwise);
+                    sleep(50);
+                    rotate(values.turn90DegreesClockwise);
 
-                    foward(700);
-                    //this may or may not just fully bump the purple out
 
-                    //side(150);
-                    //sleep(1000);
-                    //resetEncoders();
+                    foward(500);
 
-                    //foward(-100);
-                    //sleep(1000);
-                    //resetEncoders();
-
-                    side(-800);
+                    side(-600);
 
                     leftClawServo.setPosition(values.leftClawOpen);
                     sleep(500);
@@ -88,8 +81,6 @@ public class bluefront extends universalOpMode {
                     foward(-200);
 
                     side(-1050);
-
-                    foward(350);
 
                     break;
                 case CENTER:
@@ -102,8 +93,9 @@ public class bluefront extends universalOpMode {
 
                     //foward(300);
 
-                    rotate(values.turn90DegreesClockwise*2);
-// why is it turning counter clockwise????
+                    rotate(values.turn90DegreesClockwise);
+                    sleep(50);
+                    rotate(values.turn90DegreesClockwise);
 
                     rightClawServo.setPosition(values.rightClawOpen);
                     sleep(300);
@@ -117,32 +109,28 @@ public class bluefront extends universalOpMode {
 
                     rotate(values.turn90DegreesCounterClockwise);
 
-                    foward(1450);
+                    placePixel();
+                    foward(1350);
 
 //                    pickupPixel();
 //                    sleep(500);
                     //?
 
-                    placePixel();
 
                     //side(300);
 
-                    foward(100);
+                    foward(200);
+                    side(200);
 
                     //side(-);
 
                     leftClawServo.setPosition(values.leftClawOpen);
                     sleep(300);
 
-                    neutral();
-                    sleep(1300);
                     foward(-250);
+                    pickupPixel();
 
-                    side(-1050);
-                    //originally side(-1350);
-
-                    foward(450);
-                    //originally foward(450);
+                    side(-1250);
 
                     //why joe I love you <3 THIS WAS MIGUEL I PROMISE
                     break;
@@ -151,41 +139,34 @@ public class bluefront extends universalOpMode {
                     telemetry.update();
 
                     foward(-1300);
-//                    side(200);
 
-//                    pickupPixel();
-//                    sleep(500);
+                    side(100);
 
                     rotate(values.turn90DegreesCounterClockwise);
                     //foward(100);
 
-
-//
-//                    foward(150);
                     rightClawServo.setPosition(values.rightClawOpen);
-                    sleep(700);
+                    sleep(100);
 
-//                    neutral();
-//                    sleep(500);
-
-                    foward(-1600);
+                    foward(-1200);
                     placePixel();
 
-                    rotate(values.turn90DegreesCounterClockwise*2);
+                    rotate(values.turn90DegreesCounterClockwise);
+                    sleep(50);
+                    rotate(values.turn90DegreesCounterClockwise);
 
-                    side(470);
-                    //foward(300);
+                    foward(470);
+
+                    side(270);
                     leftClawServo.setPosition(values.leftClawOpen);
-                    sleep(500);
+                    sleep(100);
 
                     neutral();
                     sleep(2500);
 
                     foward(-200);
 
-                    side(-1600);
-
-                    foward(350);
+                    side(-1800);
 
                     break;
             }

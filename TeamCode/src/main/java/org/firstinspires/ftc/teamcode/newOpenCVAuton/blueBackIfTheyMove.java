@@ -99,90 +99,92 @@ public class blueBackIfTheyMove extends universalOpMode {
 
                 break;
             case CENTER:
-                telemetry.addData("Center","center");
+                telemetry.addData("Prop","center");
                 telemetry.update();
-//                neutral();
-                foward(-2160);
+                foward(-1120);
 
-                pickupPixel();
-                sleep(500);
+                rotate(values.turn90DegreesCounterClockwise);
+                sleep(50);
+                rotate(values.turn90DegreesCounterClockwise);
 
-                rightClawServo.setPosition(0.5);
-                sleep(1000);
+                rightClawServo.setPosition(values.rightClawOpen);
+                sleep(100);
+                foward(-200);
+                rotate(values.turn90DegreesClockwise);
+                foward(600);
+                side(-1600);
 
-//                neutral();
-                foward(-150);
-                sleep(1000);
+                while(System.currentTimeMillis() - startTime < 18000.0);
+
+                foward(-2750);
+                side(1600);
+                rotate(values.turn90DegreesClockwise);
+                sleep(50);
+                rotate(values.turn90DegreesClockwise);
+                placePixel();
+                foward(350);
+
+
+                foward(300);
+
+                leftClawServo.setPosition(values.leftClawOpen);
+                sleep(300);
+
+                neutral();
+
+                //why joe I love you <3 THIS WAS MIGUEL I PROMISE
+                break;
+            case RIGHT:
+                telemetry.addData("Prop","Right");
+                telemetry.update();
+                foward(-1120);
+
+                //rotate(values.turn90DegreesClockwise);
+                //pickupPixel();
+
+                //foward(300);
+
+                rotate(values.turn90DegreesClockwise);
+                sleep(50);
+                rotate(values.turn90DegreesClockwise);
+
+                rightClawServo.setPosition(values.rightClawOpen);
+                sleep(300);
+
+                //neutral();
+
+
+                foward(-100);
 
                 rotate(values.turn90DegreesClockwise);
 
-                while(System.currentTimeMillis() - startTime < 18000.0);
+                while(System.currentTimeMillis() - startTime < 20000.0);
 
-                foward(3600);
-
-                side(-1550);
-
+                foward(1450);
+                rotate(values.turn90DegreesClockwise);
+                sleep(50);
+                rotate(values.turn90DegreesClockwise);
                 placePixel();
-                sleep(2000);
+                foward(1450);
 
-                wheels.setFowardSpeed(0.4);
-                foward(350);
+//                    pickupPixel();
+//                    sleep(500);
+                //?
 
-//                side(250);
-//                sleep(1000);
-//                resetEncoders();
 
-                leftClawServo.setPosition(1);
-                sleep(300);
+                //side(300);
 
-                foward(-300);
+                foward(300);
+                side(200);
 
-                neutral();
-                sleep(2500);
-                break;
-            case RIGHT:
-                telemetry.addData("right","right");
-                telemetry.update();
-//                neutral();
-                foward(-1350);
+                //side(-);
 
-                rotate(values.turn90DegreesCounterClockwise);
-//                pickupPixel();
-                foward(100);
-
-                rightClawServo.setPosition(0.5);
-                sleep(500);
-
-//                neutral();
-                foward(-100);
-
-                side(-1050);
-
-                rotate(values.turn90DegreesCounterClockwise*2);
-
-                while(System.currentTimeMillis() - startTime < 18000.0);
-
-                foward(4000);
-
-                side(-1400);
-
-                placePixel();
-                sleep(2000);
-
-                wheels.setFowardSpeed(0.4);
-                foward(100);
-
-//                side(250);
-//                sleep(1000);
-//                resetEncoders();
-
-                leftClawServo.setPosition(1);
+                leftClawServo.setPosition(values.leftClawOpen);
                 sleep(300);
 
                 neutral();
-                sleep(2500);
 
-
+                //why joe I love you <3 THIS WAS MIGUEL I PROMISE
                 break;
 
         }

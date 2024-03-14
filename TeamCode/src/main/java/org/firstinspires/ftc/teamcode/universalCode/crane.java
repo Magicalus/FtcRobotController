@@ -72,11 +72,11 @@ public class crane {
         if(offCheck() && targetPosition == 0){
             resetEncoders();
         }
-        if(clawSpinnies.getCurrentPosition() < -2274){
+        if(clawSpinnies.getCurrentPosition() < -2574){
             clawIsBack = false;
             resetClawSpinnies();
         }else if(clawIsBack){
-            clawSpinnies.setTargetPosition(-2275);
+            clawSpinnies.setTargetPosition(-2575);
         }else if(leftDrawerSlide.getCurrentPosition() > 500){
             clawSpinnies.setTargetPosition(600);
         }else{

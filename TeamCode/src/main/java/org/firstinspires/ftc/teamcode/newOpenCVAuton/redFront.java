@@ -58,134 +58,120 @@ public class redFront extends universalOpMode {
                     telemetry.update();
 
                     foward(-1300);
-                    side(-200);
 
-//                    pickupPixel();
-//                    sleep(500);
+                    side(-100);
 
                     rotate(values.turn90DegreesClockwise);
-                    foward(100);
+                    //foward(100);
 
-
-
-                    foward(150);
                     rightClawServo.setPosition(values.rightClawOpen);
-                    sleep(700);
+                    sleep(100);
 
-//                    neutral();
-//                    sleep(500);
-
-                    foward(-1600);
-                    rotate(values.turn90DegreesClockwise*2);
+                    foward(-1200);
                     placePixel();
 
-                    side(-300);
-                    foward(300);
-                    leftClawServo.setPosition(values.leftClawOpen);
-                    sleep(500);
+                    rotate(values.turn90DegreesCounterClockwise);
+                    sleep(50);
+                    rotate(values.turn90DegreesCounterClockwise);
 
-//                    neutral();
-//                    sleep(2500);
+                    side(-240);
+                    foward(470);
+
+                    leftClawServo.setPosition(values.leftClawOpen);
+                    sleep(100);
+
+                    pickupPixel();
 
                     foward(-200);
 
                     side(1800);
 
-                    foward(350);
-
                     break;
                 case CENTER:
                     telemetry.addData("Prop","center");
                     telemetry.update();
+                    foward(-1120);
 
-                    foward(-820);
-
-                    rotate(values.turn90DegreesCounterClockwise * 2);
-
+                    //rotate(values.turn90DegreesClockwise);
                     //pickupPixel();
 
-                    foward(280);
+                    //foward(300);
+
+                    rotate(values.turn90DegreesCounterClockwise);
+                    sleep(50);
+                    rotate(values.turn90DegreesCounterClockwise);
 
                     rightClawServo.setPosition(values.rightClawOpen);
                     sleep(300);
 
-//                    neutral();
-//                    sleep(500);
+                    //neutral();
 
-                    foward(-100);
+
+                    foward(-200);
 
                     rotate(values.turn90DegreesClockwise);
 
-                    foward(1750);
-
                     placePixel();
-                    sleep(1300);
+                    foward(1350);
 
-//                    side(-500);
+//                    pickupPixel();
+//                    sleep(500);
+                    //?
 
-//                    foward(400);
+
+                    //side(300);
+
+                    foward(200);
+                    side(-200);
 
                     //side(-);
 
-                    leftClawServo.setPosition(1);
+                    leftClawServo.setPosition(values.leftClawOpen);
                     sleep(300);
 
-                    neutral();
-                    sleep(1300);
                     foward(-250);
+                    pickupPixel();
 
-                    side(1850);
-                    //originally side(1350);
-
-                    foward(450);
+                    side(1250);
 
                     //why joe I love you <3 THIS WAS MIGUEL I PROMISE
                     break;
                 case RIGHT:
                     telemetry.addData("Prop","right");
                     telemetry.update();
-                    foward(-1250);
 
-//                    pickupPixel();
-//                    sleep(500);
+                    foward(-1150);
 
-                    rotate(values.turn90DegreesCounterClockwise);
-                    //may need to use turn90DegreesClockwise*3 to not hit the truss
+                    rotate(values.turn90DegreesClockwise);
+                    foward(-200);
+                    side(-100);
 
-                    foward(900);
+                    foward(-700);
+                    side(100);
 
                     rightClawServo.setPosition(values.rightClawOpen);
                     sleep(500);
 
-//                    neutral();
-//                    sleep(500);
-
-                    foward(800);
-                    //(this may or may not just bump the purple pixel)
+                    foward(-500);
 
                     placePixel();
+                    rotate(values.turn90DegreesClockwise);
+                    sleep(50);
+                    rotate(values.turn90DegreesClockwise);
 
-                    //side(150);
-                    //sleep(1000);
-                    //resetEncoders();
 
-                    //foward(-100);
-                    //sleep(1000);
-                    //resetEncoders();
+                    side(600);
 
-                    side(300);
+                    foward(250);
 
                     leftClawServo.setPosition(values.leftClawOpen);
                     sleep(500);
 
-                    neutral();
-                    sleep(1300);
-
                     foward(-200);
 
-                    side(1050);
+                    pickupPixel();
 
-                    foward(450);
+                    side(1050);
 
                     break;
             }

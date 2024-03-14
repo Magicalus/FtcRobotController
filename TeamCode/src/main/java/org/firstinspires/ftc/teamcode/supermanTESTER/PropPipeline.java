@@ -32,7 +32,7 @@ public class PropPipeline implements VisionProcessor {
     public static int leftWidth = (int) (125);
     public static int leftHeight = (int) (125);
     public static double BLUE_TRESHOLD = 70;
-    public static double RED_TRESHOLD = 100;
+    public static double RED_TRESHOLD = 70;
     private final Mat hsv = new Mat();
     public double leftColor = 0.0;
     public double centerColor = 0.0;

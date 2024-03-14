@@ -210,7 +210,7 @@ public class driveTrain {
         double yaw = imu.getYaw();
 
         System.out.println(yaw);
-        double error = degrees - yaw - headingOffset;
+        double error = degrees - yaw + headingOffset;
         boolean one80 = false;
 
         if (error > 180){
@@ -232,7 +232,7 @@ public class driveTrain {
             crane.craneMaintenance();
             double motorPower = (error < 0 ? -0.5 : 0.5);
             motorPower *= Math.min(1, Math.abs(error /20));
-            if(Math.abs(motorPower) < 0.001){
+            if(Math.abs(motorPower) < 0.01){
                 break;
             }
             frontLeft.setPower(-motorPower);
