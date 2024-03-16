@@ -53,115 +53,103 @@ public class redBack extends universalOpMode {
 
             switch (randomization) {
                 case LEFT:
-                    telemetry.addData("left","left");
+                    telemetry.addData("Prop","left");
                     telemetry.update();
 
-//                    neutral();
-                    foward(-1350);
-
-                    pickupPixel();
-                    rotate(values.turn90DegreesClockwise);
-
-//                    sleep(500);
-
-                    rightClawServo.setPosition(0.5);
-                    sleep(500);
-
-//                    neutral();
-                    foward(-50);
-//                    sleep(2500);
-
-                    side(1000);
-
-                    while(System.currentTimeMillis() - startTime < 23000.0);
-
-                    foward(-4100);
-
-                    pickupPixel();
-
-                    sleep(750);
-
-                    leftClawServo.setPosition(values.leftClawOpen);
-
-                    sleep(500);
-
-                    neutral();
-
-                    sleep(500);
-                    break;
-                case CENTER:
-                    telemetry.addData("Center","center");
-                    telemetry.update();
-//                    neutral();
-                    foward(-2160);
-
-                    pickupPixel();
-                    sleep(500);
+                    foward(-1820);
+                    side(-750);
 
                     rightClawServo.setPosition(values.rightClawOpen);
-                    sleep(1000);
+                    sleep(100);
 
-//                    neutral();
-                    foward(-150);
-                    sleep(1000);
+                    //neutral();
 
+
+                    foward(-400);
+
+                    rotate(values.turn90DegreesCounterClockwise);
+
+                    while(System.currentTimeMillis() - startTime < 18000.0);
+
+                    foward(-3350);
+                    side(100);
                     rotate(values.turn90DegreesClockwise);
-
-                    while(System.currentTimeMillis() - startTime < 23000.0);
-
-                    foward(-4100);
-
-                    pickupPixel();
-
-                    sleep(500);
+                    sleep(50);
+                    rotate(values.turn90DegreesClockwise);
+                    foward(900);
 
                     leftClawServo.setPosition(values.leftClawOpen);
+                    sleep(100);
+                    foward(-200);
 
-                    sleep(500);
 
-                    neutral();
 
-                    sleep(500);
+                    //why joe I love you <3 THIS WAS MIGUEL I PROMISE
+                    break;
+
+                case CENTER:
+                    telemetry.addData("Prop","center");
+                    telemetry.update();
+                    foward(-1120);
+
+                    rotate(values.turn90DegreesClockwise);
+                    sleep(50);
+                    rotate(values.turn90DegreesClockwise);
+
+                    rightClawServo.setPosition(values.rightClawOpen);
+                    sleep(100);
+                    foward(-200);
+                    rotate(values.turn90DegreesCounterClockwise);
+                    foward(600);
+                    side(1500);
+
+                    while(System.currentTimeMillis() - startTime < 16000.0);
+
+                    foward(-3350);
+                    side(-100);
+                    rotate(values.turn90DegreesCounterClockwise);
+                    sleep(50);
+                    rotate(values.turn90DegreesCounterClockwise);
+                    foward(900);
+
+                    leftClawServo.setPosition(values.leftClawOpen);
+                    sleep(100);
+                    foward(-200);
+
+
+
+                    //why joe I love you <3 THIS WAS MIGUEL I PROMISE
                     break;
                 case RIGHT:
                     telemetry.addData("Prop","Right");
                     telemetry.update();
-//                    neutral();
-                    foward(-1300);
-                    side(200);
+                foward(-1300);
+                side(-200);
 
-                    pickupPixel();
-                    sleep(500);
+                rotate(values.turn90DegreesClockwise);
+                foward(100);
 
-                    rotate(values.turn90DegreesCounterClockwise);
-                    foward(100);
+                rightClawServo.setPosition(values.rightClawOpen);
+                sleep(100);
 
-                    rightClawServo.setPosition(values.rightClawOpen);
-                    sleep(500);
+                foward(-200);
 
-                    foward(-100);
+                side(1100);
 
-//                    neutral();
+                while(System.currentTimeMillis() - startTime < 16000.0);
 
-                    side(-1100);
+                foward(-3350);
+                side(100);
+                foward(900);
 
-                    while(System.currentTimeMillis() - startTime < 23000.0);
+                leftClawServo.setPosition(values.leftClawOpen);
+                sleep(100);
+                foward(-200);
 
-                    foward(4000);
 
-                    pickupPixel();
 
-                    sleep(750);
-
-                    leftClawServo.setPosition(values.leftClawOpen);
-
-                    sleep(500);
-
-                    neutral();
-
-                    sleep(500);
-
-                    break;
+                //why joe I love you <3 THIS WAS MIGUEL I PROMISE
+                break;
             }
             break;
         }

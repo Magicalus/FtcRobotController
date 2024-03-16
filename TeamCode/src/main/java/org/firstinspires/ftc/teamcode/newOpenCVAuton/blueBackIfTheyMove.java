@@ -56,46 +56,34 @@ public class blueBackIfTheyMove extends universalOpMode {
             case LEFT:
                 telemetry.addData("Prop","left");
                 telemetry.update();
-//                    neutral();
+
                 foward(-1300);
                 side(-200);
 
-//                    pickupPixel();
-//                    sleep(500);
-
                 rotate(values.turn90DegreesClockwise);
-                foward(200);
+                foward(100);
 
                 rightClawServo.setPosition(values.rightClawOpen);
                 sleep(100);
 
                 foward(-200);
 
-//                    neutral();
-
                 side(1100);
 
                 while(System.currentTimeMillis() - startTime < 16000.0);
 
-                foward(3500);
-
-                side(-1400);
+                foward(3350);
 
                 placePixel();
+                side(-1550);
+                foward(500);
 
-                foward(25);
-
-//                side(250);
-//                sleep(1000);
-//                resetEncoders();
-
-                leftClawServo.setPosition(1);
+                leftClawServo.setPosition(values.leftClawOpen);
                 sleep(100);
 
                 foward(-100);
-
-                placePixel();
-                sleep(2500);
+                pickupPixel();
+                sleep(2000);
 
                 break;
             case CENTER:
@@ -164,7 +152,6 @@ public class blueBackIfTheyMove extends universalOpMode {
 
                 //why joe I love you <3 THIS WAS MIGUEL I PROMISE
                 break;
-
         }
 
 
@@ -172,6 +159,7 @@ public class blueBackIfTheyMove extends universalOpMode {
             telemetry.update();
 
             sleep(50);
+            break;
         }
 
 

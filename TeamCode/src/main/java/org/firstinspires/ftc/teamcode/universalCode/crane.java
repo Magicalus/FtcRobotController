@@ -82,7 +82,7 @@ public class crane {
             resetClawSpinnies();
         }else if(clawIsBack){
             clawSpinnies.setTargetPosition(-2575);
-        }else if(leftDrawerSlide.getCurrentPosition() > 500){
+        }else if(leftDrawerSlide.getCurrentPosition() > 400){
             clawSpinnies.setTargetPosition(600);
         }else{
             clawSpinnies.setTargetPosition(0);
@@ -90,9 +90,9 @@ public class crane {
     }
 
     public void move(double movement, boolean byPower){
-        if(movement <= 1 && movement > 0 && byPower){
+        if(movement > 0 && byPower){
             setTargetPosition(values.craneMax, movement);
-        }else if(movement >= -1 && movement < 0){
+        }else if(movement < 0 && byPower){
             setTargetPosition(values.craneResting, -movement);
         }else if(byPower){
             setPower(0);
@@ -100,7 +100,7 @@ public class crane {
             setTargetPosition(values.craneMax);
         }else if(movement < values.craneResting){
             setTargetPosition(values.craneResting);
-        }{
+        }else{
             setTargetPosition((int)movement);
         }
     }

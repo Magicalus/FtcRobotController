@@ -119,11 +119,12 @@ public class redBackIfTheyMove extends universalOpMode {
                 case RIGHT:
                     telemetry.addData("Prop","right");
                     telemetry.update();
+
                     foward(-1300);
                     side(200);
 
                     rotate(values.turn90DegreesCounterClockwise);
-                    foward(200);
+                    foward(100);
 
                     rightClawServo.setPosition(values.rightClawOpen);
                     sleep(100);
@@ -132,22 +133,21 @@ public class redBackIfTheyMove extends universalOpMode {
 
                     side(-1100);
 
-                    while(System.currentTimeMillis() - startTime < 18000.0);
+                    while(System.currentTimeMillis() - startTime < 16000.0);
 
                     foward(3350);
 
                     placePixel();
-                    side(1700);
+                    side(1600);
+                    foward(500);
 
+                    leftClawServo.setPosition(values.leftClawOpen);
+                    sleep(100);
+
+                    foward(-100);
+                    pickupPixel();
                     sleep(2000);
 
-                    foward(100);
-
-                    leftClawServo.setPosition(1);
-                    sleep(300);
-
-                    pickupPixel();
-                    sleep(2500);
                     break;
             }
             break;

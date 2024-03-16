@@ -141,12 +141,12 @@ public class driveTrain {
     }
     private void continueSide(){
         double sideSpeed = 0.75;
-        double frontLeftCorner = sideSpeed - sideSpeed * (Math.max(imu.getYaw(), 0) / 90);
-        double frontRightCorner = - (sideSpeed - sideSpeed * (Math.max(-imu.getYaw(), 0) / 90));
-        frontLeft.setPower(frontLeftCorner);
-        frontRight.setPower(frontRightCorner);
-        backLeft.setPower(frontRightCorner);
-        jarmy.setPower(frontLeftCorner);
+        double leftPower = sideSpeed - sideSpeed * (Math.max(imu.getYaw(), 0) / 90);
+        double rightPower = sideSpeed - sideSpeed * (Math.max(-imu.getYaw(), 0) / 90);
+        frontLeft.setPower(leftPower);
+        frontRight.setPower(rightPower);
+        backLeft.setPower(-leftPower);
+        jarmy.setPower(-rightPower);
     }
 
     public void rotate(int target) {
@@ -210,7 +210,7 @@ public class driveTrain {
         double yaw = imu.getYaw();
 
         System.out.println(yaw);
-        double error = degrees - yaw + headingOffset;
+        double error = degrees - yaw - headingOffset;
         boolean one80 = false;
 
         if (error > 180){
@@ -228,12 +228,12 @@ public class driveTrain {
 
         double error = degrees;
 
-        while (opMode.opModeIsActive() && Math.abs(error) > 0.5) {
+        while (opMode.opModeIsActive() && Math.abs(error) > 0.75) {
             crane.craneMaintenance();
             double motorPower = (error < 0 ? -0.5 : 0.5);
-            motorPower *= Math.min(1, Math.abs(error /20));
-            if(Math.abs(motorPower) < 0.01){
-                break;
+            motorPower *= Math.min(1, Math.abs(error / 20));
+            if(Math.abs(motorPower) < 0.1){
+                motorPower = (error < 0 ? -0.1: 0.1);
             }
             frontLeft.setPower(-motorPower);
             frontRight.setPower(motorPower);

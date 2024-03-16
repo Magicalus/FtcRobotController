@@ -112,19 +112,8 @@ public class redFront extends universalOpMode {
                     rotate(values.turn90DegreesClockwise);
 
                     placePixel();
-                    foward(1350);
-
-//                    pickupPixel();
-//                    sleep(500);
-                    //?
-
-
-                    //side(300);
-
-                    foward(200);
                     side(-200);
-
-                    //side(-);
+                    foward(1575);
 
                     leftClawServo.setPosition(values.leftClawOpen);
                     sleep(300);
@@ -158,7 +147,7 @@ public class redFront extends universalOpMode {
                     rotate(values.turn90DegreesCounterClockwise);
 
 
-                    side(800);
+                    side(900);
                     foward(350);
 
                     leftClawServo.setPosition(values.leftClawOpen);
