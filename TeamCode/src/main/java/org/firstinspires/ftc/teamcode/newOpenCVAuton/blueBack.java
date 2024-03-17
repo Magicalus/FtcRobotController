@@ -58,7 +58,7 @@ public class blueBack extends universalOpMode {
 
                     while(System.currentTimeMillis() - startTime < 16000.0);
 
-                    foward(-3350);
+                    foward(3350);
                     side(100);
                     foward(900);
 

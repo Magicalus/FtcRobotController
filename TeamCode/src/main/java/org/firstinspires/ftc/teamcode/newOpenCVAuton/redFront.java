@@ -74,15 +74,14 @@ public class redFront extends universalOpMode {
                     sleep(50);
                     rotate(values.turn90DegreesCounterClockwise);
 
-                    side(-240);
-                    foward(470);
+                    side(-80);
+                    foward(350);
 
                     leftClawServo.setPosition(values.leftClawOpen);
                     sleep(100);
 
-                    pickupPixel();
-
                     foward(-200);
+                    pickupPixel();
 
                     side(1800);
 
@@ -112,8 +111,8 @@ public class redFront extends universalOpMode {
                     rotate(values.turn90DegreesClockwise);
 
                     placePixel();
-                    side(-200);
-                    foward(1575);
+                    side(-135);
+                    foward(1500);
 
                     leftClawServo.setPosition(values.leftClawOpen);
                     sleep(300);
@@ -129,12 +128,11 @@ public class redFront extends universalOpMode {
                     telemetry.addData("Prop","right");
                     telemetry.update();
 
-                    foward(-1050);
+                    foward(-1250);
 
                     rotate(values.turn90DegreesClockwise);
 
                     foward(-1000);
-                    side(400);
 
                     rightClawServo.setPosition(values.rightClawOpen);
                     sleep(500);
@@ -147,8 +145,8 @@ public class redFront extends universalOpMode {
                     rotate(values.turn90DegreesCounterClockwise);
 
 
-                    side(900);
-                    foward(350);
+                    side(550);
+                    foward(420);
 
                     leftClawServo.setPosition(values.leftClawOpen);
                     sleep(500);

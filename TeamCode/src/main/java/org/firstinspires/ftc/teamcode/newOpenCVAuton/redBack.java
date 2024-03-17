@@ -57,7 +57,7 @@ public class redBack extends universalOpMode {
                     telemetry.update();
 
                     foward(-1820);
-                    side(-750);
+                    side(750);
 
                     rightClawServo.setPosition(values.rightClawOpen);
                     sleep(100);
@@ -67,15 +67,15 @@ public class redBack extends universalOpMode {
 
                     foward(-400);
 
-                    rotate(values.turn90DegreesCounterClockwise);
+                    rotate(values.turn90DegreesClockwise);
 
                     while(System.currentTimeMillis() - startTime < 18000.0);
 
                     foward(-3350);
-                    side(100);
-                    rotate(values.turn90DegreesClockwise);
+                    side(-100);
+                    rotate(values.turn90DegreesCounterClockwise);
                     sleep(50);
-                    rotate(values.turn90DegreesClockwise);
+                    rotate(values.turn90DegreesCounterClockwise);
                     foward(900);
 
                     leftClawServo.setPosition(values.leftClawOpen);
@@ -106,7 +106,7 @@ public class redBack extends universalOpMode {
                     while(System.currentTimeMillis() - startTime < 16000.0);
 
                     foward(-3350);
-                    side(-100);
+                    side(-400);
                     rotate(values.turn90DegreesCounterClockwise);
                     sleep(50);
                     rotate(values.turn90DegreesCounterClockwise);
@@ -124,9 +124,9 @@ public class redBack extends universalOpMode {
                     telemetry.addData("Prop","Right");
                     telemetry.update();
                 foward(-1300);
-                side(-200);
+                side(200);
 
-                rotate(values.turn90DegreesClockwise);
+                rotate(values.turn90DegreesCounterClockwise);
                 foward(100);
 
                 rightClawServo.setPosition(values.rightClawOpen);
@@ -134,12 +134,12 @@ public class redBack extends universalOpMode {
 
                 foward(-200);
 
-                side(1100);
+                side(-1100);
 
                 while(System.currentTimeMillis() - startTime < 16000.0);
 
-                foward(-3350);
-                side(100);
+                foward(3350);
+                side(-100);
                 foward(900);
 
                 leftClawServo.setPosition(values.leftClawOpen);

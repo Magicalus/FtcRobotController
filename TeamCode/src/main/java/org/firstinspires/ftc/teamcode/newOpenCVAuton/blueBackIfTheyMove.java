@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.newOpenCVAuton;
 import android.util.Size;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -19,7 +20,7 @@ import org.firstinspires.ftc.teamcode.supermanTESTER.Location;
 import org.firstinspires.ftc.teamcode.supermanTESTER.PropPipeline;
 
 
-//@Disabled
+@Disabled
 @Autonomous(name="blue back IF THEY MOVE\uD83D\uDD35")
 public class blueBackIfTheyMove extends universalOpMode {
 
@@ -104,18 +105,19 @@ public class blueBackIfTheyMove extends universalOpMode {
 
                 while(System.currentTimeMillis() - startTime < 16000.0);
 
-                foward(-3350);
-                side(1500);
+                foward(-3550);
+                side(1100);
                 placePixel();
                 rotate(values.turn90DegreesClockwise);
                 sleep(50);
                 rotate(values.turn90DegreesClockwise);
-                foward(1150);
+                foward(750);
 
                 leftClawServo.setPosition(values.leftClawOpen);
                 sleep(100);
 
                 pickupPixel();
+                sleep(2000);
 
                 //why joe I love you <3 THIS WAS MIGUEL I PROMISE
                 break;
@@ -138,17 +140,18 @@ public class blueBackIfTheyMove extends universalOpMode {
                 while(System.currentTimeMillis() - startTime < 18000.0);
 
                 foward(-3350);
-                side(1200);
+                side(1000);
                 placePixel();
                 rotate(values.turn90DegreesClockwise);
                 sleep(50);
                 rotate(values.turn90DegreesClockwise);
-                foward(1150);
+                foward(1350);
 
                 leftClawServo.setPosition(values.leftClawOpen);
                 sleep(100);
 
                 pickupPixel();
+                sleep(2000);
 
                 //why joe I love you <3 THIS WAS MIGUEL I PROMISE
                 break;

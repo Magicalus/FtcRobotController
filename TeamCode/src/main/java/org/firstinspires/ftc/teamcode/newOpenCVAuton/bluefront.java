@@ -70,12 +70,10 @@ public class bluefront extends universalOpMode {
                     foward(400);
 
                     leftClawServo.setPosition(values.leftClawOpen);
-                    sleep(500);
-
-                    pickupPixel();
-                    sleep(1000);
+                    sleep(100);
 
                     foward(-200);
+                    pickupPixel();
 
                     side(-1050);
 
@@ -84,11 +82,6 @@ public class bluefront extends universalOpMode {
                     telemetry.addData("Prop","center");
                     telemetry.update();
                     foward(-1120);
-
-                    //rotate(values.turn90DegreesClockwise);
-                    //pickupPixel();
-
-                    //foward(300);
 
                     rotate(values.turn90DegreesClockwise);
                     sleep(50);
@@ -105,7 +98,7 @@ public class bluefront extends universalOpMode {
                     placePixel();
                     foward(1350);
 
-                    side(300);
+                    side(100);
                     foward(250);
 
                     leftClawServo.setPosition(values.leftClawOpen);
@@ -114,7 +107,7 @@ public class bluefront extends universalOpMode {
                     foward(-250);
                     pickupPixel();
 
-                    side(-1250);
+                    side(-1450);
 
                     //why joe I love you <3 THIS WAS MIGUEL I PROMISE
                     break;
@@ -127,7 +120,6 @@ public class bluefront extends universalOpMode {
                     side(100);
 
                     rotate(values.turn90DegreesCounterClockwise);
-                    //foward(100);
 
                     rightClawServo.setPosition(values.rightClawOpen);
                     sleep(100);
@@ -139,8 +131,8 @@ public class bluefront extends universalOpMode {
                     sleep(50);
                     rotate(values.turn90DegreesCounterClockwise);
 
-                    side(300);
-                    foward(470);
+                    side(350);
+                    foward(150);
 
                     leftClawServo.setPosition(values.leftClawOpen);
                     sleep(100);

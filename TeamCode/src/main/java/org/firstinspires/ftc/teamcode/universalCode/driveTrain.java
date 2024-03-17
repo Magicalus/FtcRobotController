@@ -127,7 +127,7 @@ public class driveTrain {
 
     private void continueFoward(){
         double leftPower = fowardSpeed - fowardSpeed * (Math.max(imu.getYaw(), 0) / 90);
-        double rightPower = fowardSpeed - fowardSpeed * (Math.max(-imu.getYaw(), 0) / 90);
+        double rightPower = fowardSpeed - fowardSpeed * (Math.max(-imu.getYaw(), 0) / 90 );
         frontLeft.setPower(leftPower);
         frontRight.setPower(rightPower);
         backLeft.setPower(leftPower);
@@ -140,9 +140,9 @@ public class driveTrain {
         waitForWheels(target, false);
     }
     private void continueSide(){
-        double sideSpeed = 0.75;
-        double leftPower = sideSpeed - sideSpeed * (Math.max(imu.getYaw(), 0) / 90);
-        double rightPower = sideSpeed - sideSpeed * (Math.max(-imu.getYaw(), 0) / 90);
+        double sideSpeed = 0.5;
+        double leftPower = sideSpeed - sideSpeed * (-imu.getYaw() / 90);
+        double rightPower = sideSpeed - sideSpeed * (imu.getYaw() / 90);
         frontLeft.setPower(leftPower);
         frontRight.setPower(rightPower);
         backLeft.setPower(-leftPower);
@@ -172,10 +172,15 @@ public class driveTrain {
             this.moveByEncoder(backLeft, -target, 0);
             this.moveByEncoder(jarmy, target, 0);
         }
-        while(frontLeft.getCurrentPosition() != frontLeft.getTargetPosition() &&
-                frontRight.getCurrentPosition() != frontRight.getTargetPosition() &&
-                backLeft.getCurrentPosition() != backLeft.getTargetPosition() &&
-                jarmy.getCurrentPosition() != jarmy.getTargetPosition() &&
+        double margin = 10;
+        while((frontLeft.getCurrentPosition() > frontLeft.getTargetPosition() + margin ||
+                frontRight.getCurrentPosition() > frontRight.getTargetPosition() + margin ||
+                backLeft.getCurrentPosition() > backLeft.getTargetPosition() + margin ||
+                jarmy.getCurrentPosition() > jarmy.getTargetPosition() + margin ||
+                frontLeft.getCurrentPosition() < frontLeft.getTargetPosition() - margin ||
+                frontRight.getCurrentPosition() < frontRight.getTargetPosition() - margin ||
+                backLeft.getCurrentPosition() < backLeft.getTargetPosition() - margin ||
+                jarmy.getCurrentPosition() < jarmy.getTargetPosition() - margin) &&
                 opMode.opModeIsActive()
         ) {
             crane.craneMaintenance();
@@ -239,6 +244,9 @@ public class driveTrain {
             frontRight.setPower(motorPower);
             backLeft.setPower(-motorPower);
             jarmy.setPower(motorPower);
+            if(error < degrees - getAngle() + 0.025 && error > degrees - getAngle() - 0.025 && error < 10 && error > -10){
+                break;
+            }
             error = degrees - getAngle();
             if(one80 && Math.abs(error) < 80){
                 error += (error < 0 ? -90 : 90);

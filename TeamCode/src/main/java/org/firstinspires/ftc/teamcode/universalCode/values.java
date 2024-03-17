@@ -18,7 +18,7 @@ public class values {
     public static int craneResting = 0;
     public static int craneNeutral = 0;
     public static int cranePlaceTeleop = 1850;
-    public static int cranePlaceLowAuton = 500;
+    public static int cranePlaceLowAuton = 450;
     public static int cranePlaceHighAuton = 800;
     public static int craneMax = 2800;
 
