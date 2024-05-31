@@ -98,7 +98,7 @@ public class bluefront extends universalOpMode {
                     placePixel();
                     foward(1350);
 
-                    side(100);
+                    side(500);
                     foward(250);
 
                     leftClawServo.setPosition(values.leftClawOpen);
@@ -124,25 +124,27 @@ public class bluefront extends universalOpMode {
                     rightClawServo.setPosition(values.rightClawOpen);
                     sleep(100);
 
-                    foward(-1200);
+                    foward(-1250);
                     placePixel();
 
                     rotate(values.turn90DegreesCounterClockwise);
                     sleep(50);
                     rotate(values.turn90DegreesCounterClockwise);
 
-                    side(350);
-                    foward(150);
+                    side(650);
+                    foward(330);
 
                     leftClawServo.setPosition(values.leftClawOpen);
                     sleep(100);
 
+                    foward(-200);
+
                     neutral();
                     sleep(2500);
 
-                    foward(-200);
-
                     side(-1800);
+
+                    foward(100);
 
                     break;
             }

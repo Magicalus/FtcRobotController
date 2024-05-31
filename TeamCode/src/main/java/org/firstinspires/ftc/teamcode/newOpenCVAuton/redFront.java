@@ -112,7 +112,7 @@ public class redFront extends universalOpMode {
 
                     placePixel();
                     side(-135);
-                    foward(1500);
+                    foward(1600);
 
                     leftClawServo.setPosition(values.leftClawOpen);
                     sleep(300);
